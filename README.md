@@ -30,20 +30,20 @@ The `UIBench` class extends `BeautifulSoup` to provide additional functionality,
 ```python
 if __name__ == "__main__":
     url = "https://google.com"  # Replace with your target URL
-    uibench_instance = UIBench.from_url(url)
+    uibench_instance = UIBench(url)
 
-    if uibench_instance:
-        # Accessing BeautifulSoup methods and properties
-        print("Title:", uibench_instance.title.string if uibench_instance.title else "No title found")
-        print("Body:", uibench_instance.body.text.strip() if uibench_instance.body else "No body content")
-        print("\nLinks:")
-        for link in uibench_instance.find_all("a"):
-            print("Link:", link.get("href"))
-        
-        print("\nSubroutes:")
-        subroutes = uibench_instance.get_subroutes(url)
-        for route in sorted(subroutes):
-            print(route)
+    # Accessing BeautifulSoup methods and properties
+    print("Title:", uibench_instance.title.string if uibench_instance.title else "No title found")
+    print("Body:", uibench_instance.body.text.strip() if uibench_instance.body else "No body content")
+    
+    print("\nLinks:")
+    for link in uibench_instance.find_all("a"):
+        print("Link:", link.get("href"))
+    
+    print("\nSubroutes:")
+    subroutes = uibench_instance.get_subroutes()
+    for route in sorted(subroutes):
+        print(route)
 ```
 
 ## Installation
