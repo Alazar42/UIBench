@@ -20,7 +20,7 @@ UIBench is a Python-based core engine designed to automate the evaluation of web
 
 The `UIBench` class extends `BeautifulSoup` to provide additional functionality, such as fetching content from a URL and extracting internal links.
 
-#### Key Methods:
+#### Key Methods
 
 - `from_url(cls, url, features="html.parser")`: Fetches HTML from the provided URL and initializes a `UIBench` instance.
 - `get_subroutes(self, base_url)`: Extracts all internal links (subroutes) from the HTML content.
@@ -77,16 +77,6 @@ To use the UIBench core engine locally, follow these steps:
    pip install -r requirements.txt
    ```
 
-4. Run the core engine by executing the Python script:
-
-   ```bash
-   python main.py
-   ```
-
-### Example Usage
-
-To test the engine, simply run the script and provide a URL for analysis. The script will fetch the HTML content, extract the title, body content, and internal links, and display them in the terminal.
-
 ## Contributing
 
 We welcome contributions to the UIBench core engine! To contribute:
@@ -96,10 +86,6 @@ We welcome contributions to the UIBench core engine! To contribute:
 3. Make your changes and commit them (`git commit -am 'Add feature'`).
 4. Push to your branch (`git push origin feature-name`).
 5. Open a pull request.
-
-## License
-
-UIBench is open-source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
