@@ -41,7 +41,7 @@ class UIBench(BeautifulSoup):
 
 # Example usage
 if __name__ == "__main__":
-    url = "https://google.com"  # Replace with your target URL
+    url = "https://celeris.onrender.com"  # Replace with your target URL
     uibench_instance = UIBench(url)
 
     # Accessing BeautifulSoup methods and properties
