@@ -1,10 +1,13 @@
-from ..config.database import Database  # Correct relative import
-from sqlalchemy import Column, Integer, String
+from pydantic import BaseModel, EmailStr
+import uuid
+from typing import List, Optional
 
-class User(Database):
-    __tablename__ = 'users'
+class UserModel(BaseModel):
+    user_id: str = str(uuid.uuid4())
+    name: str
+    email: EmailStr
+    hashed_password: str  # Store hashed password securely
+    role: str  # e.g., "admin", "designer"
 
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
+class UserInDB(UserModel):
+    projects: List[str] = []
