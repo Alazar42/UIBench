@@ -1,14 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, HttpUrl
+from datetime import datetime
 import uuid
 
 class AnalysisResultModel(BaseModel):
-    result_id: str = str(uuid.uuid4())
-    design_id: str
+    result_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+
+    # Relationship
+    project_id: str = None  # Injected during request, The project this analysis belongs to.
+
+    # Evaluation Metrics
     aesthetic_score: float
     accessibility_score: float
     performance_score: float
     usability_score: float
-    analysis_date: str  # ISO format date string
-    analysis_summary: str  # Summary of the analysis results
-    detailed_report: str  # Link or path to the detailed report
-    recommendations: str  # Recommendations based on the analysis results
+
+    # Metadata
+    analysis_date: datetime = Field(default_factory=datetime.utcnow)
+    analysis_summary: str
+    detailed_report: HttpUrl
+    recommendations: str
