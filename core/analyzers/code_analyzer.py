@@ -1,7 +1,6 @@
 from typing import Dict, Any
 from bs4 import BeautifulSoup
-import cssutils
-from cssutils import css
+import tinycss2
 from io import StringIO
 import pylint.lint
 from pylint.reporters.text import TextReporter
@@ -79,23 +78,27 @@ class CodeAnalyzer:
         
         for style in styles:
             try:
-                sheet = cssutils.parseString(style.string)
-                for rule in sheet:
-                    if isinstance(rule, css.CSSStyleRule):
-                        # Check for vendor prefixes
-                        for prop in rule.style:
-                            if prop.name.startswith('-'):
-                                issues.append(f"Vendor prefix detected: {prop.name}")
-                        
-                        # Check for problematic properties
-                        if '!important' in rule.style.cssText:
-                            issues.append("Use of !important detected")
-                        
-                        # Check for proper units
-                        for prop in rule.style:
-                            if prop.name in ['width', 'height', 'margin', 'padding']:
-                                if prop.value and not any(unit in prop.value for unit in ['px', 'em', 'rem', '%']):
-                                    issues.append(f"Invalid unit in {prop.name}: {prop.value}")
+                if style.string:
+                    rules = tinycss2.parse_stylesheet(style.string)
+                    for rule in rules:
+                        if rule.type == 'qualified-rule':
+                            # Check declarations within the rule
+                            declarations = tinycss2.parse_declaration_list(rule.content)
+                            for decl in declarations:
+                                if decl.type == 'declaration':
+                                    # Check for vendor prefixes
+                                    if decl.name.startswith('-'):
+                                        issues.append(f"Vendor prefix detected: {decl.name}")
+                                    
+                                    # Check for !important
+                                    if decl.important:
+                                        issues.append("Use of !important detected")
+                                    
+                                    # Check for proper units in specific properties
+                                    if decl.name in ['width', 'height', 'margin', 'padding']:
+                                        value_str = tinycss2.serialize(decl.value)
+                                        if not any(unit in value_str for unit in ['px', 'em', 'rem', '%']):
+                                            issues.append(f"Invalid unit in {decl.name}: {value_str}")
             except Exception as e:
                 issues.append(f"CSS parsing error: {str(e)}")
         

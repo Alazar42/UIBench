@@ -4,11 +4,15 @@ from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 import logging
 from datetime import datetime
-from playwright.async_api import async_playwright
+import traceback
 
 from .base_evaluator import BaseEvaluator
 from .page_evaluator import PageEvaluator
 from ..utils.html_parser import fetch_page_html
+from ..utils.browser_manager import BrowserManager
+from ..utils.async_utils import batch_process, AsyncPool
+from ..utils.performance_utils import async_timed, PerformanceMonitor
+from ..utils.cache import NetworkCache
 from ..config import Settings
 
 logger = logging.getLogger(__name__)
@@ -22,7 +26,7 @@ class WebsiteEvaluator(BaseEvaluator):
         root_url: str,
         max_subpages: Optional[int] = None,
         max_depth: int = 10,
-        concurrency: int = config.max_concurrent,
+        concurrency: int = config.performance.max_concurrent,
         custom_criteria: Dict[str, Any] = None
     ):
         super().__init__(root_url, custom_criteria)
@@ -30,7 +34,17 @@ class WebsiteEvaluator(BaseEvaluator):
         self.max_depth = max_depth
         self.concurrency = concurrency
         self.evaluated_pages: List[Dict[str, Any]] = []
+        self.performance_monitor = PerformanceMonitor()
+        self.network_cache = NetworkCache()
+        self._browser_manager = None
     
+    async def get_browser_manager(self) -> BrowserManager:
+        """Get or create the browser manager instance."""
+        if not self._browser_manager:
+            self._browser_manager = await BrowserManager.get_instance()
+        return self._browser_manager
+    
+    @async_timed()
     async def validate(self) -> bool:
         """Validate the website for evaluation."""
         try:
@@ -41,6 +55,7 @@ class WebsiteEvaluator(BaseEvaluator):
         except Exception:
             return False
     
+    @async_timed()
     async def crawl_all_subpages(self) -> List[str]:
         """Crawl all subpages of the website."""
         if not await self.validate():
@@ -50,7 +65,34 @@ class WebsiteEvaluator(BaseEvaluator):
         queue: asyncio.Queue[Tuple[str, int]] = asyncio.Queue()
         visited.add(self.url)
         queue.put_nowait((self.url, 0))
-        semaphore = asyncio.Semaphore(self.concurrency)
+        
+        # Create a pool for managing concurrent crawlers
+        crawler_pool = AsyncPool(max_concurrency=self.concurrency)
+        
+        async def crawl_page(url: str, depth: int) -> List[str]:
+            """Crawl a single page and return discovered links."""
+            discovered_links = []
+            
+            try:
+                # Check cache first
+                cached_response = self.network_cache.get_response(url)
+                if cached_response:
+                    html = cached_response['content']
+                else:
+                    html = await fetch_page_html(url)
+                    self.network_cache.cache_response(url, html, {})
+                
+                soup = BeautifulSoup(html, "html.parser")
+                for a in soup.find_all("a", href=True):
+                    link = urljoin(self.url, a["href"])
+                    if urlparse(link).netloc != urlparse(self.url).netloc:
+                        continue
+                    link = link.split("#")[0]
+                    discovered_links.append((link, depth + 1))
+            except Exception as e:
+                logger.error(f"Error crawling {url}: {e}")
+            
+            return discovered_links
         
         async def worker():
             while True:
@@ -63,65 +105,75 @@ class WebsiteEvaluator(BaseEvaluator):
                     queue.task_done()
                     continue
                 
-                try:
-                    async with semaphore:
-                        html = await fetch_page_html(current_url)
-                except Exception as e:
-                    logger.error(f"Error fetching {current_url}: {e}")
-                    queue.task_done()
-                    continue
-                
-                soup = BeautifulSoup(html, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    link = urljoin(self.url, a["href"])
-                    if urlparse(link).netloc != urlparse(self.url).netloc:
-                        continue
-                    link = link.split("#")[0]
+                discovered = await crawl_page(current_url, depth)
+                for link, new_depth in discovered:
                     if link not in visited:
                         visited.add(link)
-                        await queue.put((link, depth + 1))
+                        await queue.put((link, new_depth))
                         if self.max_subpages and len(visited) >= self.max_subpages:
                             queue.task_done()
                             return
                 queue.task_done()
         
-        workers = [asyncio.create_task(worker()) for _ in range(self.concurrency)]
+        # Start workers with the crawler pool
+        workers = [crawler_pool.add_task(worker()) for _ in range(self.concurrency)]
         await queue.join()
         for w in workers:
+            if not isinstance(w, asyncio.Task):
+                w = asyncio.create_task(w)
             w.cancel()
         
         return list(visited)
     
+    @async_timed()
     async def evaluate(self, crawl: bool = False) -> Dict[str, Any]:
         """Evaluate the website."""
         if not await self.validate():
             raise ValueError("Invalid website for evaluation")
         
-        pages = await self.crawl_all_subpages() if crawl else [self.url]
-        logger.info(f"Crawling complete. {len(pages)} page(s) to evaluate.")
-        
-        evaluations = []
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
-            for url in pages:
-                page = await browser.new_page()
+        with self.performance_monitor.monitor("website_evaluation"):
+            pages = await self.crawl_all_subpages() if crawl else [self.url]
+            logger.info(f"Crawling complete. {len(pages)} page(s) to evaluate.")
+            
+            # Get browser manager and pool
+            browser_manager = await self.get_browser_manager()
+            browser_pool = await browser_manager.get_pool(
+                max_browsers=config.resources.max_browsers,
+                max_pages_per_browser=config.resources.max_pages_per_browser
+            )
+            
+            async def evaluate_page(url: str) -> Dict[str, Any]:
+                """Evaluate a single page using the browser pool."""
                 try:
-                    await page.goto(url, timeout=60000)
-                    html = await page.content()
-                    body_text = await page.inner_text("body")
-                    evaluator = PageEvaluator(url, html, page, body_text, custom_criteria=self.custom_criteria)
-                    result = await evaluator.evaluate()
-                    evaluations.append(result)
+                    async def page_task(page):
+                        await page.goto(url, timeout=config.resources.browser_timeout * 1000)
+                        html = await page.content()
+                        body_text = await page.inner_text("body")
+                        evaluator = PageEvaluator(url, html, page, body_text, custom_criteria=self.custom_criteria)
+                        return await evaluator.evaluate()
+                    
+                    return await browser_pool.execute_in_page(page_task)
                 except Exception as e:
-                    logger.error(f"Error evaluating {url}: {e}")
-                finally:
-                    await page.close()
-            await browser.close()
-        
-        self.evaluated_pages = evaluations
-        report = self.aggregate_report(evaluations)
-        report["detailed_report"] = self.generate_detailed_report(evaluations)
-        return report
+                    logger.error(f"Error evaluating {url}: {traceback.format_exc()}")
+                    return {
+                        "url": url,
+                        "error": str(e),
+                        "results": {}
+                    }
+            
+            # Process pages in batches
+            evaluations = await batch_process(
+                pages,
+                evaluate_page,
+                batch_size=config.performance.batch_size
+            )
+            
+            self.evaluated_pages = [e for e in evaluations if e is not None]
+            report = self.aggregate_report(self.evaluated_pages)
+            report["detailed_report"] = self.generate_detailed_report(self.evaluated_pages)
+            report["performance_metrics"] = self.performance_monitor.get_metrics("website_evaluation")
+            
+            return report
     
     def aggregate_report(self, evaluations: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Aggregate evaluation results into a comprehensive report."""
@@ -172,7 +224,8 @@ class WebsiteEvaluator(BaseEvaluator):
         return {
             "aesthetic": [e["results"].get("aesthetic_metrics", {}) for e in evaluations],
             "wcag": [e["results"].get("wcag_details", {}) for e in evaluations],
-            "cross_device": [e["results"].get("cross_device_simulation", {}) for e in evaluations]
+            "cross_device": [e["results"].get("cross_device_simulation", {}) for e in evaluations],
+            "performance_metrics": self.performance_monitor.get_metrics("website_evaluation")
         }
     
     def generate_recommendations(self, evaluations: List[Dict[str, Any]]) -> List[str]:
@@ -180,35 +233,38 @@ class WebsiteEvaluator(BaseEvaluator):
         recs = []
         
         # Language issues
-        lang_issues = sum(len(p["results"]["language_quality"]["grammar_errors"]) for p in evaluations)
+        lang_issues = sum(len(p["results"].get("language_quality", {}).get("grammar_errors", [])) for p in evaluations)
         if lang_issues > 0:
             recs.append(f"Address {lang_issues} language/grammar issues found in content")
         
         # Code issues
-        code_issues = sum(len(p["results"]["code_quality"]["html"]["html_issues"]) for p in evaluations)
+        code_issues = sum(len(p["results"].get("code_quality", {}).get("html", {}).get("html_issues", [])) for p in evaluations)
         if code_issues > 0:
             recs.append(f"Fix {code_issues} HTML/CSS code quality issues")
         
         # Cognitive load
-        avg_cog_load = sum(p["results"]["ux_enhanced"]["cognitive_load"]["complexity_score"] for p in evaluations)/len(evaluations)
-        if avg_cog_load > 50:
-            recs.append("Simplify page layouts to reduce cognitive load")
+        try:
+            avg_cog_load = sum(p["results"].get("ux_enhanced", {}).get("cognitive_load", {}).get("complexity_score", 0) for p in evaluations)/len(evaluations)
+            if avg_cog_load > 50:
+                recs.append("Simplify page layouts to reduce cognitive load")
+        except (ZeroDivisionError, KeyError):
+            pass
         
         # First page specific checks
-        first = evaluations[0]["results"]
-        if first.get("alt_text", {}).get("missing", 0) > 0:
-            recs.append("Add alt text to images.")
-        if not first.get("responsive_design", {}).get("responsive", False):
-            recs.append("Include a meta viewport tag for responsive design.")
-        if not first.get("title_meta", {}).get("title_exists", False):
-            recs.append("Add a proper title tag and meta description.")
-        if not first.get("https", {}).get("https", False):
-            recs.append("Ensure your site is served over HTTPS.")
+        if evaluations and "results" in evaluations[0]:
+            first = evaluations[0]["results"]
+            if first.get("alt_text", {}).get("missing", 0) > 0:
+                recs.append("Add alt text to images")
         
         return recs
     
     async def cleanup(self) -> None:
         """Clean up resources."""
-        for page in self.evaluated_pages:
-            if "page" in page:
-                await page["page"].close() 
+        try:
+            if self._browser_manager:
+                browser_manager = await self.get_browser_manager()
+                await browser_manager.close_all()
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+        finally:
+            self._browser_manager = None 

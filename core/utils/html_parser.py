@@ -1,19 +1,102 @@
 import aiohttp
 import logging
-from typing import Optional
+from typing import Optional, Dict, Any, List
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+import asyncio
+from datetime import datetime
+
 from ..utils.error_handler import ResourceError
+from ..utils.cache import NetworkCache
+from ..utils.performance_utils import async_timed, RateLimiter
+from ..config import Settings
 
 logger = logging.getLogger(__name__)
+config = Settings()
 
-async def fetch_page_html(url: str, timeout: int = 30) -> str:
+class RequestManager:
+    """Manages HTTP requests with caching and rate limiting."""
+    
+    def __init__(self):
+        self.cache = NetworkCache()
+        self.rate_limiter = RateLimiter(
+            max_requests=config.network.max_concurrent_requests,
+            time_window=1.0
+        )
+        self.session: Optional[aiohttp.ClientSession] = None
+        self._lock = asyncio.Lock()
+    
+    async def get_session(self) -> aiohttp.ClientSession:
+        """Get or create an aiohttp session."""
+        if not self.session:
+            async with self._lock:
+                if not self.session:
+                    self.session = aiohttp.ClientSession(
+                        headers={"User-Agent": config.network.user_agent},
+                        timeout=aiohttp.ClientTimeout(
+                            total=config.network.request_timeout
+                        )
+                    )
+        return self.session
+    
+    async def close(self):
+        """Close the session."""
+        if self.session:
+            await self.session.close()
+            self.session = None
+    
+    @async_timed()
+    async def fetch(self, url: str, force_refresh: bool = False) -> Dict[str, Any]:
+        """Fetch a URL with caching and rate limiting."""
+        if not force_refresh:
+            cached = self.cache.get_response(url)
+            if cached:
+                return cached
+        
+        async with self.rate_limiter:
+            session = await self.get_session()
+            try:
+                for attempt in range(config.network.max_retries):
+                    try:
+                        async with session.get(url) as response:
+                            response.raise_for_status()
+                            content = await response.text()
+                            headers = dict(response.headers)
+                            
+                            result = {
+                                'content': content,
+                                'headers': headers,
+                                'status': response.status,
+                                'url': str(response.url),
+                                'timestamp': datetime.now().isoformat()
+                            }
+                            
+                            self.cache.cache_response(url, content, headers)
+                            return result
+                            
+                    except aiohttp.ClientError as e:
+                        if attempt == config.network.max_retries - 1:
+                            raise
+                        await asyncio.sleep(
+                            config.network.retry_delay * (config.network.retry_backoff ** attempt)
+                        )
+                        
+            except aiohttp.ClientError as e:
+                raise ResourceError(f"Failed to fetch {url}: {str(e)}")
+            except asyncio.TimeoutError:
+                raise ResourceError(f"Timeout while fetching {url}")
+
+# Global request manager instance
+request_manager = RequestManager()
+
+@async_timed()
+async def fetch_page_html(url: str, force_refresh: bool = False) -> str:
     """
     Fetch HTML content from a URL.
     
     Args:
         url: The URL to fetch
-        timeout: Request timeout in seconds
+        force_refresh: Whether to bypass cache
         
     Returns:
         str: HTML content
@@ -22,15 +105,12 @@ async def fetch_page_html(url: str, timeout: int = 30) -> str:
         ResourceError: If fetching fails
     """
     try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, timeout=timeout) as response:
-                response.raise_for_status()
-                return await response.text()
-    except aiohttp.ClientError as e:
+        response = await request_manager.fetch(url, force_refresh)
+        return response['content']
+    except Exception as e:
         raise ResourceError(f"Failed to fetch {url}: {str(e)}")
-    except asyncio.TimeoutError:
-        raise ResourceError(f"Timeout while fetching {url}")
 
+@async_timed()
 def parse_html(html: str) -> BeautifulSoup:
     """
     Parse HTML content into a BeautifulSoup object.
@@ -76,4 +156,11 @@ def normalize_url(url: str) -> str:
         str: Normalized URL
     """
     parsed = urlparse(url)
-    return f"{parsed.scheme}://{parsed.netloc}{parsed.path.rstrip('/')}" 
+    normalized = f"{parsed.scheme}://{parsed.netloc}{parsed.path.rstrip('/')}"
+    if parsed.query:
+        normalized += f"?{parsed.query}"
+    return normalized
+
+async def cleanup():
+    """Clean up resources."""
+    await request_manager.close() 
