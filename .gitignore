@@ -1,3 +1,5 @@
 /venv
 .env
 /UIBench.egg-info
+/.cursor
+/.vscode
