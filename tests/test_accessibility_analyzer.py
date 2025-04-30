@@ -1,5 +1,4 @@
 import asyncio
-import pytest
 from playwright.async_api import async_playwright
 from core.analyzers.accessibility_analyzer import AccessibilityAnalyzer
 from core.utils.browser_manager import BrowserManager

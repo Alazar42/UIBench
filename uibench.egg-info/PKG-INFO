@@ -47,7 +47,7 @@ Dynamic: summary
 
 # UIBench Core Engine
 
-UIBench is a Python-based core engine designed to automate the evaluation of web design aesthetics and accessibility. The engine fetches a website’s HTML content, parses it, and provides insights into its structure, internal links (subroutes), and key content. The primary focus of UIBench is to streamline the process of evaluating websites for design and accessibility without a web interface.
+UIBench is a Python-based core engine designed to automate the evaluation of web design aesthetics and accessibility. The engine fetches a websiteâ€™s HTML content, parses it, and provides insights into its structure, internal links (subroutes), and key content. The primary focus of UIBench is to streamline the process of evaluating websites for design and accessibility without a web interface.
 
 ## Features
 

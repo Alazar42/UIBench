@@ -1,6 +1,6 @@
 import uuid
-from database.connection import db_instance
-from core.security import decode_access_token, hash_password, verify_password, create_access_token
+from ..database.connection import db_instance
+from ..core.security import decode_access_token, hash_password, verify_password, create_access_token
 from datetime import timedelta
 from fastapi import HTTPException
 
