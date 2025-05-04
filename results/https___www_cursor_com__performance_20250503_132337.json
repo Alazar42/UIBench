@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-05-03T13:23:37.732361",
+  "scores": {
+    "overall": 69.2,
+    "page_size": 100,
+    "resource_loading": 56,
+    "render_blocking": 50,
+    "caching": 60,
+    "compression": 80
+  },
+  "metrics": {
+    "page_size_kb": 449.84,
+    "resource_counts": {
+      "scripts": 50,
+      "styles": 4,
+      "images": 57
+    }
+  },
+  "issues": {
+    "page_size": [],
+    "resource_loading": [
+      "Found 50 synchronous scripts. Consider using async or defer.",
+      "Found 7 images without lazy loading."
+    ],
+    "render_blocking": [
+      "Found 26 render-blocking scripts in head.",
+      "Found 4 render-blocking stylesheets."
+    ],
+    "caching": [
+      "No cache manifest found.",
+      "No preload resource hints found.",
+      "No prefetch resource hints found."
+    ],
+    "compression": [
+      "Found 22 inline script blocks. Consider combining and minifying."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: uibench
+Version: 0.1.0
+Requires-Python: >=3.11
+Requires-Dist: beautifulsoup4>=4.12.0
+Requires-Dist: lxml>=4.9.0
+Requires-Dist: cssselect>=1.2.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: playwright>=1.40.0
+Requires-Dist: selenium>=4.15.0
+Requires-Dist: webdriver-manager>=4.0.0
+Requires-Dist: pytest>=7.4.0
+Requires-Dist: pytest-asyncio>=0.21.0
+Requires-Dist: pytest-cov>=4.1.0
+Requires-Dist: nltk>=3.8.1
+Requires-Dist: textblob>=0.17.1
+Requires-Dist: textstat>=0.7.3
+Requires-Dist: spacy>=3.7.0
+Requires-Dist: aiohttp>=3.9.0
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: pyyaml>=6.0.1
+Requires-Dist: jsonschema>=4.20.0
+Requires-Dist: tinycss2>=1.2.1
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: colorama>=0.4.6
+Requires-Dist: tqdm>=4.66.0
+Requires-Dist: rich>=13.6.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: click>=8.0.0
+Requires-Dist: typing-extensions>=4.0.0
+Requires-Dist: packaging>=22.0
+Provides-Extra: dev
+Requires-Dist: black>=23.11.0; extra == "dev"
+Requires-Dist: flake8>=6.1.0; extra == "dev"
+Requires-Dist: mypy>=1.7.0; extra == "dev"
+Requires-Dist: pre-commit>=3.5.0; extra == "dev"
+Requires-Dist: pytest-xdist>=3.5.0; extra == "dev"
+Requires-Dist: pytest-timeout>=2.2.0; extra == "dev"
+Provides-Extra: nlp
+Requires-Dist: spacy>=3.7.0; extra == "nlp"
+Requires-Dist: nltk>=3.8.1; extra == "nlp"
+Requires-Dist: textblob>=0.17.1; extra == "nlp"
+Requires-Dist: textstat>=0.7.3; extra == "nlp"
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python

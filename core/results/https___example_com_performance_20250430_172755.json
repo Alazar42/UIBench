@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-04-30T17:27:55.814710",
+  "scores": {
+    "overall": 92.0,
+    "page_size": 100,
+    "resource_loading": 100,
+    "render_blocking": 100,
+    "caching": 60,
+    "compression": 100
+  },
+  "metrics": {
+    "page_size_kb": 0.25,
+    "resource_counts": {
+      "scripts": 0,
+      "styles": 0,
+      "images": 0
+    }
+  },
+  "issues": {
+    "page_size": [],
+    "resource_loading": [],
+    "render_blocking": [],
+    "caching": [
+      "No cache manifest found.",
+      "No preload resource hints found.",
+      "No prefetch resource hints found."
+    ],
+    "compression": []
+  }
+}
