@@ -15,7 +15,6 @@ venv*/
 .venv*/
 env/
 .env/
-.python-version
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
@@ -56,19 +55,10 @@ test-results.xml
 # Ignore files like .cursor and similar
 .cursor
 *.cursor
-_supported_features
-wheel
-pip
-install
-setuptools*
-core.tests.test_core
 
 # Ignore all dotfiles except .gitignore
 .*
 !.gitignore
-
-# Ignore JSON result files
-*.json
 
 # Ignore frontend static build artifacts
 frontend/.svelte-kit/
