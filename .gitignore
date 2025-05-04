@@ -54,7 +54,9 @@ test-results.xml
 
 # Ignore files like .cursor and similar
 .cursor
-*.cursor
+.cursor/
+.cache
+.cache/
 
 # Ignore all dotfiles except .gitignore
 .*
