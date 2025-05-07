@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "analyzer": "accessibility",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:22",
+    "last_updated": "2025-05-07 20:39:22",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:22",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "results": {
+          "overall_score": 25.0,
+          "score": 25.0,
+          "issues": [
+            "No headings found on the page",
+            "No forms found on the page",
+            "Missing main landmark",
+            "Missing navigation landmark",
+            "Missing header landmark",
+            "Missing footer landmark",
+            "Missing skip navigation link"
+          ],
+          "passes": [
+            "No images found on the page",
+            "No links found on the page"
+          ],
+          "recommendations": [
+            "Add a main landmark to the page",
+            "Add a navigation landmark",
+            "Add a skip navigation link"
+          ],
+          "metrics": {
+            "headings_score": 0,
+            "images_score": 100,
+            "links_score": 100,
+            "color_contrast_score": 0,
+            "forms_score": 0,
+            "landmarks_score": 0.0,
+            "keyboard_nav_score": 0.0,
+            "aria_score": 0
+          },
+          "details": {
+            "headings": {
+              "score": 0,
+              "issues": [
+                "No headings found on the page"
+              ],
+              "passes": []
+            },
+            "images": {
+              "score": 100,
+              "issues": [],
+              "passes": [
+                "No images found on the page"
+              ]
+            },
+            "links": {
+              "score": 100,
+              "issues": [],
+              "passes": [
+                "No links found on the page"
+              ]
+            },
+            "color_contrast": {
+              "score": 0,
+              "issues": [],
+              "passes": []
+            },
+            "forms": {
+              "score": 0,
+              "issues": [
+                "No forms found on the page"
+              ],
+              "passes": []
+            },
+            "landmarks": {
+              "score": 0.0,
+              "issues": [
+                "Missing main landmark",
+                "Missing navigation landmark",
+                "Missing header landmark",
+                "Missing footer landmark"
+              ],
+              "passes": []
+            },
+            "keyboard_navigation": {
+              "score": 0.0,
+              "issues": [
+                "Missing skip navigation link"
+              ],
+              "passes": []
+            },
+            "aria": {
+              "score": 0,
+              "issues": [],
+              "passes": []
+            }
+          }
+        },
+        "json_path": "analysis_results/accessibility_http___localhost_3001_frontend_src_app_html_20250507_203922.json",
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

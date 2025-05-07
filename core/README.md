@@ -1,654 +1,346 @@
 # UIBench Core Engine
 
-The core engine provides a comprehensive set of tools for analyzing and evaluating web interfaces. This document outlines the core functionality and how to integrate it with the backend.
+UIBench is a Python-based core engine designed to automate the evaluation of web design aesthetics and accessibility. The engine provides comprehensive analysis of web pages through various analyzers and evaluators.
 
 ## Core Components
 
 ### Analyzers
-
-The core provides specialized analyzers for different aspects of UI evaluation:
-
-```python
-from core.analyzers import (
-    AccessibilityAnalyzer,
-    PerformanceAnalyzer,
-    SEOAnalyzer,
-    SecurityAnalyzer,
-    UsabilityAnalyzer,
-    CodeQualityAnalyzer,
-    DesignSystemAnalyzer,
-    NLPContentAnalyzer,
-    InfrastructureAnalyzer,
-    OperationalMetricsAnalyzer,
-    ComplianceAnalyzer
-)
-```
-
-Each analyzer provides specific evaluation capabilities and returns structured results.
-
-#### NLP Content Analyzer
-
-The NLPContentAnalyzer provides sophisticated natural language processing capabilities for analyzing web content. It features a flexible architecture that adapts to available NLP libraries:
-
-##### API Reference
-
-```python
-class NLPContentAnalyzer:
-    def __init__(self, custom_metrics: Dict[str, Any] = None):
-        """
-        Initialize the NLP analyzer with optional custom metrics.
-        
-        Args:
-            custom_metrics: Dictionary of custom analysis parameters:
-                - min_readability_score: Minimum acceptable readability score (0-100)
-                - max_sentence_length: Maximum words per sentence
-                - required_keywords: List of keywords that must be present
-                - sentiment_threshold: Minimum acceptable sentiment score (-1 to 1)
-        """
-        pass
-
-    async def analyze(self, text: str, language: str = "en") -> Dict[str, Any]:
-        """
-        Perform comprehensive text analysis.
-        
-        Args:
-            text: The text content to analyze
-            language: ISO language code (default: "en")
-            
-        Returns:
-            Dictionary containing analysis results:
-            {
-                "readability": {
-                    "score": float,  # 0-100
-                    "metrics": {
-                        "avg_sentence_length": float,
-                        "avg_word_length": float
-                    }
-                },
-                "sentiment": {
-                    "score": float,  # 0-100
-                    "metrics": {
-                        "compound": float,  # -1 to 1
-                        "pos": float,
-                        "neg": float,
-                        "neu": float
-                    }
-                },
-                "keywords": {
-                    "keywords": List[str],
-                    "count": int
-                },
-                "grammar": {
-                    "score": float,  # 0-100
-                    "issues": List[str]
-                },
-                "overall_score": float  # 0-100
-            }
-        """
-        pass
-
-    @staticmethod
-    def analyze_sentiment(text: str) -> Dict[str, float]:
-        """
-        Analyze text sentiment using VADER sentiment analyzer.
-        
-        Args:
-            text: Input text to analyze
-            
-        Returns:
-            {
-                "polarity": float,  # -1 to 1
-                "subjectivity": float  # 0 to 1
-            }
-        """
-        pass
-
-    @staticmethod
-    def detect_inclusive_language(text: str) -> List[Dict[str, Any]]:
-        """
-        Detect potentially non-inclusive language.
-        
-        Args:
-            text: Input text to analyze
-            
-        Returns:
-            List of issues:
-            [{
-                "term": str,
-                "alternatives": List[str],
-                "severity": str  # "high", "medium", "low"
-            }]
-        """
-        pass
-
-    @staticmethod
-    def detect_translation_quality(text: str) -> Dict[str, Any]:
-        """
-        Assess translation quality and language detection.
-        
-        Args:
-            text: Input text to analyze
-            
-        Returns:
-            {
-                "translation_likelihood": float,  # 0 to 1
-                "cultural_appropriateness": bool
-            }
-        """
-        pass
-
-    @staticmethod
-    def analyze_content_gaps(text: str) -> Dict[str, Any]:
-        """
-        Analyze content for gaps and SEO potential.
-        
-        Args:
-            text: Input text to analyze
-            
-        Returns:
-            {
-                "keyword_density": float,  # 0 to 1
-                "content_gaps": List[str],
-                "seo_potential": float  # 0 to 100
-            }
-        """
-        pass
-
-    @staticmethod
-    def compute_readability(text: str) -> Dict[str, float]:
-        """
-        Compute various readability metrics.
-        
-        Args:
-            text: Input text to analyze
-            
-        Returns:
-            {
-                "flesch": float,  # 0 to 100
-                "smog": float,    # Grade level
-                "coleman_liau": float  # Grade level
-            }
-        """
-        pass
-
-##### Features and Fallback Behavior
-
-1. **Keyword Extraction**
-   - With spaCy: Advanced POS tagging and named entity recognition
-   - Without spaCy: NLTK-based POS tagging for identifying key terms
-
-2. **Grammar Analysis**
-   - With spaCy: Dependency parsing for sophisticated subject-verb analysis
-   - Without spaCy: NLTK POS tagging for basic grammatical structure detection
-
-3. **Sentiment Analysis**
-   - Primary: NLTK's VADER sentiment analyzer
-   - Backup: TextBlob sentiment analysis
-
-4. **Readability Metrics**
-   - Consistent analysis using textstat
-   - Flesch reading ease
-   - SMOG index
-   - Coleman-Liau index
-
-5. **Inclusive Language Detection**
-   - Dictionary-based approach
-   - Consistent behavior regardless of available libraries
-   - Customizable terminology database
-
-6. **Translation Quality Assessment**
-   - Language detection using TextBlob
-   - Confidence scoring for translation likelihood
-   - Cultural appropriateness checks
-
-##### Installation Options
-
-Basic installation (without spaCy):
-```bash
-pip install uibench
-```
-
-Full installation (with enhanced NLP capabilities):
-```bash
-pip install uibench[nlp]
-python -m spacy download en_core_web_sm
-```
-
-##### Usage Examples
-
-1. **Basic Content Analysis**
-```python
-from core.analyzers import NLPContentAnalyzer
-
-analyzer = NLPContentAnalyzer()
-text = "Your webpage content here..."
-results = await analyzer.analyze(text)
-```
-
-2. **Custom Metrics Configuration**
-```python
-analyzer = NLPContentAnalyzer(custom_metrics={
-    "min_readability_score": 70,
-    "max_sentence_length": 15,
-    "required_keywords": ["product", "service", "solution"],
-    "sentiment_threshold": 0.3
-})
-```
-
-3. **Multi-language Analysis**
-```python
-# English content
-en_results = await analyzer.analyze(english_text, language="en")
-
-# Spanish content
-es_results = await analyzer.analyze(spanish_text, language="es")
-```
-
-4. **Specific Analysis Types**
-```python
-# Sentiment analysis only
-sentiment = NLPContentAnalyzer.analyze_sentiment(text)
-
-# Inclusive language check
-inclusive_issues = NLPContentAnalyzer.detect_inclusive_language(text)
-
-# Readability metrics
-readability = NLPContentAnalyzer.compute_readability(text)
-```
-
-5. **Content Gap Analysis**
-```python
-gaps = NLPContentAnalyzer.analyze_content_gaps(text)
-if gaps["keyword_density"] < 0.02:
-    print("Warning: Low keyword density")
-```
-
-##### Content-Specific Analysis Examples
-
-1. **Technical Documentation**
-```python
-# Configure analyzer for technical content
-tech_analyzer = NLPContentAnalyzer(custom_metrics={
-    "min_readability_score": 60,  # Technical content can be more complex
-    "max_sentence_length": 25,    # Longer sentences acceptable in technical docs
-    "required_keywords": ["api", "function", "parameter", "example"],
-    "sentiment_threshold": 0.0    # Neutral sentiment expected
-})
-
-# Analyze API documentation
-api_docs = """
-The `processData` function accepts a JSON payload and returns a Promise.
-Parameters:
-- data: The input data to process
-- options: Configuration options
-Returns: A Promise that resolves to the processed data.
-"""
-results = await tech_analyzer.analyze(api_docs)
-
-# Check for technical writing best practices
-if results["readability"]["score"] < 60:
-    print("Warning: Documentation may be too complex")
-if len(results["grammar"]["issues"]) > 0:
-    print("Warning: Technical accuracy may be affected")
-```
-
-2. **Marketing Copy**
-```python
-# Configure analyzer for marketing content
-marketing_analyzer = NLPContentAnalyzer(custom_metrics={
-    "min_readability_score": 80,  # Marketing should be very readable
-    "max_sentence_length": 15,    # Short, punchy sentences
-    "required_keywords": ["benefit", "solution", "value"],
-    "sentiment_threshold": 0.5    # Positive sentiment expected
-})
-
-# Analyze product description
-product_copy = """
-Transform your workflow with our revolutionary solution.
-Experience unmatched efficiency and productivity.
-Join thousands of satisfied customers today!
-"""
-results = await marketing_analyzer.analyze(product_copy)
-
-# Check marketing effectiveness
-if results["sentiment"]["score"] < 70:
-    print("Warning: Copy may not be engaging enough")
-if results["readability"]["score"] < 80:
-    print("Warning: Copy may be too complex for target audience")
-```
-
-3. **Blog Content**
-```python
-# Configure analyzer for blog posts
-blog_analyzer = NLPContentAnalyzer(custom_metrics={
-    "min_readability_score": 70,
-    "max_sentence_length": 20,
-    "required_keywords": ["insight", "experience", "learn"],
-    "sentiment_threshold": 0.2
-})
-
-# Analyze blog post
-blog_post = """
-In this comprehensive guide, we'll explore the latest trends
-in web development. Learn how to implement modern techniques
-and improve your workflow efficiency.
-"""
-results = await blog_analyzer.analyze(blog_post)
-
-# Check blog post quality
-if results["content_gaps"]["seo_potential"] < 70:
-    print("Warning: SEO optimization needed")
-```
-
-##### Advanced Usage Patterns
-
-1. **Batch Processing**
-```python
-from typing import List, Dict
-import asyncio
-
-class BatchAnalyzer:
-    def __init__(self, analyzer: NLPContentAnalyzer, batch_size: int = 10):
-        self.analyzer = analyzer
-        self.batch_size = batch_size
-
-    async def analyze_batch(self, texts: List[str]) -> List[Dict]:
-        """Process multiple texts in parallel batches."""
-        results = []
-        for i in range(0, len(texts), self.batch_size):
-            batch = texts[i:i + self.batch_size]
-            batch_results = await asyncio.gather(
-                *[self.analyzer.analyze(text) for text in batch]
-            )
-            results.extend(batch_results)
-        return results
-
-    async def analyze_with_retry(self, text: str, max_retries: int = 3) -> Dict:
-        """Analyze text with automatic retry on failure."""
-        for attempt in range(max_retries):
-            try:
-                return await self.analyzer.analyze(text)
-            except Exception as e:
-                if attempt == max_retries - 1:
-                    raise
-                await asyncio.sleep(1 * (attempt + 1))
-```
-
-2. **Custom Analyzers**
-```python
-from abc import ABC, abstractmethod
-
-class CustomAnalyzer(ABC):
-    @abstractmethod
-    async def analyze(self, text: str) -> Dict:
-        pass
-
-class TechnicalTermAnalyzer(CustomAnalyzer):
-    def __init__(self, technical_terms: List[str]):
-        self.technical_terms = set(technical_terms)
-
-    async def analyze(self, text: str) -> Dict:
-        words = text.lower().split()
-        found_terms = [term for term in self.technical_terms if term in words]
-        return {
-            "technical_terms": found_terms,
-            "coverage": len(found_terms) / len(self.technical_terms)
-        }
-
-# Usage
-tech_terms = ["api", "endpoint", "authentication", "authorization"]
-term_analyzer = TechnicalTermAnalyzer(tech_terms)
-results = await term_analyzer.analyze(api_documentation)
-```
-
-3. **Pipeline Processing**
-```python
-class AnalysisPipeline:
-    def __init__(self):
-        self.analyzers = []
-
-    def add_analyzer(self, analyzer: CustomAnalyzer):
-        self.analyzers.append(analyzer)
-
-    async def process(self, text: str) -> Dict:
-        results = {}
-        for analyzer in self.analyzers:
-            analyzer_results = await analyzer.analyze(text)
-            results.update(analyzer_results)
-        return results
-
-# Usage
-pipeline = AnalysisPipeline()
-pipeline.add_analyzer(NLPContentAnalyzer())
-pipeline.add_analyzer(TechnicalTermAnalyzer(tech_terms))
-results = await pipeline.process(text)
-```
-
-##### Performance Optimization Techniques
-
-1. **Caching Strategies**
-```python
-from functools import lru_cache
-import hashlib
-
-class CachedAnalyzer:
-    def __init__(self, analyzer: NLPContentAnalyzer):
-        self.analyzer = analyzer
-        self.cache = {}
-
-    def _get_cache_key(self, text: str) -> str:
-        return hashlib.md5(text.encode()).hexdigest()
-
-    async def analyze(self, text: str) -> Dict:
-        cache_key = self._get_cache_key(text)
-        if cache_key in self.cache:
-            return self.cache[cache_key]
-        
-        results = await self.analyzer.analyze(text)
-        self.cache[cache_key] = results
-        return results
-
-    def clear_cache(self):
-        self.cache.clear()
-```
-
-2. **Resource Management**
-```python
-class ResourceManager:
-    def __init__(self, max_memory_mb: int = 1024):
-        self.max_memory = max_memory_mb * 1024 * 1024
-        self.current_memory = 0
-
-    async def check_memory(self):
-        import psutil
-        process = psutil.Process()
-        memory_info = process.memory_info()
-        self.current_memory = memory_info.rss
-        
-        if self.current_memory > self.max_memory:
-            raise MemoryError("Memory limit exceeded")
-
-# Usage in analyzer
-class MemoryAwareAnalyzer:
-    def __init__(self, analyzer: NLPContentAnalyzer):
-        self.analyzer = analyzer
-        self.resource_manager = ResourceManager()
-
-    async def analyze(self, text: str) -> Dict:
-        await self.resource_manager.check_memory()
-        return await self.analyzer.analyze(text)
-```
-
-3. **Parallel Processing**
-```python
-import multiprocessing
-from concurrent.futures import ProcessPoolExecutor
-
-class ParallelAnalyzer:
-    def __init__(self, analyzer: NLPContentAnalyzer):
-        self.analyzer = analyzer
-        self.max_workers = multiprocessing.cpu_count()
-
-    async def analyze_parallel(self, texts: List[str]) -> List[Dict]:
-        with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
-            loop = asyncio.get_event_loop()
-            tasks = [
-                loop.run_in_executor(executor, self.analyzer.analyze, text)
-                for text in texts
-            ]
-            return await asyncio.gather(*tasks)
-```
+- **Accessibility Analyzer**: Evaluates WCAG compliance and accessibility features
+- **Code Analyzer**: Analyzes HTML, CSS, and JavaScript code quality
+- **Compliance Analyzer**: Checks for legal and regulatory compliance
+- **Design System Analyzer**: Evaluates design consistency and component usage
+- **Infrastructure Analyzer**: Analyzes server configuration and performance
+- **NLP Analyzer**: Performs natural language processing on content
+- **Operational Metrics Analyzer**: Tracks performance and operational metrics
+- **Performance Analyzer**: Measures page load and runtime performance
+- **Security Analyzer**: Checks for security vulnerabilities
+- **SEO Analyzer**: Evaluates search engine optimization
+- **UX Analyzer**: Analyzes user experience and interaction patterns
 
 ### Evaluators
+- **PageEvaluator**: Evaluates individual web pages
+- **WebsiteEvaluator**: Evaluates entire websites
+- **ProjectEvaluator**: Evaluates local project files
 
-The core provides two main evaluator classes:
+## Core Architecture and Concepts
 
+### System Overview
+
+UIBench's core engine is built on a modular architecture that separates concerns and allows for flexible analysis of web interfaces. The system is designed to be:
+
+1. **Extensible**: New analyzers can be added without modifying existing code
+2. **Configurable**: Each component can be customized through settings
+3. **Asynchronous**: Built for high-performance concurrent analysis
+4. **Cached**: Results are cached to improve performance
+5. **Error-Resilient**: Graceful handling of failures and timeouts
+
+### Key Concepts
+
+#### 1. Analysis Pipeline
+
+The analysis pipeline follows these steps:
+
+1. **Page Loading**: 
+   - Initial page load and rendering
+   - JavaScript execution
+   - Resource loading (images, styles, scripts)
+
+2. **Content Extraction**:
+   - HTML structure analysis
+   - CSS style computation
+   - JavaScript execution context
+   - Network request analysis
+
+3. **Analysis Execution**:
+   - Parallel analyzer execution
+   - Result aggregation
+   - Score calculation
+   - Issue detection
+
+4. **Result Processing**:
+   - Data normalization
+   - Cache storage
+   - Report generation
+
+#### 2. Analyzer Types
+
+Analyzers are categorized by their focus:
+
+1. **Technical Analyzers**:
+   - Code quality
+   - Performance metrics
+   - Security vulnerabilities
+   - Infrastructure assessment
+
+2. **User Experience Analyzers**:
+   - Accessibility compliance
+   - Design system consistency
+   - Interaction patterns
+   - Content readability
+
+3. **Business Analyzers**:
+   - SEO optimization
+   - Compliance requirements
+   - Operational metrics
+   - Content analysis
+
+#### 3. Evaluation Modes
+
+The engine supports multiple evaluation modes:
+
+1. **Live Evaluation**:
+   - Real-time analysis of live websites
+   - WebSocket-based progress updates
+   - Interactive result exploration
+
+2. **Offline Evaluation**:
+   - Analysis of local project files
+   - Batch processing capabilities
+   - Detailed reporting
+
+3. **Continuous Evaluation**:
+   - Automated periodic checks
+   - Change detection
+   - Trend analysis
+
+#### 4. Scoring System
+
+The scoring system is designed to be:
+
+1. **Comprehensive**:
+   - Multiple evaluation criteria
+   - Weighted importance factors
+   - Normalized scores (0-100)
+
+2. **Transparent**:
+   - Detailed scoring breakdown
+   - Issue categorization
+   - Actionable recommendations
+
+3. **Customizable**:
+   - Adjustable weights
+   - Custom criteria
+   - Industry-specific standards
+
+### Best Practices
+
+#### 1. Performance Optimization
+
+1. **Resource Management**:
+   - Browser instance pooling
+   - Memory usage monitoring
+   - Concurrent analysis limits
+
+2. **Caching Strategy**:
+   - Result caching
+   - Resource caching
+   - Cache invalidation rules
+
+3. **Network Optimization**:
+   - Request batching
+   - Resource prioritization
+   - Connection pooling
+
+#### 2. Analysis Configuration
+
+1. **Analyzer Selection**:
+   - Choose relevant analyzers
+   - Configure analysis depth
+   - Set performance thresholds
+
+2. **Custom Rules**:
+   - Define custom criteria
+   - Set industry standards
+   - Configure severity levels
+
+3. **Output Format**:
+   - Select report format
+   - Configure detail level
+   - Set export options
+
+#### 3. Integration Guidelines
+
+1. **API Integration**:
+   - RESTful endpoints
+   - WebSocket connections
+   - Authentication methods
+
+2. **Data Flow**:
+   - Input validation
+   - Result processing
+   - Error handling
+
+3. **Security**:
+   - Access control
+   - Data protection
+   - Rate limiting
+
+### Advanced Features
+
+#### 1. Custom Analyzers
+
+The system supports custom analyzers through:
+
+1. **Plugin System**:
+   - Standardized interfaces
+   - Configuration options
+   - Result formatting
+
+2. **Integration Points**:
+   - Analysis hooks
+   - Event listeners
+   - Custom metrics
+
+3. **Extension Methods**:
+   - Custom rules
+   - Specialized checks
+   - Industry-specific analysis
+
+#### 2. Analysis Extensions
+
+Extend analysis capabilities with:
+
+1. **Custom Metrics**:
+   - Business-specific KPIs
+   - Industry standards
+   - Performance indicators
+
+2. **Specialized Checks**:
+   - Compliance requirements
+   - Brand guidelines
+   - Accessibility standards
+
+3. **Integration Points**:
+   - Third-party tools
+   - External services
+   - Custom validators
+
+#### 3. Reporting System
+
+Generate comprehensive reports with:
+
+1. **Multiple Formats**:
+   - JSON
+   - HTML
+   - PDF
+   - CSV
+
+2. **Custom Templates**:
+   - Branded reports
+   - Custom sections
+   - Specific metrics
+
+3. **Export Options**:
+   - Scheduled exports
+   - Automated delivery
+   - Integration with tools
+
+## Usage Examples
+
+### Basic Page Evaluation
 ```python
-from core.evaluators import PageEvaluator, WebsiteEvaluator
+from core.evaluators import PageEvaluator
+from playwright.async_api import async_playwright
+
+async def evaluate_page():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        page = await browser.new_page()
+        await page.goto("https://example.com")
+        
+        evaluator = PageEvaluator(page)
+        results = await evaluator.evaluate()
+        
+        print(f"Overall Score: {results['overall_score']}")
+        print(f"Accessibility Score: {results['accessibility']['overall_score']}")
+        print(f"Performance Score: {results['performance']['overall_score']}")
+        
+        await browser.close()
+
+# Run the evaluation
+import asyncio
+asyncio.run(evaluate_page())
 ```
 
-#### PageEvaluator
-
-Evaluates individual pages:
-
+### Backend Implementation
 ```python
-# Initialize with page content
-evaluator = PageEvaluator(
-    url="https://example.com",
-    html="<html>...",
-    page=browser_page,  # Playwright page object
-    body_text="Page content...",
-    custom_criteria={}  # Optional custom evaluation criteria
-)
+from fastapi import FastAPI, WebSocket
+from core.evaluators import PageEvaluator
+from core.services.websocket_service import WebSocketManager
+from core.services.live_evaluation_service import LiveEvaluationService
 
-# Run evaluation
-results = await evaluator.evaluate()
+app = FastAPI()
+ws_manager = WebSocketManager()
+evaluation_service = LiveEvaluationService(ws_manager)
+
+@app.websocket("/ws/evaluate")
+async def websocket_endpoint(websocket: WebSocket):
+    await ws_manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_json()
+            if data["type"] == "start_evaluation":
+                await evaluation_service.start_evaluation(
+                    url=data["url"],
+                    client_id=websocket.client.id
+                )
+    except Exception as e:
+        await ws_manager.disconnect(websocket)
 ```
 
-#### WebsiteEvaluator
-
-Manages crawling and evaluation of entire websites:
-
+### Offline Evaluation
 ```python
-# Initialize with website URL
-evaluator = WebsiteEvaluator(
-    root_url="https://example.com",
-    max_subpages=100,  # Optional limit
-    max_depth=3,       # Optional depth limit
-    concurrency=5,     # Optional concurrency limit
-    custom_criteria={} # Optional custom criteria
-)
+from core.evaluators import ProjectEvaluator
+from pathlib import Path
 
-# Run evaluation
-results = await evaluator.evaluate(crawl=True)
-```
-
-## Backend Integration
-
-### API Endpoints
-
-The backend provides REST API endpoints that utilize the core functionality:
-
-```python
-# Example FastAPI endpoint
-@router.post("/analyze")
-async def analyze_website(request: AnalysisRequest):
-    evaluator = WebsiteEvaluator(
-        root_url=request.url,
-        max_subpages=request.max_subpages,
-        max_depth=request.max_depth
+def evaluate_project():
+    project_path = Path("./my-project")
+    evaluator = ProjectEvaluator(project_path)
+    
+    # Run specific analyzers
+    results = evaluator.evaluate(
+        analyzers=["accessibility", "performance", "security"]
     )
-    results = await evaluator.evaluate(crawl=request.crawl)
-    return results
+    
+    # Save results
+    evaluator.save_results(results, "analysis_results.json")
+    
+    # Get detailed report
+    report = evaluator.generate_report(results)
+    print(report)
+
+# Run offline evaluation
+evaluate_project()
 ```
 
-### Output Format
+## Analysis Results Structure
 
-The core engine provides structured output in the following format:
+Each analyzer returns results in a consistent format:
 
 ```python
 {
-    "url": "https://example.com",
-    "timestamp": "2024-03-21T10:00:00Z",
-    "results": {
-        "accessibility": {
-            "score": 85,
-            "issues": [...],
-            "recommendations": [...]
-        },
-        "performance": {
-            "score": 90,
-            "metrics": {...},
-            "recommendations": [...]
-        },
-        "seo": {
-            "score": 75,
-            "issues": [...],
-            "recommendations": [...]
-        },
-        "security": {
-            "score": 95,
-            "vulnerabilities": [...],
-            "recommendations": [...]
-        },
-        "usability": {
-            "score": 80,
-            "issues": [...],
-            "recommendations": [...]
-        },
-        "code_quality": {
-            "score": 85,
-            "issues": [...],
-            "recommendations": [...]
-        },
-        "design_system": {
-            "score": 88,
-            "components": {...},
-            "inconsistencies": [...]
-        },
-        "content": {
-            "score": 82,
-            "readability": {...},
-            "recommendations": [...]
-        },
-        "infrastructure": {
-            "score": 92,
-            "hosting": {...},
-            "cdn": {...},
-            "recommendations": [...]
-        },
-        "operational": {
-            "score": 87,
-            "metrics": {...},
-            "recommendations": [...]
-        },
-        "compliance": {
-            "score": 90,
-            "issues": [...],
-            "recommendations": [...]
-        }
-    },
-    "summary": {
-        "overall_score": 85,
-        "critical_issues": [...],
-        "high_priority_recommendations": [...]
-    }
-}
-```
-
-### Error Handling
-
-The core engine provides detailed error information:
-
-```python
-{
-    "error": {
-        "type": "EvaluationError",
-        "message": "Failed to evaluate website",
+    "analyzer_name": {
+        "overall_score": float,  # 0-100 score
         "details": {
-            "component": "PerformanceAnalyzer",
-            "reason": "Timeout while loading page",
-            "stack_trace": "..."
+            # Analyzer-specific details
+        },
+        "issues": [
+            {
+                "type": str,
+                "message": str,
+                "severity": str,
+                "location": str
+            }
+        ],
+        "recommendations": [
+            {
+                "title": str,
+                "description": str,
+                "priority": str
+            }
+        ],
+        "metrics": {
+            # Analyzer-specific metrics
         }
     }
 }
@@ -656,600 +348,249 @@ The core engine provides detailed error information:
 
 ## Configuration
 
-The core engine can be configured through environment variables or a configuration file:
+The core engine can be configured through environment variables or a config file:
 
 ```python
 from core.config import Settings
 
-config = Settings()
-config.performance.max_concurrent = 10
-config.resources.max_browsers = 5
-config.resources.browser_timeout = 30000  # milliseconds
-```
-
-## Performance Considerations
-
-- The core engine uses asynchronous processing for better performance
-- Browser instances are managed through a pool to optimize resource usage
-- Network requests are cached to reduce redundant calls
-- Large websites are processed in batches to manage memory usage
-
-## Security
-
-- The core engine validates all URLs before processing
-- External resources are loaded in a controlled environment
-- Sensitive information is filtered from reports
-- Rate limiting is implemented to prevent abuse
-
-## Dependencies
-
-- Python 3.7+
-- Playwright for browser automation
-- BeautifulSoup for HTML parsing
-- aiohttp for async HTTP requests
-- pydantic for data validation
-
-## Detailed Analyzer Examples
-
-### Accessibility Analyzer
-```python
-from core.analyzers import AccessibilityAnalyzer
-
-# Initialize analyzer
-accessibility = AccessibilityAnalyzer(
-    page=browser_page,
-    html=page_html,
-    custom_rules={
-        "min_contrast_ratio": 4.5,
-        "skip_aria_checks": False
-    }
-)
-
-# Run analysis
-results = await accessibility.analyze()
-# Returns: {
-#     "score": 85,
-#     "issues": [
-#         {"type": "contrast", "element": "button.submit", "severity": "high"},
-#         {"type": "aria-label", "element": "nav.main", "severity": "medium"}
-#     ],
-#     "recommendations": [
-#         "Increase contrast ratio for submit button",
-#         "Add aria-label to main navigation"
-#     ]
-# }
-```
-
-### Performance Analyzer
-```python
-from core.analyzers import PerformanceAnalyzer
-
-# Initialize analyzer
-performance = PerformanceAnalyzer(
-    page=browser_page,
-    metrics={
-        "first_contentful_paint": True,
-        "largest_contentful_paint": True,
-        "time_to_interactive": True
-    }
-)
-
-# Run analysis
-results = await performance.analyze()
-# Returns: {
-#     "score": 90,
-#     "metrics": {
-#         "fcp": 1.2,
-#         "lcp": 2.5,
-#         "tti": 3.1
-#     },
-#     "recommendations": [
-#         "Optimize image loading",
-#         "Reduce JavaScript bundle size"
-#     ]
-# }
-```
-
-### SEO Analyzer
-```python
-from core.analyzers import SEOAnalyzer
-
-# Initialize analyzer
-seo = SEOAnalyzer(
-    html=page_html,
-    url="https://example.com",
-    custom_keywords=["web development", "UI design"]
-)
-
-# Run analysis
-results = await seo.analyze()
-# Returns: {
-#     "score": 75,
-#     "issues": [
-#         {"type": "meta_description", "severity": "high"},
-#         {"type": "heading_structure", "severity": "medium"}
-#     ],
-#     "recommendations": [
-#         "Add meta description",
-#         "Improve heading hierarchy"
-#     ]
-# }
-```
-
-### Security Analyzer
-```python
-from core.analyzers import SecurityAnalyzer
-
-# Initialize analyzer
-security = SecurityAnalyzer(
-    page=browser_page,
-    html=page_html,
-    headers=response_headers
-)
-
-# Run analysis
-results = await security.analyze()
-# Returns: {
-#     "score": 95,
-#     "vulnerabilities": [
-#         {"type": "xss", "severity": "high", "location": "search form"},
-#         {"type": "csp", "severity": "medium", "location": "global"}
-#     ],
-#     "recommendations": [
-#         "Implement Content Security Policy",
-#         "Sanitize user input"
-#     ]
-# }
-```
-
-## Caching System
-
-The core engine implements a sophisticated caching system to optimize performance and reduce redundant requests.
-
-### Cache Configuration
-```python
-from core.cache import CacheManager
-
-# Initialize cache with custom settings
-cache = CacheManager(
-    ttl=3600,  # Cache time-to-live in seconds
-    max_size=1000,  # Maximum number of cached items
-    storage="redis"  # Storage backend (redis, memory, or file)
-)
-
-# Configure cache for specific analyzers
-cache.configure_analyzer(
-    "performance",
-    ttl=1800,  # Custom TTL for performance results
-    exclude_patterns=["metrics.lcp"]  # Don't cache LCP metrics
+settings = Settings(
+    CACHE_DIR="~/.uibench/cache",
+    CACHE_TTL=3600,
+    MAX_CONCURRENT_EVALUATIONS=5,
+    ENABLED_ANALYZERS=["accessibility", "performance", "security"]
 )
 ```
 
-### Cache Usage
+## Error Handling
+
+The core engine includes comprehensive error handling:
+
 ```python
-# Automatic caching in analyzers
-results = await performance.analyze(use_cache=True)
-
-# Manual cache operations
-await cache.set("page_metrics", metrics_data)
-cached_data = await cache.get("page_metrics")
-await cache.invalidate("page_metrics")
-```
-
-### Cache Invalidation
-```python
-# Invalidate specific patterns
-await cache.invalidate_pattern("performance_*")
-
-# Invalidate by analyzer
-await cache.invalidate_analyzer("seo")
-
-# Clear entire cache
-await cache.clear()
-```
-
-## Browser Management System
-
-The core engine includes a robust browser management system for handling multiple browser instances efficiently.
-
-### Browser Pool Configuration
-```python
-from core.browser import BrowserManager
-
-# Initialize browser manager
-browser_manager = BrowserManager(
-    max_instances=5,  # Maximum number of concurrent browsers
-    timeout=30000,    # Page load timeout in milliseconds
-    viewport={
-        "width": 1920,
-        "height": 1080
-    },
-    user_agent="UIBench/1.0"
+from core.exceptions import (
+    EvaluationError,
+    AnalyzerError,
+    BrowserError,
+    CacheError
 )
-
-# Configure browser settings
-browser_manager.configure({
-    "headless": True,
-    "ignore_https_errors": True,
-    "bypass_csp": True
-})
-```
-
-### Browser Instance Management
-```python
-# Get a browser instance from the pool
-browser = await browser_manager.get_browser()
 
 try:
-    # Create a new page
-    page = await browser.new_page()
-    
-    # Navigate and analyze
-    await page.goto("https://example.com")
-    results = await analyzer.analyze(page)
-    
-finally:
-    # Release the browser back to the pool
-    await browser_manager.release_browser(browser)
+    results = await evaluator.evaluate()
+except EvaluationError as e:
+    print(f"Evaluation failed: {e}")
+except AnalyzerError as e:
+    print(f"Analyzer failed: {e}")
+except BrowserError as e:
+    print(f"Browser error: {e}")
+except CacheError as e:
+    print(f"Cache error: {e}")
 ```
 
-### Advanced Browser Features
+## Troubleshooting
+
+### Common Issues and Solutions
+
+#### 1. Browser Automation Issues
+
+**Problem**: Playwright browser fails to launch or crashes
 ```python
-# Configure network interception
-await browser_manager.setup_interception({
-    "patterns": ["*.jpg", "*.png"],
-    "handler": custom_handler
-})
-
-# Set up authentication
-await browser_manager.setup_auth({
-    "type": "basic",
-    "username": "user",
-    "password": "pass"
-})
-
-# Configure proxy
-await browser_manager.setup_proxy({
-    "server": "http://proxy.example.com",
-    "username": "proxy_user",
-    "password": "proxy_pass"
-})
+# Error: Browser closed unexpectedly
+# Error: Target page, context or browser has been closed
 ```
 
-### Browser Monitoring
-```python
-# Monitor browser health
-health_metrics = await browser_manager.get_health_metrics()
-# Returns: {
-#     "active_instances": 3,
-#     "memory_usage": "1.2GB",
-#     "cpu_usage": "45%",
-#     "errors": []
-# }
+**Solutions**:
+- Ensure Playwright browsers are installed:
+  ```bash
+  playwright install
+  ```
+- Check system resources (memory, CPU)
+- Increase browser launch timeout:
+  ```python
+  browser = await p.chromium.launch(timeout=60000)  # 60 seconds
+  ```
+- Use headless mode for better stability:
+  ```python
+  browser = await p.chromium.launch(headless=True)
+  ```
 
-# Get browser logs
-logs = await browser_manager.get_logs()
+#### 2. Cache Issues
+
+**Problem**: Cache operations fail or return stale data
+```python
+# Error: Cache directory not found
+# Error: Cache file corrupted
 ```
 
-### Error Recovery
-```python
-# Automatic recovery from crashes
-browser_manager.configure_recovery({
-    "max_retries": 3,
-    "retry_delay": 1000,
-    "on_crash": custom_recovery_handler
-})
+**Solutions**:
+- Clear cache directory:
+  ```python
+  from core.utils.cache import AnalysisCache
+  cache = AnalysisCache()
+  cache.clear()
+  ```
+- Verify cache permissions:
+  ```bash
+  chmod -R 755 ~/.uibench/cache
+  ```
+- Disable cache temporarily:
+  ```python
+  settings = Settings(CACHE_ENABLED=False)
+  ```
 
-# Manual recovery
-await browser_manager.recover_browser(browser)
+#### 3. Analyzer Failures
+
+**Problem**: Specific analyzers fail to complete
+```python
+# Error: Analyzer timeout
+# Error: Missing required data
 ```
 
-## Additional Analyzer Examples
+**Solutions**:
+- Increase analyzer timeout:
+  ```python
+  settings = Settings(ANALYZER_TIMEOUT=300)  # 5 minutes
+  ```
+- Check analyzer dependencies:
+  ```python
+  # Verify required packages
+  pip install -r requirements.txt
+  ```
+- Enable debug logging:
+  ```python
+  import logging
+  logging.basicConfig(level=logging.DEBUG)
+  ```
 
-### Usability Analyzer
+#### 4. Memory Issues
+
+**Problem**: High memory usage or out of memory errors
 ```python
-from core.analyzers import UsabilityAnalyzer
+# Error: MemoryError
+# Error: Process killed due to memory limit
+```
 
-# Initialize analyzer
-usability = UsabilityAnalyzer(
-    page=browser_page,
-    html=page_html,
-    custom_criteria={
-        "min_clickable_area": 44,  # pixels
-        "max_navigation_depth": 3,
-        "required_elements": ["search", "menu", "footer"]
-    }
+**Solutions**:
+- Reduce concurrent evaluations:
+  ```python
+  settings = Settings(MAX_CONCURRENT_EVALUATIONS=2)
+  ```
+- Enable garbage collection:
+  ```python
+  import gc
+  gc.enable()
+  ```
+- Monitor memory usage:
+  ```python
+  from core.utils.monitoring import MemoryMonitor
+  monitor = MemoryMonitor()
+  monitor.start()
+  ```
+
+#### 5. Network Issues
+
+**Problem**: Failed to fetch or analyze web pages
+```python
+# Error: Connection timeout
+# Error: SSL certificate error
+```
+
+**Solutions**:
+- Increase network timeout:
+  ```python
+  settings = Settings(NETWORK_TIMEOUT=30000)  # 30 seconds
+  ```
+- Configure proxy if needed:
+  ```python
+  browser = await p.chromium.launch(proxy={
+      "server": "http://proxy.example.com:8080"
+  })
+  ```
+- Disable SSL verification (not recommended for production):
+  ```python
+  browser = await p.chromium.launch(ignore_https_errors=True)
+  ```
+
+### Debugging Tools
+
+#### 1. Enable Debug Logging
+```python
+import logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+```
+
+#### 2. Use Debug Mode
+```python
+settings = Settings(DEBUG=True)
+```
+
+#### 3. Save Debug Information
+```python
+from core.utils.debug import DebugCollector
+
+debug = DebugCollector()
+try:
+    results = await evaluator.evaluate()
+except Exception as e:
+    debug.save_error(e)
+    debug.save_state(evaluator.get_state())
+```
+
+### Performance Optimization
+
+#### 1. Resource Management
+```python
+# Limit concurrent operations
+settings = Settings(
+    MAX_CONCURRENT_EVALUATIONS=3,
+    MAX_BROWSER_INSTANCES=2
 )
 
-# Run analysis
-results = await usability.analyze()
-# Returns: {
-#     "score": 80,
-#     "issues": [
-#         {"type": "clickable_area", "element": "button.small", "severity": "high"},
-#         {"type": "navigation_depth", "path": "products/category/subcategory", "severity": "medium"}
-#     ],
-#     "recommendations": [
-#         "Increase clickable area for small buttons",
-#         "Simplify navigation structure"
-#     ]
-# }
-```
-
-### Code Quality Analyzer
-```python
-from core.analyzers import CodeQualityAnalyzer
-
-# Initialize analyzer
-code_quality = CodeQualityAnalyzer(
-    html=page_html,
-    javascript=page_scripts,
-    css=page_styles,
-    custom_rules={
-        "max_script_size": 500000,  # bytes
-        "max_css_size": 200000,     # bytes
-        "minify_required": True
-    }
+# Configure memory limits
+settings = Settings(
+    MAX_MEMORY_USAGE="2GB",
+    MEMORY_CLEANUP_THRESHOLD="1.5GB"
 )
-
-# Run analysis
-results = await code_quality.analyze()
-# Returns: {
-#     "score": 85,
-#     "issues": [
-#         {"type": "script_size", "file": "main.js", "size": 600000, "severity": "high"},
-#         {"type": "unminified", "file": "styles.css", "severity": "medium"}
-#     ],
-#     "recommendations": [
-#         "Split main.js into smaller modules",
-#         "Minify CSS files"
-#     ]
-# }
 ```
 
-### Design System Analyzer
+#### 2. Caching Strategy
 ```python
-from core.analyzers import DesignSystemAnalyzer
-
-# Initialize analyzer
-design_system = DesignSystemAnalyzer(
-    page=browser_page,
-    html=page_html,
-    css=page_styles,
-    custom_standards={
-        "color_palette": ["#primary", "#secondary", "#accent"],
-        "typography": {
-            "headings": ["h1", "h2", "h3"],
-            "body": ["p", "span"]
-        }
-    }
+# Configure cache settings
+settings = Settings(
+    CACHE_TTL=3600,  # 1 hour
+    CACHE_MAX_SIZE=1000,
+    CACHE_CLEANUP_INTERVAL=3600
 )
-
-# Run analysis
-results = await design_system.analyze()
-# Returns: {
-#     "score": 88,
-#     "components": {
-#         "buttons": {
-#             "variants": ["primary", "secondary"],
-#             "inconsistencies": ["border-radius"]
-#         },
-#         "cards": {
-#             "variants": ["standard", "featured"],
-#             "inconsistencies": ["shadow"]
-#         }
-#     },
-#     "recommendations": [
-#         "Standardize button border-radius",
-#         "Create consistent card shadow system"
-#     ]
-# }
 ```
 
-### NLP Content Analyzer
+#### 3. Browser Pool Management
 ```python
-from core.analyzers import NLPContentAnalyzer
-
-# Initialize analyzer
-content = NLPContentAnalyzer(
-    text=page_text,
-    language="en",
-    custom_metrics={
-        "min_readability_score": 60,
-        "max_sentence_length": 20,
-        "required_keywords": ["product", "service"]
-    }
+# Configure browser pool
+settings = Settings(
+    BROWSER_POOL_SIZE=3,
+    BROWSER_IDLE_TIMEOUT=300,  # 5 minutes
+    BROWSER_RECYCLE_INTERVAL=3600  # 1 hour
 )
-
-# Run analysis
-results = await content.analyze()
-# Returns: {
-#     "score": 82,
-#     "readability": {
-#         "flesch_kincaid": 65,
-#         "gunning_fog": 12,
-#         "coleman_liau": 8
-#     },
-#     "issues": [
-#         {"type": "sentence_length", "text": "This is a very long sentence...", "severity": "medium"},
-#         {"type": "missing_keyword", "keyword": "service", "severity": "high"}
-#     ],
-#     "recommendations": [
-#         "Break down long sentences",
-#         "Include service-related content"
-#     ]
-# }
 ```
 
-## Browser Pool Resource Management
+### Getting Help
 
-The browser pool implements sophisticated resource management to ensure optimal performance and stability.
+If you encounter issues not covered here:
 
-### Resource Limits
-```python
-# Configure resource limits
-browser_manager.configure_resources({
-    "max_memory_per_instance": "1GB",
-    "max_cpu_percent": 50,
-    "max_total_memory": "4GB",
-    "max_total_cpu": 80
-})
+1. Check the [GitHub Issues](https://github.com/yourusername/uibench/issues)
+2. Search the [Documentation](https://uibench.readthedocs.io)
+3. Join our [Discord Community](https://discord.gg/uibench)
+4. Open a new issue with:
+   - Error message and stack trace
+   - Steps to reproduce
+   - System information
+   - UIBench version
 
-# Monitor resource usage
-resource_metrics = await browser_manager.get_resource_metrics()
-# Returns: {
-#     "memory": {
-#         "per_instance": {"browser1": "800MB", "browser2": "600MB"},
-#         "total": "1.4GB",
-#         "available": "2.6GB"
-#     },
-#     "cpu": {
-#         "per_instance": {"browser1": "30%", "browser2": "25%"},
-#         "total": "55%",
-#         "available": "45%"
-#     }
-# }
-```
+## Contributing
 
-### Resource Optimization
-```python
-# Configure automatic resource optimization
-browser_manager.configure_optimization({
-    "memory_cleanup_threshold": "800MB",
-    "cpu_throttle_threshold": 70,
-    "idle_timeout": 300,  # seconds
-    "max_concurrent_requests": 10
-})
+We welcome contributions to the core engine! Please see the main README for contribution guidelines.
 
-# Manual resource cleanup
-await browser_manager.cleanup_resources()
-```
+## License
 
-### Resource Monitoring
-```python
-# Set up resource monitoring
-browser_manager.setup_monitoring({
-    "interval": 60,  # seconds
-    "metrics": ["memory", "cpu", "network"],
-    "alert_thresholds": {
-        "memory": "90%",
-        "cpu": "80%",
-        "network": "1000req/s"
-    }
-})
-
-# Get detailed resource logs
-resource_logs = await browser_manager.get_resource_logs()
-```
-
-## Combined Analyzer Usage
-
-The core engine provides powerful ways to combine multiple analyzers for comprehensive analysis.
-
-### Parallel Analysis
-```python
-from core.analyzers import AnalyzerManager
-
-# Initialize analyzer manager
-manager = AnalyzerManager(
-    page=browser_page,
-    html=page_html,
-    config={
-        "parallel": True,
-        "timeout": 30000
-    }
-)
-
-# Run multiple analyzers in parallel
-results = await manager.analyze_all([
-    "accessibility",
-    "performance",
-    "seo",
-    "security"
-])
-
-# Get combined results
-combined_report = manager.generate_combined_report(results)
-```
-
-### Sequential Analysis
-```python
-# Run analyzers in sequence with dependencies
-results = await manager.analyze_sequence([
-    {
-        "name": "performance",
-        "dependencies": []
-    },
-    {
-        "name": "accessibility",
-        "dependencies": ["performance"]
-    },
-    {
-        "name": "usability",
-        "dependencies": ["accessibility"]
-    }
-])
-```
-
-### Custom Analysis Pipeline
-```python
-# Create custom analysis pipeline
-pipeline = manager.create_pipeline([
-    {
-        "name": "performance",
-        "config": {"metrics": ["fcp", "lcp"]}
-    },
-    {
-        "name": "accessibility",
-        "config": {"rules": ["wcag2.1"]}
-    },
-    {
-        "name": "seo",
-        "config": {"keywords": ["web", "development"]}
-    }
-])
-
-# Run pipeline
-results = await pipeline.execute()
-
-# Get pipeline metrics
-metrics = pipeline.get_metrics()
-# Returns: {
-#     "total_time": 45.2,
-#     "analyzer_times": {
-#         "performance": 15.3,
-#         "accessibility": 20.1,
-#         "seo": 9.8
-#     },
-#     "memory_usage": "1.2GB"
-# }
-```
-
-### Analysis Aggregation
-```python
-# Aggregate results from multiple analyzers
-aggregator = manager.create_aggregator({
-    "weighted_scores": {
-        "accessibility": 0.3,
-        "performance": 0.3,
-        "seo": 0.2,
-        "security": 0.2
-    },
-    "critical_issues": ["security", "accessibility"],
-    "recommendation_priority": ["high", "medium", "low"]
-})
-
-# Generate aggregated report
-report = await aggregator.generate_report(results)
-# Returns: {
-#     "overall_score": 85,
-#     "weighted_scores": {
-#         "accessibility": 25.5,
-#         "performance": 27.0,
-#         "seo": 15.0,
-#         "security": 17.0
-#     },
-#     "critical_issues": [...],
-#     "prioritized_recommendations": [...]
-# }
-```
+This project is licensed under the MIT License - see the LICENSE file for details.

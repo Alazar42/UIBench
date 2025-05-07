@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "analyzer": "code",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:23",
+    "last_updated": "2025-05-07 20:39:23",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:23",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "results": {
+          "overall_score": 97.5,
+          "issues": [
+            "Missing description meta tag",
+            "Missing H1 heading"
+          ],
+          "recommendations": [
+            "Consider using <header> element for better semantics",
+            "Consider using <nav> element for better semantics",
+            "Consider using <main> element for better semantics",
+            "Consider using <article> element for better semantics",
+            "Consider using <section> element for better semantics",
+            "Consider using <aside> element for better semantics",
+            "Consider using <footer> element for better semantics",
+            "Consider adding media queries for responsive design"
+          ],
+          "metrics": {
+            "html_quality": {
+              "score": 100,
+              "details": {}
+            },
+            "css_quality": {
+              "score": 100,
+              "details": {}
+            },
+            "javascript_quality": {
+              "score": 100,
+              "details": {}
+            },
+            "code_optimization": {
+              "score": 100,
+              "details": {}
+            },
+            "best_practices": {
+              "score": 90,
+              "details": {}
+            },
+            "semantic_html": {
+              "score": 90,
+              "details": {}
+            },
+            "responsive_design": {
+              "score": 100,
+              "details": {}
+            },
+            "performance_optimization": {
+              "score": 100,
+              "details": {}
+            }
+          },
+          "details": {
+            "html_quality": {
+              "score": 100,
+              "issues": []
+            },
+            "css_quality": {
+              "score": 100,
+              "issues": []
+            },
+            "javascript_quality": {
+              "score": 100,
+              "issues": []
+            },
+            "code_optimization": {
+              "score": 100,
+              "issues": []
+            },
+            "best_practices": {
+              "score": 90,
+              "issues": [
+                "Missing description meta tag"
+              ]
+            },
+            "semantic_html": {
+              "score": 90,
+              "issues": [
+                "Missing H1 heading"
+              ],
+              "recommendations": [
+                "Consider using <header> element for better semantics",
+                "Consider using <nav> element for better semantics",
+                "Consider using <main> element for better semantics",
+                "Consider using <article> element for better semantics",
+                "Consider using <section> element for better semantics",
+                "Consider using <aside> element for better semantics",
+                "Consider using <footer> element for better semantics"
+              ]
+            },
+            "responsive_design": {
+              "score": 100,
+              "issues": [],
+              "recommendations": [
+                "Consider adding media queries for responsive design"
+              ]
+            },
+            "performance_optimization": {
+              "score": 100,
+              "issues": [],
+              "recommendations": []
+            }
+          }
+        },
+        "json_path": "analysis_results/code_http_localhost:3001_frontend_src_app_html_20250507_203923.json",
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

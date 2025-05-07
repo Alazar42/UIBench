@@ -1,0 +1,21 @@
+{
+  "results": {
+    "overall_score": 33.33333333333333,
+    "mutations": [
+      {
+        "type": "style_change",
+        "element": "div",
+        "property": "display",
+        "value": "none"
+      }
+    ],
+    "killed": 1,
+    "survived": 2,
+    "metrics": {
+      "mutation_score": 33.33333333333333,
+      "total_mutations": 3,
+      "execution_time": 0
+    }
+  },
+  "json_path": null
+}

@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "analyzer": "operational_metrics",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:30",
+    "last_updated": "2025-05-07 20:39:30",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:30",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "json_path": "analysis_results/operational_metrics_http_localhost:3001_frontend_src_app.html_20250507_203930.json",
+        "results": {
+          "overall_score": 50.0,
+          "issues": [
+            "No uptime monitoring scripts detected",
+            "No error budget documentation found",
+            "No deployment/version info found",
+            "No incident response/status page found",
+            "No performance budget meta tag found",
+            "No audit trail/activity log found"
+          ],
+          "recommendations": [],
+          "metrics": {
+            "execution_time": 0,
+            "operational_score": 50.0,
+            "total_checks": 6
+          },
+          "details": {
+            "uptime_monitoring": {
+              "score": 50,
+              "issues": [
+                "No uptime monitoring scripts detected"
+              ],
+              "passes": [],
+              "details": {
+                "uptime_scripts": []
+              }
+            },
+            "error_budgets": {
+              "score": 50,
+              "issues": [
+                "No error budget documentation found"
+              ],
+              "passes": []
+            },
+            "deployment_frequency": {
+              "score": 50,
+              "issues": [
+                "No deployment/version info found"
+              ],
+              "passes": []
+            },
+            "mttr": {
+              "score": 50,
+              "issues": [
+                "No incident response/status page found"
+              ],
+              "passes": []
+            },
+            "performance_budgets": {
+              "score": 50,
+              "issues": [
+                "No performance budget meta tag found"
+              ],
+              "passes": []
+            },
+            "audit_trails": {
+              "score": 50,
+              "issues": [
+                "No audit trail/activity log found"
+              ],
+              "passes": []
+            }
+          }
+        },
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

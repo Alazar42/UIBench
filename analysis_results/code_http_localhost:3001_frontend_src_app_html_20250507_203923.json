@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "analyzer": "code",
+    "url": "http://localhost:3001/frontend/src/app.html",
+    "timestamp": "2025-05-07T20:39:23.857731",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 97.5,
+    "issues": [
+      "Missing description meta tag",
+      "Missing H1 heading"
+    ],
+    "recommendations": [
+      "Consider using <header> element for better semantics",
+      "Consider using <nav> element for better semantics",
+      "Consider using <main> element for better semantics",
+      "Consider using <article> element for better semantics",
+      "Consider using <section> element for better semantics",
+      "Consider using <aside> element for better semantics",
+      "Consider using <footer> element for better semantics",
+      "Consider adding media queries for responsive design"
+    ],
+    "metrics": {
+      "html_quality": {
+        "score": 100,
+        "details": {}
+      },
+      "css_quality": {
+        "score": 100,
+        "details": {}
+      },
+      "javascript_quality": {
+        "score": 100,
+        "details": {}
+      },
+      "code_optimization": {
+        "score": 100,
+        "details": {}
+      },
+      "best_practices": {
+        "score": 90,
+        "details": {}
+      },
+      "semantic_html": {
+        "score": 90,
+        "details": {}
+      },
+      "responsive_design": {
+        "score": 100,
+        "details": {}
+      },
+      "performance_optimization": {
+        "score": 100,
+        "details": {}
+      }
+    },
+    "details": {
+      "html_quality": {
+        "score": 100,
+        "issues": []
+      },
+      "css_quality": {
+        "score": 100,
+        "issues": []
+      },
+      "javascript_quality": {
+        "score": 100,
+        "issues": []
+      },
+      "code_optimization": {
+        "score": 100,
+        "issues": []
+      },
+      "best_practices": {
+        "score": 90,
+        "issues": [
+          "Missing description meta tag"
+        ]
+      },
+      "semantic_html": {
+        "score": 90,
+        "issues": [
+          "Missing H1 heading"
+        ],
+        "recommendations": [
+          "Consider using <header> element for better semantics",
+          "Consider using <nav> element for better semantics",
+          "Consider using <main> element for better semantics",
+          "Consider using <article> element for better semantics",
+          "Consider using <section> element for better semantics",
+          "Consider using <aside> element for better semantics",
+          "Consider using <footer> element for better semantics"
+        ]
+      },
+      "responsive_design": {
+        "score": 100,
+        "issues": [],
+        "recommendations": [
+          "Consider adding media queries for responsive design"
+        ]
+      },
+      "performance_optimization": {
+        "score": 100,
+        "issues": [],
+        "recommendations": []
+      }
+    }
+  }
+}

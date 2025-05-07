@@ -1,0 +1,14 @@
+{
+  "results": {
+    "overall_score": 0,
+    "executions": 0,
+    "crashes": 4,
+    "coverage": 0.0,
+    "metrics": {
+      "fuzz_score": 0,
+      "total_inputs": 4,
+      "execution_time": 0
+    }
+  },
+  "json_path": null
+}

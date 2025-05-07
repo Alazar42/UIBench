@@ -24,47 +24,211 @@ class PerformanceAnalyzer(BaseAnalyzer):
         self.performance_monitor = PerformanceMonitor()
         self.cache = AnalysisCache()
     
+    def _save_results(self, url: str, results: Dict[str, Any]) -> str:
+        """Save analysis results to a JSON file."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"performance_{url.replace('://', '_').replace('/', '_')}_{timestamp}.json"
+        output_dir = "analysis_results"
+        os.makedirs(output_dir, exist_ok=True)
+        filepath = os.path.join(output_dir, filename)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=2)
+        
+        return filepath
+    
     async def analyze(self, url: str, page: Page, soup: BeautifulSoup) -> str:
         """
-        Perform performance analysis.
+        Analyze performance metrics for a web page.
         
         Args:
             url: Target URL
             page: Playwright page object
-            soup: BeautifulSoup parsed HTML
+            soup: BeautifulSoup object
             
         Returns:
-            JSON string containing performance analysis results and JSON file path
+            JSON string containing performance analysis results
         """
         try:
-            # Get page content for size analysis
-            content = await page.content()
-            
+            # Initialize results
             results = {
-                "page_size": self._analyze_page_size(content),
-                "resource_loading": self._analyze_resource_loading(soup),
-                "render_blocking": self._analyze_render_blocking(soup),
-                "caching": self._analyze_caching(soup),
-                "compression": self._analyze_compression(soup)
+                "page_size": self._analyze_page_size(str(soup)),
+                "load_time": await self._analyze_load_time(page),
+                "resource_usage": await self._analyze_resource_usage(page),
+                "rendering_performance": await self._analyze_rendering_performance(page)
             }
             
-            # Calculate overall performance score
+            # Calculate overall score
             scores = [result.get("score", 0) for result in results.values() if isinstance(result, dict)]
-            results["overall_score"] = sum(scores) / len(scores) if scores else 0
+            overall_score = sum(scores) / len(scores) if scores else 0
+            
+            # Collect issues and recommendations
+            issues = []
+            recommendations = []
+            for check_name, result in results.items():
+                if isinstance(result, dict):
+                    issues.extend(result.get("issues", []))
+                    recommendations.extend(result.get("recommendations", []))
             
             # Standardize results
-            standardized_results = self._standardize_results(results)
+            standardized_results = {
+                "overall_score": overall_score,
+                "issues": issues,
+                "recommendations": recommendations,
+                "metrics": {
+                    "execution_time": 0,  # TODO: Add actual execution time
+                    "performance_score": overall_score,
+                    "total_checks": len(results)
+                },
+                "details": results
+            }
             
-            # Save to JSON
-            json_path = self.save_to_json(standardized_results, url, "performance")
+            # Save results to file
+            json_path = self._save_results(url, standardized_results)
             
+            # Return results with json_path at root level
             return json.dumps({
-                "results": standardized_results,
-                "json_path": json_path
-            }, ensure_ascii=False, indent=2)
+                "json_path": json_path,
+                "results": standardized_results
+            })
+            
         except Exception as e:
             logger.error(f"Performance analysis failed: {str(e)}")
-            raise AnalysisError(f"Performance analysis failed: {str(e)}")
+            return json.dumps({
+                "json_path": "",
+                "results": {
+                    "overall_score": 0,
+                    "issues": [f"Analysis failed: {str(e)}"],
+                    "recommendations": ["Fix performance analysis"],
+                    "metrics": {
+                        "execution_time": 0,
+                        "performance_score": 0,
+                        "total_checks": 0
+                    },
+                    "details": {}
+                }
+            })
+    
+    def _analyze_page_size(self, html: str) -> Dict[str, Any]:
+        """Analyze the page size and provide recommendations."""
+        try:
+            size_bytes = len(html.encode('utf-8'))
+            size_kb = size_bytes / 1024
+            
+            return {
+                "score": 1.0 if size_kb < 100 else 0.5,
+                "issues": [] if size_kb < 100 else [f"Large page size: {size_kb:.2f} KB"],
+                "recommendations": [] if size_kb < 100 else ["Optimize page size"],
+                "details": {
+                    "size_bytes": size_bytes,
+                    "size_kb": size_kb
+                }
+            }
+        except Exception as e:
+            logger.error(f"Error analyzing page size: {str(e)}")
+            return {
+                "score": 0,
+                "issues": [f"Error analyzing page size: {str(e)}"],
+                "recommendations": ["Fix page size analysis"],
+                "details": {"error": str(e)}
+            }
+    
+    async def _analyze_load_time(self, page: Page) -> Dict[str, Any]:
+        """Analyze page load time."""
+        try:
+            metrics = await page.evaluate("""() => {
+                const perf = window.performance;
+                return {
+                    loadTime: perf.timing.loadEventEnd - perf.timing.navigationStart,
+                    domContentLoaded: perf.timing.domContentLoadedEventEnd - perf.timing.navigationStart,
+                    firstPaint: perf.getEntriesByType('paint').find(e => e.name === 'first-paint')?.startTime
+                };
+            }""")
+            
+            load_time = metrics.get("loadTime", 0)
+            score = 1.0 if load_time < 2000 else (0.5 if load_time < 4000 else 0.0)
+            
+            return {
+                "score": score,
+                "issues": [] if load_time < 2000 else [f"Slow page load time: {load_time}ms"],
+                "recommendations": [] if load_time < 2000 else ["Optimize page load time"],
+                "details": metrics
+            }
+        except Exception as e:
+            logger.error(f"Error analyzing load time: {str(e)}")
+            return {
+                "score": 0,
+                "issues": [f"Error analyzing load time: {str(e)}"],
+                "recommendations": ["Fix load time analysis"],
+                "details": {"error": str(e)}
+            }
+    
+    async def _analyze_resource_usage(self, page: Page) -> Dict[str, Any]:
+        """Analyze resource usage."""
+        try:
+            metrics = await page.evaluate("""() => {
+                const resources = performance.getEntriesByType('resource');
+                return {
+                    totalResources: resources.length,
+                    totalSize: resources.reduce((sum, r) => sum + (r.transferSize || 0), 0),
+                    resourceTypes: resources.reduce((types, r) => {
+                        const type = r.initiatorType;
+                        types[type] = (types[type] || 0) + 1;
+                        return types;
+                    }, {})
+                };
+            }""")
+            
+            total_size = metrics.get("totalSize", 0) / 1024  # Convert to KB
+            score = 1.0 if total_size < 500 else (0.5 if total_size < 1000 else 0.0)
+            
+            return {
+                "score": score,
+                "issues": [] if total_size < 500 else [f"High resource usage: {total_size:.2f} KB"],
+                "recommendations": [] if total_size < 500 else ["Optimize resource usage"],
+                "details": metrics
+            }
+        except Exception as e:
+            logger.error(f"Error analyzing resource usage: {str(e)}")
+            return {
+                "score": 0,
+                "issues": [f"Error analyzing resource usage: {str(e)}"],
+                "recommendations": ["Fix resource usage analysis"],
+                "details": {"error": str(e)}
+            }
+    
+    async def _analyze_rendering_performance(self, page: Page) -> Dict[str, Any]:
+        """Analyze rendering performance."""
+        try:
+            metrics = await page.evaluate("""() => {
+                const perf = performance;
+                const paint = perf.getEntriesByType('paint');
+                const firstPaint = paint.find(e => e.name === 'first-paint')?.startTime;
+                const firstContentfulPaint = paint.find(e => e.name === 'first-contentful-paint')?.startTime;
+                return {
+                    firstPaint,
+                    firstContentfulPaint,
+                    timeToInteractive: perf.timing.domInteractive - perf.timing.navigationStart
+                };
+            }""")
+            
+            fcp = metrics.get("firstContentfulPaint", 0)
+            score = 1.0 if fcp < 1000 else (0.5 if fcp < 2000 else 0.0)
+            
+            return {
+                "score": score,
+                "issues": [] if fcp < 1000 else [f"Slow first contentful paint: {fcp}ms"],
+                "recommendations": [] if fcp < 1000 else ["Optimize rendering performance"],
+                "details": metrics
+            }
+        except Exception as e:
+            logger.error(f"Error analyzing rendering performance: {str(e)}")
+            return {
+                "score": 0,
+                "issues": [f"Error analyzing rendering performance: {str(e)}"],
+                "recommendations": ["Fix rendering performance analysis"],
+                "details": {"error": str(e)}
+            }
     
     @async_timed()
     async def _check_core_web_vitals(self, page: Page) -> Dict[str, Any]:
@@ -485,30 +649,6 @@ class PerformanceAnalyzer(BaseAnalyzer):
                 };
             }
         """)
-
-    def _analyze_page_size(self, html: str) -> Dict[str, Any]:
-        """Analyze the page size and provide recommendations."""
-        try:
-            size_bytes = len(html.encode('utf-8'))
-            size_kb = size_bytes / 1024
-            
-            return {
-                "score": 1.0 if size_kb < 100 else 0.5,
-                "issues": [] if size_kb < 100 else [f"Large page size: {size_kb:.2f} KB"],
-                "recommendations": [] if size_kb < 100 else ["Optimize page size"],
-                "details": {
-                    "size_bytes": size_bytes,
-                    "size_kb": size_kb
-                }
-            }
-        except Exception as e:
-            logger.error(f"Error analyzing page size: {str(e)}")
-            return {
-                "score": 0,
-                "issues": [f"Error analyzing page size: {str(e)}"],
-                "recommendations": ["Fix page size analysis"],
-                "details": {"error": str(e)}
-            }
 
     def _analyze_resource_loading(self, soup: BeautifulSoup) -> Dict[str, Any]:
         """Analyze resource loading patterns."""

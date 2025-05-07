@@ -122,4 +122,4 @@ class ContractAnalyzer:
             return json.dumps(results)
             
         except Exception as e:
-            raise AnalysisError(f"Contract analysis failed: {str(e)}") 
+            raise AnalysisError(f"Contract analysis failed: {str(e)}")

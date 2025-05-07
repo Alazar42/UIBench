@@ -13,6 +13,9 @@ from .nlp_content_analyzer import NLPContentAnalyzer
 from .infrastructure_analyzer import InfrastructureAnalyzer
 from .operational_metrics_analyzer import OperationalMetricsAnalyzer
 from .compliance_analyzer import ComplianceAnalyzer
+from .mutation_analyzer import MutationAnalyzer
+from .contract_analyzer import ContractAnalyzer
+from .fuzz_analyzer import FuzzAnalyzer
 
 __all__ = [
     'AccessibilityAnalyzer',
@@ -25,5 +28,8 @@ __all__ = [
     'NLPContentAnalyzer',
     'InfrastructureAnalyzer',
     'OperationalMetricsAnalyzer',
-    'ComplianceAnalyzer'
-] 
+    'ComplianceAnalyzer',
+    'MutationAnalyzer',
+    'ContractAnalyzer',
+    'FuzzAnalyzer'
+]

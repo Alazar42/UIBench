@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "analyzer": "seo",
+    "url": "http://localhost:3001/frontend/src/app.html",
+    "timestamp": "2025-05-07T20:39:34.589055",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 45.0,
+    "issues": [
+      "Missing title tag",
+      "Missing meta description",
+      "Missing required Open Graph tags: og:title, og:description, og:image, og:url",
+      "Missing required Twitter Card tags: twitter:card, twitter:title, twitter:description, twitter:image",
+      "Missing canonical URL tag",
+      "Missing robots meta tag",
+      "Missing H1 heading",
+      "Content is too short (less than 300 characters)",
+      "Top keywords: sveltekit.head% (1), sveltekit.body% (1)",
+      "No images found on the page",
+      "Missing mobile-specific stylesheet",
+      "Missing canonical URL",
+      "Missing robots meta tag",
+      "Missing sitemap reference",
+      "Missing structured data"
+    ],
+    "recommendations": [],
+    "metrics": {
+      "meta_tags": {
+        "score": 0.0,
+        "details": {}
+      },
+      "content_structure": {
+        "score": 70,
+        "details": {}
+      },
+      "url_structure": {
+        "score": 100,
+        "details": {}
+      },
+      "image_optimization": {
+        "score": 0,
+        "details": {}
+      },
+      "mobile_friendliness": {
+        "score": 80,
+        "details": {}
+      },
+      "technical_seo": {
+        "score": 20,
+        "details": {}
+      }
+    },
+    "details": {
+      "meta_tags": {
+        "score": 0.0,
+        "issues": [
+          "Missing title tag",
+          "Missing meta description",
+          "Missing required Open Graph tags: og:title, og:description, og:image, og:url",
+          "Missing required Twitter Card tags: twitter:card, twitter:title, twitter:description, twitter:image",
+          "Missing canonical URL tag",
+          "Missing robots meta tag"
+        ],
+        "recommendations": []
+      },
+      "content_structure": {
+        "score": 70,
+        "issues": [
+          "Missing H1 heading",
+          "Content is too short (less than 300 characters)",
+          "Top keywords: sveltekit.head% (1), sveltekit.body% (1)"
+        ]
+      },
+      "url_structure": {
+        "score": 100,
+        "issues": []
+      },
+      "image_optimization": {
+        "score": 0,
+        "issues": [
+          "No images found on the page"
+        ],
+        "recommendations": []
+      },
+      "mobile_friendliness": {
+        "score": 80,
+        "issues": [
+          "Missing mobile-specific stylesheet"
+        ]
+      },
+      "technical_seo": {
+        "score": 20,
+        "issues": [
+          "Missing canonical URL",
+          "Missing robots meta tag",
+          "Missing sitemap reference",
+          "Missing structured data"
+        ]
+      }
+    }
+  }
+}

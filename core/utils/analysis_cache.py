@@ -9,6 +9,7 @@ import logging
 from dataclasses import dataclass, asdict
 import hashlib
 from .cache import DiskCache
+import aiofiles
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ class AnalysisCache(DiskCache):
         key = f"{url}:{analyzer_id}:{self.version}"
         return hashlib.sha256(key.encode()).hexdigest()
     
-    def store_result(self, result: AnalysisResult) -> None:
+    async def store_result(self, result: AnalysisResult) -> None:
         """Store an analysis result in the cache."""
         key = self._compute_cache_key(result.url, result.analyzer_id)
         
@@ -45,15 +46,15 @@ class AnalysisCache(DiskCache):
             data = asdict(result)
             # Convert datetime to ISO format for JSON serialization
             data['timestamp'] = data['timestamp'].isoformat()
-            self.set(key, data)
+            await self.set(key, data)
             logger.debug(f"Stored analysis result for {result.url} ({result.analyzer_id})")
         except Exception as e:
             logger.error(f"Failed to store analysis result: {str(e)}")
     
-    def get_result(self, url: str, analyzer_id: str) -> Optional[AnalysisResult]:
+    async def get_result(self, url: str, analyzer_id: str) -> Optional[AnalysisResult]:
         """Retrieve an analysis result from the cache if available and valid."""
         key = self._compute_cache_key(url, analyzer_id)
-        data = self.get(key)
+        data = await self.get(key)
         
         if data:
             try:
@@ -88,11 +89,11 @@ class AnalysisCache(DiskCache):
                     
         return True
     
-    def invalidate(self, url: str = None, analyzer_id: str = None) -> None:
+    async def invalidate(self, url: str = None, analyzer_id: str = None) -> None:
         """Invalidate cache entries matching the given criteria."""
         if url and analyzer_id:
             key = self._compute_cache_key(url, analyzer_id)
-            self._remove_cache_file(key)
+            await self._remove_cache_file(key)
         else:
             pattern = ""
             if url:
@@ -106,7 +107,7 @@ class AnalysisCache(DiskCache):
                 except OSError as e:
                     logger.error(f"Failed to remove cache file {cache_file}: {str(e)}")
     
-    def get_stats(self) -> Dict[str, Any]:
+    async def get_stats(self) -> Dict[str, Any]:
         """Get cache statistics."""
         total_size = 0
         num_entries = 0
@@ -116,16 +117,17 @@ class AnalysisCache(DiskCache):
         
         for cache_file in self.cache_dir.glob("*.json"):
             try:
-                data = json.loads(cache_file.read_text())
-                total_size += cache_file.stat().st_size
-                num_entries += 1
-                analyzers.add(data.get('analyzer_id'))
-                
-                timestamp = datetime.fromisoformat(data.get('timestamp'))
-                if not oldest_entry or timestamp < oldest_entry:
-                    oldest_entry = timestamp
-                if not newest_entry or timestamp > newest_entry:
-                    newest_entry = timestamp
+                async with aiofiles.open(cache_file, 'r') as f:
+                    data = json.loads(await f.read())
+                    total_size += cache_file.stat().st_size
+                    num_entries += 1
+                    analyzers.add(data.get('analyzer_id'))
+                    
+                    timestamp = datetime.fromisoformat(data.get('timestamp'))
+                    if not oldest_entry or timestamp < oldest_entry:
+                        oldest_entry = timestamp
+                    if not newest_entry or timestamp > newest_entry:
+                        newest_entry = timestamp
                     
             except Exception as e:
                 logger.error(f"Failed to read cache file {cache_file}: {str(e)}")
@@ -139,12 +141,12 @@ class AnalysisCache(DiskCache):
             'newest_entry': newest_entry.isoformat() if newest_entry else None
         }
     
-    def optimize(self, max_size_bytes: int = None) -> None:
+    async def optimize(self, max_size_bytes: int = None) -> None:
         """Optimize the cache by removing old entries if needed."""
         if not max_size_bytes:
             return
             
-        stats = self.get_stats()
+        stats = await self.get_stats()
         if stats['total_size_bytes'] <= max_size_bytes:
             return
             
@@ -187,12 +189,12 @@ class AnalysisCacheManager:
             self.caches[name] = AnalysisCache(str(cache_dir), ttl, version)
         return self.caches[name]
     
-    def clear_all(self) -> None:
+    async def clear_all(self) -> None:
         """Clear all managed caches."""
         for cache in self.caches.values():
-            cache.clear()
+            await cache.clear()
             
-    def get_total_stats(self) -> Dict[str, Any]:
+    async def get_total_stats(self) -> Dict[str, Any]:
         """Get combined statistics for all managed caches."""
         total_stats = {
             'total_size_bytes': 0,
@@ -203,7 +205,7 @@ class AnalysisCacheManager:
         }
         
         for name, cache in self.caches.items():
-            stats = cache.get_stats()
+            stats = await cache.get_stats()
             total_stats['total_size_bytes'] += stats['total_size_bytes']
             total_stats['num_entries'] += stats['num_entries']
             total_stats['per_cache_stats'][name] = stats

@@ -1,0 +1,109 @@
+{
+  "overall_score": 0.7,
+  "issues": [
+    "No resource optimization found",
+    "No cache-control meta tags found",
+    "Low compression usage"
+  ],
+  "recommendations": [
+    "Optimize resource loading",
+    "Add cache-control meta tags",
+    "Enable compression for more resources"
+  ],
+  "metrics": {
+    "page_size": {
+      "score": 1.0,
+      "details": {
+        "size_bytes": 494,
+        "size_kb": 0.482421875
+      }
+    },
+    "resource_loading": {
+      "score": 0.5,
+      "details": {
+        "async_scripts": 0,
+        "preloads": 0
+      }
+    },
+    "render_blocking": {
+      "score": 1.0,
+      "details": {
+        "blocking_css": 0,
+        "blocking_js": 0
+      }
+    },
+    "caching": {
+      "score": 0.5,
+      "details": {
+        "cache_meta_tags": 0
+      }
+    },
+    "compression": {
+      "score": 0.5,
+      "details": {
+        "compressed_resources": 0,
+        "total_resources": 1,
+        "compression_ratio": 0.0
+      }
+    }
+  },
+  "details": {
+    "page_size": {
+      "score": 1.0,
+      "issues": [],
+      "recommendations": [],
+      "details": {
+        "size_bytes": 494,
+        "size_kb": 0.482421875
+      }
+    },
+    "resource_loading": {
+      "score": 0.5,
+      "issues": [
+        "No resource optimization found"
+      ],
+      "recommendations": [
+        "Optimize resource loading"
+      ],
+      "details": {
+        "async_scripts": 0,
+        "preloads": 0
+      }
+    },
+    "render_blocking": {
+      "score": 1.0,
+      "issues": [],
+      "recommendations": [],
+      "details": {
+        "blocking_css": 0,
+        "blocking_js": 0
+      }
+    },
+    "caching": {
+      "score": 0.5,
+      "issues": [
+        "No cache-control meta tags found"
+      ],
+      "recommendations": [
+        "Add cache-control meta tags"
+      ],
+      "details": {
+        "cache_meta_tags": 0
+      }
+    },
+    "compression": {
+      "score": 0.5,
+      "issues": [
+        "Low compression usage"
+      ],
+      "recommendations": [
+        "Enable compression for more resources"
+      ],
+      "details": {
+        "compressed_resources": 0,
+        "total_resources": 1,
+        "compression_ratio": 0.0
+      }
+    }
+  }
+}

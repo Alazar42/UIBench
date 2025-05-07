@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "analyzer": "contract",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:42",
+    "last_updated": "2025-05-07 20:39:42",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:42",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "results": {
+          "overall_score": 0.0,
+          "interactions": [],
+          "passed": 0,
+          "failed": 3,
+          "metrics": {
+            "contract_score": 0.0,
+            "total_contracts": 3,
+            "execution_time": 0
+          }
+        },
+        "json_path": "analysis_results/contract_http_localhost:3001_frontend_src_app.html_20250507_203942.json",
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

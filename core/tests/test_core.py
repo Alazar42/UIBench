@@ -21,6 +21,9 @@ from core.analyzers.performance_analyzer import PerformanceAnalyzer
 from core.analyzers.security_analyzer import SecurityAnalyzer
 from core.analyzers.seo_analyzer import SEOAnalyzer
 from core.analyzers.ux_analyzer import UXAnalyzer
+from core.analyzers.mutation_analyzer import MutationAnalyzer
+from core.analyzers.contract_analyzer import ContractAnalyzer
+from core.analyzers.fuzz_analyzer import FuzzAnalyzer
 
 # Import evaluators
 from core.evaluators.website_evaluator import WebsiteEvaluator
@@ -206,7 +209,9 @@ async def test_security_analysis(test_url: str, test_page: Page):
     analyzer = SecurityAnalyzer()
     try:
         await test_page.goto(test_url)
-        results_json = await analyzer.analyze(test_url, test_page)
+        html = await test_page.content()
+        soup = BeautifulSoup(html, "html.parser")
+        results_json = await analyzer.analyze(test_url, test_page, soup)
         results = json.loads(results_json)
         assert "results" in results
         assert "json_path" in results
@@ -248,6 +253,60 @@ async def test_ux_analysis(test_url: str, test_page: Page, test_soup: BeautifulS
         assert "recommendations" in results["results"]
     except Exception as e:
         pytest.fail(f"UX analysis failed: {str(e)}")
+
+@pytest.mark.asyncio
+async def test_mutation_analysis(test_url: str, test_page: Page, test_html: str):
+    """Test mutation testing analysis."""
+    analyzer = MutationAnalyzer()
+    try:
+        await test_page.goto(test_url)
+        results_json = await analyzer.analyze(test_url, test_page, test_html)
+        results = json.loads(results_json)
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "mutations" in results["results"]
+        assert "killed" in results["results"]
+        assert "survived" in results["results"]
+        assert "metrics" in results["results"]
+    except Exception as e:
+        pytest.fail(f"Mutation analysis failed: {str(e)}")
+
+@pytest.mark.asyncio
+async def test_contract_analysis(test_url: str, test_page: Page):
+    """Test contract testing analysis."""
+    analyzer = ContractAnalyzer()
+    try:
+        await test_page.goto(test_url)
+        results_json = await analyzer.analyze(test_url, test_page)
+        results = json.loads(results_json)
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "interactions" in results["results"]
+        assert "passed" in results["results"]
+        assert "failed" in results["results"]
+        assert "metrics" in results["results"]
+    except Exception as e:
+        pytest.fail(f"Contract analysis failed: {str(e)}")
+
+@pytest.mark.asyncio
+async def test_fuzz_analysis(test_url: str, test_page: Page):
+    """Test fuzz testing analysis."""
+    analyzer = FuzzAnalyzer()
+    try:
+        await test_page.goto(test_url)
+        results_json = await analyzer.analyze(test_url, test_page)
+        results = json.loads(results_json)
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "executions" in results["results"]
+        assert "crashes" in results["results"]
+        assert "coverage" in results["results"]
+        assert "metrics" in results["results"]
+    except Exception as e:
+        pytest.fail(f"Fuzz analysis failed: {str(e)}")
 
 # Evaluator Tests
 @pytest.mark.asyncio

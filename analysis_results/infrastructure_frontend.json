@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "analyzer": "infrastructure",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:26",
+    "last_updated": "2025-05-07 20:39:26",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:26",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "results": {
+          "overall_score": 0.4,
+          "issues": [
+            "Low CDN utilization",
+            "No cache headers found",
+            "No resource prioritization found",
+            "No error monitoring found",
+            "No load balancing detected",
+            "content-security-policy",
+            "x-frame-options",
+            "x-content-type-options",
+            "strict-transport-security",
+            "Not using HTTPS"
+          ],
+          "recommendations": [
+            "Increase CDN utilization for better performance",
+            "Implement proper cache headers",
+            "Implement resource prioritization",
+            "Implement error monitoring",
+            "Implement load balancing",
+            "Add content-security-policy header",
+            "Add x-frame-options header",
+            "Add x-content-type-options header",
+            "Add strict-transport-security header",
+            "Enable HTTPS"
+          ],
+          "metrics": {
+            "cdn_utilization": {
+              "score": 0.0,
+              "details": {
+                "cdn_resources": 0,
+                "total_resources": 1,
+                "cdn_ratio": 0.0
+              }
+            },
+            "cache_policies": {
+              "score": 0,
+              "details": {
+                "cache_control": "",
+                "has_cache": false
+              }
+            },
+            "dns_configuration": {
+              "score": 1.0,
+              "details": {
+                "dns_time": 0.002227478995337151,
+                "status": 200
+              }
+            },
+            "server_response_times": {
+              "score": 1.0,
+              "details": {
+                "ttfb": 0.006668529000307899,
+                "status": 200
+              }
+            },
+            "resource_prioritization": {
+              "score": 0.5,
+              "details": {
+                "resource_hints": 0
+              }
+            },
+            "third_party_services": {
+              "score": 1.0,
+              "details": {
+                "third_party_count": 0
+              }
+            },
+            "error_monitoring": {
+              "score": 0,
+              "details": {
+                "has_error_monitoring": false
+              }
+            },
+            "load_balancing": {
+              "score": 0.5,
+              "details": {
+                "has_load_balancer": false
+              }
+            },
+            "security_headers": {
+              "score": 0.0,
+              "details": {
+                "content-security-policy": false,
+                "x-frame-options": false,
+                "x-content-type-options": false,
+                "strict-transport-security": false
+              }
+            },
+            "ssl_tls": {
+              "score": 0,
+              "details": {
+                "is_https": false,
+                "status": 200
+              }
+            }
+          },
+          "details": {
+            "cdn_utilization": {
+              "score": 0.0,
+              "issues": [
+                "Low CDN utilization"
+              ],
+              "recommendations": [
+                "Increase CDN utilization for better performance"
+              ],
+              "details": {
+                "cdn_resources": 0,
+                "total_resources": 1,
+                "cdn_ratio": 0.0
+              }
+            },
+            "cache_policies": {
+              "score": 0,
+              "issues": [
+                "No cache headers found"
+              ],
+              "recommendations": [
+                "Implement proper cache headers"
+              ],
+              "details": {
+                "cache_control": "",
+                "has_cache": false
+              }
+            },
+            "dns_configuration": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "dns_time": 0.002227478995337151,
+                "status": 200
+              }
+            },
+            "server_response_times": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "ttfb": 0.006668529000307899,
+                "status": 200
+              }
+            },
+            "resource_prioritization": {
+              "score": 0.5,
+              "issues": [
+                "No resource prioritization found"
+              ],
+              "recommendations": [
+                "Implement resource prioritization"
+              ],
+              "details": {
+                "resource_hints": 0
+              }
+            },
+            "third_party_services": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "third_party_count": 0
+              }
+            },
+            "error_monitoring": {
+              "score": 0,
+              "issues": [
+                "No error monitoring found"
+              ],
+              "recommendations": [
+                "Implement error monitoring"
+              ],
+              "details": {
+                "has_error_monitoring": false
+              }
+            },
+            "load_balancing": {
+              "score": 0.5,
+              "issues": [
+                "No load balancing detected"
+              ],
+              "recommendations": [
+                "Implement load balancing"
+              ],
+              "details": {
+                "has_load_balancer": false
+              }
+            },
+            "security_headers": {
+              "score": 0.0,
+              "issues": [
+                "content-security-policy",
+                "x-frame-options",
+                "x-content-type-options",
+                "strict-transport-security"
+              ],
+              "recommendations": [
+                "Add content-security-policy header",
+                "Add x-frame-options header",
+                "Add x-content-type-options header",
+                "Add strict-transport-security header"
+              ],
+              "details": {
+                "content-security-policy": false,
+                "x-frame-options": false,
+                "x-content-type-options": false,
+                "strict-transport-security": false
+              }
+            },
+            "ssl_tls": {
+              "score": 0,
+              "issues": [
+                "Not using HTTPS"
+              ],
+              "recommendations": [
+                "Enable HTTPS"
+              ],
+              "details": {
+                "is_https": false,
+                "status": 200
+              }
+            }
+          }
+        },
+        "json_path": "analysis_results/infrastructure_http_localhost:3001_frontend_src_app_html_20250507_203926.json",
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

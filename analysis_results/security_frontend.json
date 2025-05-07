@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "analyzer": "security",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:33",
+    "last_updated": "2025-05-07 20:39:33",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:33",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "results": {
+          "overall_score": 85.83333333333333,
+          "security_headers": 0,
+          "content_security": 0,
+          "issues": [
+            "Missing X-Content-Type-Options header",
+            "Missing X-Frame-Options header",
+            "Missing X-XSS-Protection header",
+            "Missing Strict-Transport-Security header",
+            "Missing Content-Security-Policy header",
+            "Missing X-Frame-Options and CSP frame-ancestors headers",
+            "Missing Content-Security-Policy header"
+          ],
+          "recommendations": [],
+          "metrics": {
+            "security_score": 85.83333333333333,
+            "total_checks": 12,
+            "execution_time": 0
+          }
+        },
+        "json_path": "analysis_results/security_http_localhost:3001_frontend_src_app.html_20250507_203933.json",
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

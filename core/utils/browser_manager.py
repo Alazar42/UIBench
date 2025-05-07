@@ -68,20 +68,22 @@ class BrowserPool:
             
             return available_browser
     
-    async def get_page(self) -> Optional[Page]:
-        """Get an available page from the pool."""
-        browser = await self.get_browser()
-        if not browser:
-            return None
-            
+    async def get_page(self) -> Page:
+        """Get a page from the pool."""
         async with self._lock:
-            try:
-                page = await browser.new_page()
-                self.pages[browser].append(page)
-                return page
-            except Exception as e:
-                logger.error(f"Failed to create new page: {str(e)}")
-                return None
+            if not self._available_pages:
+                if len(self._in_use_pages) < self._max_pages:
+                    page = await self._browser.new_page()
+                else:
+                    # Wait for a page to become available
+                    while not self._available_pages:
+                        await asyncio.sleep(0.1)
+                    page = self._available_pages.pop()
+            else:
+                page = self._available_pages.pop()
+            
+            self._in_use_pages.append(page)
+            return page
     
     async def release_page(self, page: Page) -> None:
         """Release a page back to the pool."""

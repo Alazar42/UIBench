@@ -69,18 +69,8 @@ class FuzzAnalyzer:
             
             executions = 0
             crashes = 0
-            details = []
             
             for target in targets:
-
-                detail = {
-                    "selector": target["selector"],
-                    "type": target["type"],
-                    "input": None,
-                    "status": "success",
-                    "error": None
-                }
-
                 try:
                     # Set a timeout for each fuzz test
                     async with asyncio.timeout(2.0):  # 2 second timeout per test
@@ -116,8 +106,7 @@ class FuzzAnalyzer:
                     "fuzz_score": fuzz_score,
                     "total_inputs": total_inputs,
                     "execution_time": 0  # In a real implementation, measure actual execution time
-                },
-                 "details": details 
+                }
             })
             
             # Save results to file
@@ -126,4 +115,4 @@ class FuzzAnalyzer:
             return json.dumps(results)
             
         except Exception as e:
-            raise AnalysisError(f"Fuzz analysis failed: {str(e)}") 
+            raise AnalysisError(f"Fuzz analysis failed: {str(e)}")

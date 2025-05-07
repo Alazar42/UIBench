@@ -13,6 +13,22 @@ from bs4 import BeautifulSoup
 from playwright.async_api import Page, async_playwright
 from core.evaluators.page_evaluator import PageEvaluator
 import logging
+from core.analyzers.accessibility_analyzer import AccessibilityAnalyzer
+from core.analyzers.code_analyzer import CodeAnalyzer
+from core.analyzers.compliance_analyzer import ComplianceAnalyzer
+from core.analyzers.infrastructure_analyzer import InfrastructureAnalyzer
+from core.analyzers.design_system_analyzer import DesignSystemAnalyzer
+from core.analyzers.nlp_content_analyzer import NLPContentAnalyzer
+from core.analyzers.operational_metrics_analyzer import OperationalMetricsAnalyzer
+from core.analyzers.performance_analyzer import PerformanceAnalyzer
+from core.analyzers.security_analyzer import SecurityAnalyzer
+from core.analyzers.seo_analyzer import SEOAnalyzer
+from core.analyzers.ux_analyzer import UXAnalyzer
+from core.analyzers.mutation_analyzer import MutationAnalyzer
+from core.analyzers.contract_analyzer import ContractAnalyzer
+from core.analyzers.fuzz_analyzer import FuzzAnalyzer
+
+
 
 # Add the core directory to the Python path
 core_dir = str(Path(__file__).parent.parent)
@@ -164,27 +180,122 @@ async def body_text(page: Page) -> str:
     return await page.inner_text("body")
 
 def save_results(analyzer_name: str, data: dict, project_path: str, analysis_results_dir: Path) -> str:
-    """Helper method to save results to JSON file in the correct format"""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    """Helper method to save results to JSON file in the correct format.
+    
+    Args:
+        analyzer_name: Name of the analyzer (e.g., 'accessibility', 'security')
+        data: Analysis results data
+        project_path: Path to the project being analyzed
+        analysis_results_dir: Directory to save results in
+        
+    Returns:
+        str: Path to the saved results file
+    """
     project_name = os.path.basename(project_path)
-    filename = f"{analyzer_name}_{project_name}_{timestamp}.json"
+    
+    # Create a single file per analyzer without timestamp
+    filename = f"{analyzer_name}_{project_name}.json"
     filepath = analysis_results_dir / filename
     
-    # Add metadata to results
-    output = {
-        "metadata": {
-            "analyzer": analyzer_name,
-            "project_path": project_path,
-            "timestamp": timestamp,
-            "version": "1.0.0"
-        },
-        "results": data
+    # Ensure the directory exists
+    analysis_results_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Extract URL from results if available
+    url = data.get("url", "unknown_url")
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Prepare the new result entry
+    new_result = {
+        "timestamp": current_time,
+        "url": url,
+        "data": data
     }
     
+    # Initialize or load existing results
+    if filepath.exists():
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                output = json.load(f)
+                # Ensure results is a list
+                if "results" not in output:
+                    output["results"] = []
+                # Append new result
+                output["results"].append(new_result)
+                # Update last_updated timestamp
+                output["metadata"]["last_updated"] = current_time
+        except json.JSONDecodeError:
+            # If file is corrupted, start fresh
+            output = {
+                "metadata": {
+                    "analyzer": analyzer_name,
+                    "project_path": project_path,
+                    "created": current_time,
+                    "last_updated": current_time,
+                    "version": "1.0.0"
+                },
+                "results": [new_result]
+            }
+    else:
+        # Create new file with initial result
+        output = {
+            "metadata": {
+                "analyzer": analyzer_name,
+                "project_path": project_path,
+                "created": current_time,
+                "last_updated": current_time,
+                "version": "1.0.0"
+            },
+            "results": [new_result]
+        }
+    
+    # Write the file
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
     
-    return filepath
+    return str(filepath)
+
+@pytest.fixture
+async def browser_manager():
+    """Create a browser manager instance."""
+    manager = await BrowserManager.get_instance()
+    yield manager
+    await manager.close_all()
+
+@pytest.fixture
+def analysis_cache():
+    """Create an analysis cache instance."""
+    return AnalysisCache()
+
+@pytest.fixture
+def sample_html():
+    """Return a sample HTML page for testing."""
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Test Page</title>
+        <style>
+            .test-class { color: blue; }
+        </style>
+    </head>
+    <body>
+        <h1>Test Page</h1>
+        <form id="test-form">
+            <input type="text" id="test-input" name="test-input">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="test-div" class="test-class">
+            <p>Test content</p>
+        </div>
+        <script>
+            document.getElementById('test-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Form submitted');
+            });
+        </script>
+    </body>
+    </html>
+    """
 
 @pytest.mark.asyncio
 class TestOfflineEvaluation:
@@ -210,199 +321,234 @@ class TestOfflineEvaluation:
     
     async def test_accessibility_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                         body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test accessibility analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = AccessibilityAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, html, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('accessibility', results, project_path, analysis_results_dir)
-        assert "accessibility" in results["results"]
-        assert "score" in results["results"]["accessibility"]
-        assert "details" in results["results"]["accessibility"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_code_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test code analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = CodeAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, html, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('code', results, project_path, analysis_results_dir)
-        assert "code" in results["results"]
-        assert "details" in results["results"]["code"]
-        assert "overall_score" in results["results"]["code"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_compliance_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                      body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test compliance analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = ComplianceAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('compliance', results, project_path, analysis_results_dir)
-        assert "compliance" in results["results"]
-        assert "details" in results["results"]["compliance"]
-        assert "overall_score" in results["results"]["compliance"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
+    async def test_infrastructure_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
+                                         body_text: str, analysis_results_dir: Path, test_port: int):
+        evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
+        analyzer = InfrastructureAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page)
+        results = json.loads(results_json)
+        results["url"] = evaluator.url
+        save_results('infrastructure', results, project_path, analysis_results_dir)
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+
     async def test_design_system_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                         body_text: str, analysis_results_dir: Path, test_port: int):
         """Test design system analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = DesignSystemAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('design', results, project_path, analysis_results_dir)
-        assert "design" in results["results"]
-        # Design system may be empty if no design system is detected
-        if results["results"]["design"]:
-            assert "overall_score" in results["results"]["design"]
-    
-    @pytest.mark.asyncio
-    async def test_infrastructure_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
-                                         body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test infrastructure analysis"""
-        evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
-        results = json.loads(results_json)
-        save_results('infrastructure', results, project_path, analysis_results_dir)
-        assert "infrastructure" in results["results"]
-        assert "details" in results["results"]["infrastructure"]
-        assert "overall_score" in results["results"]["infrastructure"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+
     async def test_nlp_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                               body_text: str, analysis_results_dir: Path, test_port: int):
         """Test NLP content analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = NLPContentAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, body_text)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('nlp_content', results, project_path, analysis_results_dir)
-        # Check if any analyzer results exist
-        assert len(results["results"]) > 0
-        # Check for overall score in results
-        assert any("overall_score" in analyzer_result for analyzer_result in results["results"].values())
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_operational_metrics_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                               body_text: str, analysis_results_dir: Path, test_port: int):
         """Test operational metrics analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = OperationalMetricsAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('operational_metrics', results, project_path, analysis_results_dir)
-        # Check if any analyzer results exist
-        assert len(results["results"]) > 0
-        # Check for overall score in results
-        assert any("overall_score" in analyzer_result for analyzer_result in results["results"].values())
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+
     async def test_performance_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                       body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test performance analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = PerformanceAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('performance', results, project_path, analysis_results_dir)
-        assert "performance" in results["results"]
-        assert "details" in results["results"]["performance"]
-        assert "overall_score" in results["results"]["performance"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+
     async def test_security_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                    body_text: str, analysis_results_dir: Path, test_port: int):
         """Test security analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = SecurityAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('security', results, project_path, analysis_results_dir)
-        assert "security" in results["results"]
-        # Security analyzer has a different structure
-        assert "overall_score" in results["results"]["security"]
-        assert "issues" in results["results"]["security"]
-        assert "metrics" in results["results"]["security"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_seo_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                               body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test SEO analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = SEOAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('seo', results, project_path, analysis_results_dir)
-        assert "seo" in results["results"]
-        assert "details" in results["results"]["seo"]
-        assert "overall_score" in results["results"]["seo"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_ux_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                              body_text: str, analysis_results_dir: Path, test_port: int):
-        """Test UX analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = UXAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page, soup)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('ux', results, project_path, analysis_results_dir)
-        assert "ux" in results["results"]
-        assert "details" in results["results"]["ux"]
-        assert "overall_score" in results["results"]["ux"]
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "issues" in results["results"]
+        assert "recommendations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_mutation_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                    body_text: str, analysis_results_dir: Path, test_port: int):
         """Test mutation testing analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = MutationAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page, html)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('mutation', results, project_path, analysis_results_dir)
-        # Check if any analyzer results exist
-        assert len(results["results"]) > 0
-        # Check for overall score in results
-        assert any("overall_score" in analyzer_result for analyzer_result in results["results"].values())
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "mutations" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_contract_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                    body_text: str, analysis_results_dir: Path, test_port: int):
         """Test contract testing analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = ContractAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('contract', results, project_path, analysis_results_dir)
-        # Check if any analyzer results exist
-        assert len(results["results"]) > 0
-        # Check for overall score in results
-        assert any("overall_score" in analyzer_result for analyzer_result in results["results"].values())
-    
-    @pytest.mark.asyncio
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "interactions" in results["results"]
+        assert "metrics" in results["results"]
+
     async def test_fuzz_analysis(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                body_text: str, analysis_results_dir: Path, test_port: int):
         """Test fuzz testing analysis"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
-        results_json = await evaluator.evaluate()
+        analyzer = FuzzAnalyzer()
+        results_json = await analyzer.analyze(evaluator.url, page)
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('fuzz', results, project_path, analysis_results_dir)
-        # Check if any analyzer results exist
-        assert len(results["results"]) > 0
-        # Check for overall score in results
-        assert any("overall_score" in analyzer_result for analyzer_result in results["results"].values())
+        assert "results" in results
+        assert "json_path" in results
+        assert "overall_score" in results["results"]
+        assert "crashes" in results["results"]
+        assert "metrics" in results["results"]
     
-    @pytest.mark.asyncio
     async def test_website_evaluator(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                    body_text: str, analysis_results_dir: Path, test_port: int):
         """Test website evaluation"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
         results_json = await evaluator.evaluate()
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('website', results, project_path, analysis_results_dir)
         assert "url" in results
         assert "results" in results
         assert "design_data" in results
         assert "performance_metrics" in results
     
-    @pytest.mark.asyncio
     async def test_page_evaluator(self, project_path: str, page: Page, html: str, soup: BeautifulSoup, 
                                 body_text: str, analysis_results_dir: Path, test_port: int):
         """Test page evaluation"""
         evaluator = await self._create_evaluator(project_path, page, html, body_text, test_port)
         results_json = await evaluator.evaluate()
         results = json.loads(results_json)
+        results["url"] = evaluator.url
         save_results('page', results, project_path, analysis_results_dir)
         assert "url" in results
         assert "results" in results

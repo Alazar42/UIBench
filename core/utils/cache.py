@@ -42,69 +42,64 @@ class Cache(Generic[K, V]):
         self._cache.clear()
 
 class DiskCache:
-    """Persistent disk-based cache implementation."""
+    """Disk-based cache implementation with TTL support."""
     
-    def __init__(self, cache_dir: str = ".cache", ttl: int = 86400):
+    def __init__(self, cache_dir: str = ".cache", ttl: int = 3600):
         self.cache_dir = Path(cache_dir)
-        self.ttl = ttl
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        self._lock = asyncio.Lock()
+        self.ttl = ttl
     
     def _get_cache_path(self, key: str) -> Path:
-        """Get the file path for a cache key."""
-        # Use hash of key to avoid filesystem issues with long URLs
-        return self.cache_dir / f"{hash(key)}.json"
+        """Get the cache file path for a key."""
+        return self.cache_dir / f"{key}.json"
     
-    async def get(self, key: str) -> Optional[Any]:
-        """Get value from disk cache if it exists and hasn't expired."""
+    async def get(self, key: str) -> Optional[Dict[str, Any]]:
+        """Get value from cache if it exists and hasn't expired."""
         cache_path = self._get_cache_path(key)
-        
-        if cache_path.exists():
-            try:
-                async with self._lock:
-                    async with aiofiles.open(cache_path, 'r') as f:
-                        content = await f.read()
-                        data = json.loads(content)
-                        timestamp = datetime.fromisoformat(data['timestamp'])
-                        
-                        if datetime.now() - timestamp <= timedelta(seconds=self.ttl):
-                            return data['value']
-                        else:
-                            await self._remove_file(cache_path)
-            except (json.JSONDecodeError, KeyError, OSError) as e:
-                logger.error(f"Cache read error for {key}: {str(e)}")
-                if cache_path.exists():
-                    await self._remove_file(cache_path)
+        if not cache_path.exists():
+            return None
+            
+        try:
+            async with aiofiles.open(cache_path, 'r') as f:
+                data = json.loads(await f.read())
+                if time.time() - data['timestamp'] <= self.ttl:
+                    return data['value']
+                else:
+                    await self._remove_cache_file(key)
+        except Exception as e:
+            logger.error(f"Error reading cache file {cache_path}: {str(e)}")
+            await self._remove_cache_file(key)
         return None
     
     async def set(self, key: str, value: Any) -> None:
-        """Save value to disk cache with current timestamp."""
+        """Set value in cache with current timestamp."""
         cache_path = self._get_cache_path(key)
-        
         try:
             data = {
-                'timestamp': datetime.now().isoformat(),
-                'value': value
+                'value': value,
+                'timestamp': time.time()
             }
-            async with self._lock:
-                async with aiofiles.open(cache_path, 'w') as f:
-                    await f.write(json.dumps(data))
-        except (OSError, TypeError) as e:
-            logger.error(f"Cache write error for {key}: {str(e)}")
+            async with aiofiles.open(cache_path, 'w') as f:
+                await f.write(json.dumps(data))
+        except Exception as e:
+            logger.error(f"Error writing cache file {cache_path}: {str(e)}")
     
-    async def _remove_file(self, path: Path) -> None:
-        """Remove a file asynchronously."""
+    async def _remove_cache_file(self, key: str) -> None:
+        """Remove a cache file."""
         try:
-            async with self._lock:
-                os.remove(path)
-        except OSError as e:
-            logger.error(f"Failed to remove file {path}: {str(e)}")
+            cache_path = self._get_cache_path(key)
+            if cache_path.exists():
+                cache_path.unlink()
+        except Exception as e:
+            logger.error(f"Error removing cache file {cache_path}: {str(e)}")
     
     async def clear(self) -> None:
-        """Clear all cached files."""
-        async with self._lock:
+        """Clear all cached items."""
+        try:
             for cache_file in self.cache_dir.glob("*.json"):
-                await self._remove_file(cache_file)
+                cache_file.unlink()
+        except Exception as e:
+            logger.error(f"Error clearing cache: {str(e)}")
 
 class NetworkCache(DiskCache):
     """Specialized cache for network requests."""

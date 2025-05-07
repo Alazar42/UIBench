@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "analyzer": "compliance",
+    "url": "http://localhost:3001/frontend/src/app.html",
+    "timestamp": "2025-05-07T20:39:25.190804",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 0.0,
+    "issues": [
+      "No cookie consent banner found",
+      "No privacy policy link found",
+      "No accessibility statement found",
+      "No data access controls found",
+      "No GDPR compliance elements found",
+      "No CCPA compliance elements found",
+      "No data retention policy found"
+    ],
+    "recommendations": [
+      "Implement a cookie consent banner",
+      "Add a privacy policy link",
+      "Add an accessibility statement",
+      "Implement data access controls",
+      "Implement GDPR compliance elements",
+      "Implement CCPA compliance elements",
+      "Add a data retention policy"
+    ],
+    "metrics": {
+      "cookie_consent": {
+        "score": 0,
+        "details": {
+          "banner_found": false
+        }
+      },
+      "privacy_policy": {
+        "score": 0,
+        "details": {
+          "link_found": false
+        }
+      },
+      "accessibility_statement": {
+        "score": 0,
+        "details": {
+          "statement_found": false
+        }
+      },
+      "data_access_controls": {
+        "score": 0,
+        "details": {
+          "controls_found": false
+        }
+      },
+      "gdpr_compliance": {
+        "score": 0,
+        "details": {
+          "gdpr_elements_found": false
+        }
+      },
+      "ccpa_compliance": {
+        "score": 0,
+        "details": {
+          "ccpa_elements_found": false
+        }
+      },
+      "data_retention": {
+        "score": 0,
+        "details": {
+          "policy_found": false
+        }
+      }
+    },
+    "details": {
+      "cookie_consent": {
+        "score": 0,
+        "issues": [
+          "No cookie consent banner found"
+        ],
+        "recommendations": [
+          "Implement a cookie consent banner"
+        ],
+        "details": {
+          "banner_found": false
+        }
+      },
+      "privacy_policy": {
+        "score": 0,
+        "issues": [
+          "No privacy policy link found"
+        ],
+        "recommendations": [
+          "Add a privacy policy link"
+        ],
+        "details": {
+          "link_found": false
+        }
+      },
+      "accessibility_statement": {
+        "score": 0,
+        "issues": [
+          "No accessibility statement found"
+        ],
+        "recommendations": [
+          "Add an accessibility statement"
+        ],
+        "details": {
+          "statement_found": false
+        }
+      },
+      "data_access_controls": {
+        "score": 0,
+        "issues": [
+          "No data access controls found"
+        ],
+        "recommendations": [
+          "Implement data access controls"
+        ],
+        "details": {
+          "controls_found": false
+        }
+      },
+      "gdpr_compliance": {
+        "score": 0,
+        "issues": [
+          "No GDPR compliance elements found"
+        ],
+        "recommendations": [
+          "Implement GDPR compliance elements"
+        ],
+        "details": {
+          "gdpr_elements_found": false
+        }
+      },
+      "ccpa_compliance": {
+        "score": 0,
+        "issues": [
+          "No CCPA compliance elements found"
+        ],
+        "recommendations": [
+          "Implement CCPA compliance elements"
+        ],
+        "details": {
+          "ccpa_elements_found": false
+        }
+      },
+      "data_retention": {
+        "score": 0,
+        "issues": [
+          "No data retention policy found"
+        ],
+        "recommendations": [
+          "Add a data retention policy"
+        ],
+        "details": {
+          "policy_found": false
+        }
+      }
+    }
+  }
+}

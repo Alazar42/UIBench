@@ -1,0 +1,983 @@
+{
+  "metadata": {
+    "analyzer": "website",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:51",
+    "last_updated": "2025-05-07 20:39:51",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:51",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "url": "http://localhost:3001/frontend/src/app.html",
+        "page_rating": 25.0,
+        "page_class": "content",
+        "results": {
+          "accessibility": {
+            "AccessibilityAnalyzer": {
+              "overall_score": 25.0,
+              "score": 25.0,
+              "issues": [
+                "No headings found on the page",
+                "No forms found on the page",
+                "Missing main landmark",
+                "Missing navigation landmark",
+                "Missing header landmark",
+                "Missing footer landmark",
+                "Missing skip navigation link"
+              ],
+              "passes": [
+                "No images found on the page",
+                "No links found on the page"
+              ],
+              "recommendations": [
+                "Add a main landmark to the page",
+                "Add a navigation landmark",
+                "Add a skip navigation link"
+              ],
+              "metrics": {
+                "headings_score": 0,
+                "images_score": 100,
+                "links_score": 100,
+                "color_contrast_score": 0,
+                "forms_score": 0,
+                "landmarks_score": 0.0,
+                "keyboard_nav_score": 0.0,
+                "aria_score": 0
+              },
+              "details": {
+                "headings": {
+                  "score": 0,
+                  "issues": [
+                    "No headings found on the page"
+                  ],
+                  "passes": []
+                },
+                "images": {
+                  "score": 100,
+                  "issues": [],
+                  "passes": [
+                    "No images found on the page"
+                  ]
+                },
+                "links": {
+                  "score": 100,
+                  "issues": [],
+                  "passes": [
+                    "No links found on the page"
+                  ]
+                },
+                "color_contrast": {
+                  "score": 0,
+                  "issues": [],
+                  "passes": []
+                },
+                "forms": {
+                  "score": 0,
+                  "issues": [
+                    "No forms found on the page"
+                  ],
+                  "passes": []
+                },
+                "landmarks": {
+                  "score": 0.0,
+                  "issues": [
+                    "Missing main landmark",
+                    "Missing navigation landmark",
+                    "Missing header landmark",
+                    "Missing footer landmark"
+                  ],
+                  "passes": []
+                },
+                "keyboard_navigation": {
+                  "score": 0.0,
+                  "issues": [
+                    "Missing skip navigation link"
+                  ],
+                  "passes": []
+                },
+                "aria": {
+                  "score": 0,
+                  "issues": [],
+                  "passes": []
+                }
+              }
+            }
+          },
+          "performance": {
+            "PerformanceAnalyzer": {
+              "overall_score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "metrics": {
+                "execution_time": 0,
+                "performance_score": 1.0,
+                "total_checks": 4
+              },
+              "details": {
+                "page_size": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "size_bytes": 481,
+                    "size_kb": 0.4697265625
+                  }
+                },
+                "load_time": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "loadTime": 676,
+                    "domContentLoaded": 676,
+                    "firstPaint": 20
+                  }
+                },
+                "resource_usage": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "totalResources": 1,
+                    "totalSize": 921,
+                    "resourceTypes": {
+                      "css": 1
+                    }
+                  }
+                },
+                "rendering_performance": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "firstPaint": 20,
+                    "firstContentfulPaint": 20,
+                    "timeToInteractive": 676
+                  }
+                }
+              }
+            }
+          },
+          "security": {
+            "SecurityAnalyzer": {
+              "overall_score": 85.83333333333333,
+              "security_headers": 0,
+              "content_security": 0,
+              "issues": [
+                "Missing X-Content-Type-Options header",
+                "Missing X-Frame-Options header",
+                "Missing X-XSS-Protection header",
+                "Missing Strict-Transport-Security header",
+                "Missing Content-Security-Policy header",
+                "Missing X-Frame-Options and CSP frame-ancestors headers",
+                "Missing Content-Security-Policy header"
+              ],
+              "recommendations": [],
+              "metrics": {
+                "security_score": 85.83333333333333,
+                "total_checks": 12,
+                "execution_time": 0
+              },
+              "details": {}
+            }
+          },
+          "seo": {
+            "SEOAnalyzer": "{\"results\": {\"error\": \"SEO analysis failed: 'Page' object has no attribute 'find'\", \"status\": \"failed\", \"overall_score\": 0.0, \"details\": {}, \"issues\": [\"Analysis failed: SEO analysis failed: 'Page' object has no attribute 'find'\"], \"recommendations\": [\"Fix analyzer implementation\"], \"metrics\": {}}, \"json_path\": \"analysis_results/seoanalyzer_http_localhost:3001_frontend_src_app.html_20250507_203951.json\"}"
+          },
+          "ux": {
+            "UXAnalyzer": {
+              "overall_score": 0.55,
+              "issues": [
+                "Navigation structure needs improvement",
+                "Error checking interaction elements: 'async_generator' object is not iterable",
+                "Feedback mechanisms need improvement",
+                "Error checking error handling: 'async_generator' object is not iterable",
+                "Mobile responsiveness needs improvement",
+                "Loading states need improvement",
+                "Visual hierarchy needs improvement"
+              ],
+              "recommendations": [
+                "Improve navigation structure",
+                "Fix interaction elements analysis",
+                "Improve feedback mechanisms",
+                "Fix error handling analysis",
+                "Improve mobile responsiveness",
+                "Improve loading states",
+                "Improve visual hierarchy"
+              ],
+              "metrics": {
+                "navigation": {
+                  "score": 0.5,
+                  "details": {
+                    "has_main_nav": false,
+                    "has_breadcrumbs": false,
+                    "has_search": false
+                  }
+                },
+                "interaction_elements": {
+                  "score": 0,
+                  "details": {
+                    "error": "'async_generator' object is not iterable"
+                  }
+                },
+                "feedback_mechanisms": {
+                  "score": 0.5,
+                  "details": {
+                    "loading_indicators": 0,
+                    "feedback_messages": 0
+                  }
+                },
+                "error_handling": {
+                  "score": 0,
+                  "details": {
+                    "error": "'async_generator' object is not iterable"
+                  }
+                },
+                "mobile_responsiveness": {
+                  "score": 0.5,
+                  "details": {
+                    "responsive_elements": 0,
+                    "has_viewport_meta": true
+                  }
+                },
+                "loading_states": {
+                  "score": 0.5,
+                  "details": {
+                    "loading_indicators": 0,
+                    "skeleton_loaders": 0
+                  }
+                },
+                "visual_hierarchy": {
+                  "score": 0.5,
+                  "details": {
+                    "has_proper_hierarchy": true,
+                    "sections_count": 0
+                  }
+                },
+                "consistency": {
+                  "score": 1.0,
+                  "details": {
+                    "button_variations": 0,
+                    "input_variations": 0
+                  }
+                },
+                "typography": {
+                  "score": 1.0,
+                  "details": {
+                    "font_size_variations": 0,
+                    "line_height_variations": 0
+                  }
+                },
+                "color_contrast": {
+                  "score": 1.0,
+                  "details": {
+                    "has_contrast_issues": false
+                  }
+                }
+              },
+              "details": {
+                "navigation": {
+                  "score": 0.5,
+                  "issues": [
+                    "Navigation structure needs improvement"
+                  ],
+                  "recommendations": [
+                    "Improve navigation structure"
+                  ],
+                  "details": {
+                    "has_main_nav": false,
+                    "has_breadcrumbs": false,
+                    "has_search": false
+                  }
+                },
+                "interaction_elements": {
+                  "score": 0,
+                  "issues": [
+                    "Error checking interaction elements: 'async_generator' object is not iterable"
+                  ],
+                  "recommendations": [
+                    "Fix interaction elements analysis"
+                  ],
+                  "details": {
+                    "error": "'async_generator' object is not iterable"
+                  }
+                },
+                "feedback_mechanisms": {
+                  "score": 0.5,
+                  "issues": [
+                    "Feedback mechanisms need improvement"
+                  ],
+                  "recommendations": [
+                    "Improve feedback mechanisms"
+                  ],
+                  "details": {
+                    "loading_indicators": 0,
+                    "feedback_messages": 0
+                  }
+                },
+                "error_handling": {
+                  "score": 0,
+                  "issues": [
+                    "Error checking error handling: 'async_generator' object is not iterable"
+                  ],
+                  "recommendations": [
+                    "Fix error handling analysis"
+                  ],
+                  "details": {
+                    "error": "'async_generator' object is not iterable"
+                  }
+                },
+                "mobile_responsiveness": {
+                  "score": 0.5,
+                  "issues": [
+                    "Mobile responsiveness needs improvement"
+                  ],
+                  "recommendations": [
+                    "Improve mobile responsiveness"
+                  ],
+                  "details": {
+                    "responsive_elements": 0,
+                    "has_viewport_meta": true
+                  }
+                },
+                "loading_states": {
+                  "score": 0.5,
+                  "issues": [
+                    "Loading states need improvement"
+                  ],
+                  "recommendations": [
+                    "Improve loading states"
+                  ],
+                  "details": {
+                    "loading_indicators": 0,
+                    "skeleton_loaders": 0
+                  }
+                },
+                "visual_hierarchy": {
+                  "score": 0.5,
+                  "issues": [
+                    "Visual hierarchy needs improvement"
+                  ],
+                  "recommendations": [
+                    "Improve visual hierarchy"
+                  ],
+                  "details": {
+                    "has_proper_hierarchy": true,
+                    "sections_count": 0
+                  }
+                },
+                "consistency": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "button_variations": 0,
+                    "input_variations": 0
+                  }
+                },
+                "typography": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "font_size_variations": 0,
+                    "line_height_variations": 0
+                  }
+                },
+                "color_contrast": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "has_contrast_issues": false
+                  }
+                }
+              }
+            }
+          },
+          "code": {
+            "CodeAnalyzer": "{\"results\": {\"error\": \"Code analysis failed: 'Page' object has no attribute 'strip'\", \"status\": \"failed\", \"overall_score\": 0.0, \"details\": {}, \"issues\": [\"Analysis failed: Code analysis failed: 'Page' object has no attribute 'strip'\"], \"recommendations\": [\"Fix analyzer implementation\"], \"metrics\": {}}, \"json_path\": \"analysis_results/codeanalyzer_http_localhost:3001_frontend_src_app.html_20250507_203951.json\"}"
+          },
+          "compliance": {
+            "ComplianceAnalyzer": {
+              "overall_score": 0.0,
+              "issues": [
+                "No cookie consent banner found",
+                "No privacy policy link found",
+                "No accessibility statement found",
+                "No data access controls found",
+                "No GDPR compliance elements found",
+                "No CCPA compliance elements found",
+                "No data retention policy found"
+              ],
+              "recommendations": [
+                "Implement a cookie consent banner",
+                "Add a privacy policy link",
+                "Add an accessibility statement",
+                "Implement data access controls",
+                "Implement GDPR compliance elements",
+                "Implement CCPA compliance elements",
+                "Add a data retention policy"
+              ],
+              "metrics": {
+                "cookie_consent": {
+                  "score": 0,
+                  "details": {
+                    "banner_found": false
+                  }
+                },
+                "privacy_policy": {
+                  "score": 0,
+                  "details": {
+                    "link_found": false
+                  }
+                },
+                "accessibility_statement": {
+                  "score": 0,
+                  "details": {
+                    "statement_found": false
+                  }
+                },
+                "data_access_controls": {
+                  "score": 0,
+                  "details": {
+                    "controls_found": false
+                  }
+                },
+                "gdpr_compliance": {
+                  "score": 0,
+                  "details": {
+                    "gdpr_elements_found": false
+                  }
+                },
+                "ccpa_compliance": {
+                  "score": 0,
+                  "details": {
+                    "ccpa_elements_found": false
+                  }
+                },
+                "data_retention": {
+                  "score": 0,
+                  "details": {
+                    "policy_found": false
+                  }
+                }
+              },
+              "details": {
+                "cookie_consent": {
+                  "score": 0,
+                  "issues": [
+                    "No cookie consent banner found"
+                  ],
+                  "recommendations": [
+                    "Implement a cookie consent banner"
+                  ],
+                  "details": {
+                    "banner_found": false
+                  }
+                },
+                "privacy_policy": {
+                  "score": 0,
+                  "issues": [
+                    "No privacy policy link found"
+                  ],
+                  "recommendations": [
+                    "Add a privacy policy link"
+                  ],
+                  "details": {
+                    "link_found": false
+                  }
+                },
+                "accessibility_statement": {
+                  "score": 0,
+                  "issues": [
+                    "No accessibility statement found"
+                  ],
+                  "recommendations": [
+                    "Add an accessibility statement"
+                  ],
+                  "details": {
+                    "statement_found": false
+                  }
+                },
+                "data_access_controls": {
+                  "score": 0,
+                  "issues": [
+                    "No data access controls found"
+                  ],
+                  "recommendations": [
+                    "Implement data access controls"
+                  ],
+                  "details": {
+                    "controls_found": false
+                  }
+                },
+                "gdpr_compliance": {
+                  "score": 0,
+                  "issues": [
+                    "No GDPR compliance elements found"
+                  ],
+                  "recommendations": [
+                    "Implement GDPR compliance elements"
+                  ],
+                  "details": {
+                    "gdpr_elements_found": false
+                  }
+                },
+                "ccpa_compliance": {
+                  "score": 0,
+                  "issues": [
+                    "No CCPA compliance elements found"
+                  ],
+                  "recommendations": [
+                    "Implement CCPA compliance elements"
+                  ],
+                  "details": {
+                    "ccpa_elements_found": false
+                  }
+                },
+                "data_retention": {
+                  "score": 0,
+                  "issues": [
+                    "No data retention policy found"
+                  ],
+                  "recommendations": [
+                    "Add a data retention policy"
+                  ],
+                  "details": {
+                    "policy_found": false
+                  }
+                }
+              }
+            }
+          },
+          "design": {
+            "DesignSystemAnalyzer": {
+              "overall_score": 50,
+              "issues": [],
+              "recommendations": [],
+              "metrics": {
+                "css_vars_count": 1,
+                "figma_tokens": false,
+                "sketch_data": false
+              },
+              "details": {
+                "figma_tokens": {},
+                "sketch_data": {},
+                "css_vars": []
+              }
+            }
+          },
+          "infrastructure": {
+            "InfrastructureAnalyzer": {
+              "overall_score": 0.4,
+              "issues": [
+                "Low CDN utilization",
+                "No cache headers found",
+                "No resource prioritization found",
+                "No error monitoring found",
+                "No load balancing detected",
+                "content-security-policy",
+                "x-frame-options",
+                "x-content-type-options",
+                "strict-transport-security",
+                "Not using HTTPS"
+              ],
+              "recommendations": [
+                "Increase CDN utilization for better performance",
+                "Implement proper cache headers",
+                "Implement resource prioritization",
+                "Implement error monitoring",
+                "Implement load balancing",
+                "Add content-security-policy header",
+                "Add x-frame-options header",
+                "Add x-content-type-options header",
+                "Add strict-transport-security header",
+                "Enable HTTPS"
+              ],
+              "metrics": {
+                "cdn_utilization": {
+                  "score": 0.0,
+                  "details": {
+                    "cdn_resources": 0,
+                    "total_resources": 1,
+                    "cdn_ratio": 0.0
+                  }
+                },
+                "cache_policies": {
+                  "score": 0,
+                  "details": {
+                    "cache_control": "",
+                    "has_cache": false
+                  }
+                },
+                "dns_configuration": {
+                  "score": 1.0,
+                  "details": {
+                    "dns_time": 0.0013188999946578406,
+                    "status": 200
+                  }
+                },
+                "server_response_times": {
+                  "score": 1.0,
+                  "details": {
+                    "ttfb": 0.008480254000460263,
+                    "status": 200
+                  }
+                },
+                "resource_prioritization": {
+                  "score": 0.5,
+                  "details": {
+                    "resource_hints": 0
+                  }
+                },
+                "third_party_services": {
+                  "score": 1.0,
+                  "details": {
+                    "third_party_count": 0
+                  }
+                },
+                "error_monitoring": {
+                  "score": 0,
+                  "details": {
+                    "has_error_monitoring": false
+                  }
+                },
+                "load_balancing": {
+                  "score": 0.5,
+                  "details": {
+                    "has_load_balancer": false
+                  }
+                },
+                "security_headers": {
+                  "score": 0.0,
+                  "details": {
+                    "content-security-policy": false,
+                    "x-frame-options": false,
+                    "x-content-type-options": false,
+                    "strict-transport-security": false
+                  }
+                },
+                "ssl_tls": {
+                  "score": 0,
+                  "details": {
+                    "is_https": false,
+                    "status": 200
+                  }
+                }
+              },
+              "details": {
+                "cdn_utilization": {
+                  "score": 0.0,
+                  "issues": [
+                    "Low CDN utilization"
+                  ],
+                  "recommendations": [
+                    "Increase CDN utilization for better performance"
+                  ],
+                  "details": {
+                    "cdn_resources": 0,
+                    "total_resources": 1,
+                    "cdn_ratio": 0.0
+                  }
+                },
+                "cache_policies": {
+                  "score": 0,
+                  "issues": [
+                    "No cache headers found"
+                  ],
+                  "recommendations": [
+                    "Implement proper cache headers"
+                  ],
+                  "details": {
+                    "cache_control": "",
+                    "has_cache": false
+                  }
+                },
+                "dns_configuration": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "dns_time": 0.0013188999946578406,
+                    "status": 200
+                  }
+                },
+                "server_response_times": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "ttfb": 0.008480254000460263,
+                    "status": 200
+                  }
+                },
+                "resource_prioritization": {
+                  "score": 0.5,
+                  "issues": [
+                    "No resource prioritization found"
+                  ],
+                  "recommendations": [
+                    "Implement resource prioritization"
+                  ],
+                  "details": {
+                    "resource_hints": 0
+                  }
+                },
+                "third_party_services": {
+                  "score": 1.0,
+                  "issues": [],
+                  "recommendations": [],
+                  "details": {
+                    "third_party_count": 0
+                  }
+                },
+                "error_monitoring": {
+                  "score": 0,
+                  "issues": [
+                    "No error monitoring found"
+                  ],
+                  "recommendations": [
+                    "Implement error monitoring"
+                  ],
+                  "details": {
+                    "has_error_monitoring": false
+                  }
+                },
+                "load_balancing": {
+                  "score": 0.5,
+                  "issues": [
+                    "No load balancing detected"
+                  ],
+                  "recommendations": [
+                    "Implement load balancing"
+                  ],
+                  "details": {
+                    "has_load_balancer": false
+                  }
+                },
+                "security_headers": {
+                  "score": 0.0,
+                  "issues": [
+                    "content-security-policy",
+                    "x-frame-options",
+                    "x-content-type-options",
+                    "strict-transport-security"
+                  ],
+                  "recommendations": [
+                    "Add content-security-policy header",
+                    "Add x-frame-options header",
+                    "Add x-content-type-options header",
+                    "Add strict-transport-security header"
+                  ],
+                  "details": {
+                    "content-security-policy": false,
+                    "x-frame-options": false,
+                    "x-content-type-options": false,
+                    "strict-transport-security": false
+                  }
+                },
+                "ssl_tls": {
+                  "score": 0,
+                  "issues": [
+                    "Not using HTTPS"
+                  ],
+                  "recommendations": [
+                    "Enable HTTPS"
+                  ],
+                  "details": {
+                    "is_https": false,
+                    "status": 200
+                  }
+                }
+              }
+            }
+          },
+          "nlp": {
+            "NLPContentAnalyzer": "{\"results\": {\"error\": \"name 'AnalysisError' is not defined\", \"status\": \"failed\", \"overall_score\": 0.0, \"details\": {}, \"issues\": [\"Analysis failed: name 'AnalysisError' is not defined\"], \"recommendations\": [\"Fix analyzer implementation\"], \"metrics\": {}}, \"json_path\": \"analysis_results/nlpcontentanalyzer_http_localhost:3001_frontend_src_app.html_20250507_203951.json\"}"
+          },
+          "operational": {
+            "OperationalMetricsAnalyzer": {
+              "overall_score": 50.0,
+              "issues": [
+                "No uptime monitoring scripts detected",
+                "No error budget documentation found",
+                "No deployment/version info found",
+                "No incident response/status page found",
+                "No performance budget meta tag found",
+                "No audit trail/activity log found"
+              ],
+              "recommendations": [],
+              "metrics": {
+                "execution_time": 0,
+                "operational_score": 50.0,
+                "total_checks": 6
+              },
+              "details": {
+                "uptime_monitoring": {
+                  "score": 50,
+                  "issues": [
+                    "No uptime monitoring scripts detected"
+                  ],
+                  "passes": [],
+                  "details": {
+                    "uptime_scripts": []
+                  }
+                },
+                "error_budgets": {
+                  "score": 50,
+                  "issues": [
+                    "No error budget documentation found"
+                  ],
+                  "passes": []
+                },
+                "deployment_frequency": {
+                  "score": 50,
+                  "issues": [
+                    "No deployment/version info found"
+                  ],
+                  "passes": []
+                },
+                "mttr": {
+                  "score": 50,
+                  "issues": [
+                    "No incident response/status page found"
+                  ],
+                  "passes": []
+                },
+                "performance_budgets": {
+                  "score": 50,
+                  "issues": [
+                    "No performance budget meta tag found"
+                  ],
+                  "passes": []
+                },
+                "audit_trails": {
+                  "score": 50,
+                  "issues": [
+                    "No audit trail/activity log found"
+                  ],
+                  "passes": []
+                }
+              }
+            }
+          },
+          "mutation": {
+            "MutationAnalyzer": {
+              "overall_score": 33.33333333333333,
+              "mutations": [
+                {
+                  "type": "style_change",
+                  "element": "div",
+                  "property": "display",
+                  "value": "none"
+                }
+              ],
+              "killed": 1,
+              "survived": 2,
+              "metrics": {
+                "mutation_score": 33.33333333333333,
+                "total_mutations": 3,
+                "execution_time": 0
+              },
+              "details": {},
+              "issues": [],
+              "recommendations": []
+            }
+          },
+          "contract": {
+            "ContractAnalyzer": {
+              "overall_score": 0.0,
+              "interactions": [],
+              "passed": 0,
+              "failed": 3,
+              "metrics": {
+                "contract_score": 0.0,
+                "total_contracts": 3,
+                "execution_time": 0
+              },
+              "details": {},
+              "issues": [],
+              "recommendations": []
+            }
+          },
+          "fuzz": {
+            "FuzzAnalyzer": {
+              "overall_score": 0,
+              "executions": 0,
+              "crashes": 4,
+              "coverage": 0.0,
+              "metrics": {
+                "fuzz_score": 0,
+                "total_inputs": 4,
+                "execution_time": 0
+              },
+              "details": {},
+              "issues": [],
+              "recommendations": []
+            }
+          }
+        },
+        "design_data": {},
+        "performance_metrics": {
+          "PerformanceAnalyzer": {
+            "overall_score": 1.0,
+            "issues": [],
+            "recommendations": [],
+            "metrics": {
+              "execution_time": 0,
+              "performance_score": 1.0,
+              "total_checks": 4
+            },
+            "details": {
+              "page_size": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "size_bytes": 481,
+                  "size_kb": 0.4697265625
+                }
+              },
+              "load_time": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "loadTime": 676,
+                  "domContentLoaded": 676,
+                  "firstPaint": 20
+                }
+              },
+              "resource_usage": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "totalResources": 1,
+                  "totalSize": 921,
+                  "resourceTypes": {
+                    "css": 1
+                  }
+                }
+              },
+              "rendering_performance": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "firstPaint": 20,
+                  "firstContentfulPaint": 20,
+                  "timeToInteractive": 676
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

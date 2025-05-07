@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "analyzer": "performance",
+    "project_path": "/home/jared/Documents/UIBench_code_backup/frontend",
+    "created": "2025-05-07 20:39:31",
+    "last_updated": "2025-05-07 20:39:31",
+    "version": "1.0.0"
+  },
+  "results": [
+    {
+      "timestamp": "2025-05-07 20:39:31",
+      "url": "http://localhost:3001/frontend/src/app.html",
+      "data": {
+        "json_path": "analysis_results/performance_http_localhost:3001_frontend_src_app.html_20250507_203931.json",
+        "results": {
+          "overall_score": 1.0,
+          "issues": [],
+          "recommendations": [],
+          "metrics": {
+            "execution_time": 0,
+            "performance_score": 1.0,
+            "total_checks": 4
+          },
+          "details": {
+            "page_size": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "size_bytes": 481,
+                "size_kb": 0.4697265625
+              }
+            },
+            "load_time": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "loadTime": 714,
+                "domContentLoaded": 713,
+                "firstPaint": 32
+              }
+            },
+            "resource_usage": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "totalResources": 1,
+                "totalSize": 921,
+                "resourceTypes": {
+                  "css": 1
+                }
+              }
+            },
+            "rendering_performance": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "firstPaint": 32,
+                "firstContentfulPaint": 32,
+                "timeToInteractive": 713
+              }
+            }
+          }
+        },
+        "url": "http://localhost:3001/frontend/src/app.html"
+      }
+    }
+  ]
+}

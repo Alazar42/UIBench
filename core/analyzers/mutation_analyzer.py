@@ -114,4 +114,4 @@ class MutationAnalyzer:
             return json.dumps(results)
             
         except Exception as e:
-            raise AnalysisError(f"Mutation analysis failed: {str(e)}") 
+            raise AnalysisError(f"Mutation analysis failed: {str(e)}")

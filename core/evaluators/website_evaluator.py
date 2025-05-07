@@ -1,3 +1,6 @@
+"""
+Website evaluator for comprehensive analysis.
+"""
 from typing import Dict, Any, List, Set, Tuple, Optional
 import asyncio
 from urllib.parse import urlparse, urljoin
@@ -31,13 +34,15 @@ class WebsiteEvaluator(BaseEvaluator):
         custom_criteria: Dict[str, Any] = None
     ):
         super().__init__(root_url, custom_criteria)
-        self.max_subpages = max_subpages
-        self.max_depth = max_depth
-        self.concurrency = concurrency
+        self.max_subpages = max_subpages or 5  # Default to 5 pages
+        self.max_depth = min(max_depth, 2)  # Cap depth at 2
+        self.concurrency = min(concurrency, 3)  # Cap concurrency at 3
         self.evaluated_pages: List[Dict[str, Any]] = []
         self.performance_monitor = PerformanceMonitor()
         self.network_cache = NetworkCache()
         self._browser_manager = None
+        self.urls: List[str] = []
+        self.base_url = root_url  # Add base_url attribute
     
     async def get_browser_manager(self) -> BrowserManager:
         """Get or create the browser manager instance."""
@@ -75,21 +80,26 @@ class WebsiteEvaluator(BaseEvaluator):
             discovered_links = []
             
             try:
-                # Check cache first
-                cached_response = self.network_cache.get_response(url)
-                if cached_response:
-                    html = cached_response['content']
-                else:
-                    html = await fetch_page_html(url)
-                    self.network_cache.cache_response(url, html, {})
-                
-                soup = BeautifulSoup(html, "html.parser")
-                for a in soup.find_all("a", href=True):
-                    link = urljoin(self.url, a["href"])
-                    if urlparse(link).netloc != urlparse(self.url).netloc:
-                        continue
-                    link = link.split("#")[0]
-                    discovered_links.append((link, depth + 1))
+                async with asyncio.timeout(5.0):  # 5 second timeout per page
+                    # Check cache first
+                    cached_response = self.network_cache.get_response(url)
+                    if cached_response:
+                        html = cached_response['content']
+                    else:
+                        html = await fetch_page_html(url)
+                        self.network_cache.cache_response(url, html, {})
+                    
+                    soup = BeautifulSoup(html, "html.parser")
+                    for a in soup.find_all("a", href=True):
+                        if len(discovered_links) >= 10:  # Limit links per page
+                            break
+                        link = urljoin(self.url, a["href"])
+                        if urlparse(link).netloc != urlparse(self.url).netloc:
+                            continue
+                        link = link.split("#")[0]
+                        discovered_links.append((link, depth + 1))
+            except asyncio.TimeoutError:
+                logger.warning(f"Timeout crawling {url}")
             except Exception as e:
                 logger.error(f"Error crawling {url}: {e}")
             
@@ -102,23 +112,26 @@ class WebsiteEvaluator(BaseEvaluator):
                 except asyncio.CancelledError:
                     break
                 
-                if depth >= self.max_depth:
+                if depth >= self.max_depth or len(visited) >= self.max_subpages:
                     queue.task_done()
                     continue
                 
                 discovered = await crawl_page(current_url, depth)
                 for link, new_depth in discovered:
-                    if link not in visited:
+                    if link not in visited and len(visited) < self.max_subpages:
                         visited.add(link)
                         await queue.put((link, new_depth))
-                        if self.max_subpages and len(visited) >= self.max_subpages:
-                            queue.task_done()
-                            return
                 queue.task_done()
         
         # Start workers with the crawler pool
         workers = [crawler_pool.add_task(worker()) for _ in range(self.concurrency)]
-        await queue.join()
+        
+        try:
+            async with asyncio.timeout(30.0):  # 30 second timeout for entire crawl
+                await queue.join()
+        except asyncio.TimeoutError:
+            logger.warning("Crawl timeout reached")
+        
         for w in workers:
             if not isinstance(w, asyncio.Task):
                 w = asyncio.create_task(w)
@@ -131,48 +144,84 @@ class WebsiteEvaluator(BaseEvaluator):
         """Perform comprehensive website evaluation and return JSON string."""
         if not await self.validate():
             raise ValueError("Invalid website for evaluation")
-        
+
+        # Initialize URL list by crawling subpages
+        self.urls = await self.crawl_all_subpages()
+
         results = {}
         page_ratings = []
         page_evaluations = {}
-        
+        analyzer_scores = {
+            "accessibility": [],
+            "performance": [],
+            "security": [],
+            "seo": [],
+            "ux": [],
+            "code": [],
+            "design": [],
+            "infrastructure": [],
+            "operational": [],
+            "compliance": []
+        }
+
         with self.performance_monitor.monitor("website_evaluation"):
-            # Evaluate each page
             for url in self.urls:
                 try:
-                    # Get page content
-                    page = await self.browser.new_page()
-                    await page.goto(url)
-                    html = await page.content()
-                    soup = BeautifulSoup(html, "html.parser")
-                    body_text = soup.get_text()
-                    
-                    # Create and run page evaluator
-                    page_evaluator = PageEvaluator(
-                        url=url,
-                        html=html,
-                        page=page,
-                        body_text=body_text,
-                        custom_criteria=self.custom_criteria
-                    )
-                    
-                    page_result = await page_evaluator.evaluate()
-                    page_data = json.loads(page_result)
-                    
-                    # Store page evaluation
-                    page_name = page_data.get("page_name", "Unknown")
-                    page_ratings.append(page_data.get("page_rating", 0))
-                    page_evaluations[page_name] = {
-                        "url": url,
-                        "rating": page_data.get("page_rating", 0),
-                        "class": page_data.get("page_class", "Unknown"),
-                        "details": page_data.get("results", {})
+                    async with asyncio.timeout(10.0):  # 10 second timeout per page evaluation
+                        # Try to get cached result
+                        cached = self.network_cache.get_response(url)
+                        if cached and "page_data" in cached:
+                            page_data = cached["page_data"]
+                        else:
+                            # Get page content
+                            page = await self.browser.new_page()
+                            await page.goto(url, timeout=5000)  # 5 second page load timeout
+                            html = await page.content()
+                            soup = BeautifulSoup(html, "html.parser")
+                            body_text = soup.get_text()
+
+                            # Create and run page evaluator
+                            page_evaluator = PageEvaluator(
+                                url=url,
+                                html=html,
+                                page=page,
+                                body_text=body_text,
+                                custom_criteria=self.custom_criteria
+                            )
+
+                            page_result = await page_evaluator.evaluate()
+                            page_data = json.loads(page_result)
+
+                            # Cache the result
+                            self.network_cache.cache_response(url, html, {"page_data": page_data})
+
+                            # Cleanup
+                            await page_evaluator.cleanup()
+                            await page.close()
+
+                        # Store page evaluation
+                        page_name = page_data.get("page_name", "Unknown")
+                        page_ratings.append(page_data.get("page_rating", 0))
+                        page_evaluations[page_name] = {
+                            "url": url,
+                            "rating": page_data.get("page_rating", 0),
+                            "class": page_data.get("page_class", "Unknown"),
+                            "details": page_data.get("results", {})
+                        }
+
+                        # Collect analyzer scores
+                        if "detailed_report" in page_data and "analyzer_scores" in page_data["detailed_report"]:
+                            for analyzer, score in page_data["detailed_report"]["analyzer_scores"].items():
+                                if analyzer in analyzer_scores:
+                                    analyzer_scores[analyzer].append(score)
+
+                except asyncio.TimeoutError:
+                    logger.warning(f"Timeout evaluating {url}")
+                    page_evaluations[url] = {
+                        "error": "Evaluation timeout",
+                        "rating": 0,
+                        "class": "Error"
                     }
-                    
-                    # Cleanup
-                    await page_evaluator.cleanup()
-                    await page.close()
-                    
                 except Exception as e:
                     logger.error(f"Error evaluating page {url}: {str(e)}")
                     page_evaluations[url] = {
@@ -180,16 +229,22 @@ class WebsiteEvaluator(BaseEvaluator):
                         "rating": 0,
                         "class": "Error"
                     }
-            
+
             # Calculate overall website rating
             website_rating = sum(page_ratings) / len(page_ratings) if page_ratings else 0
-            
+
+            # Calculate average analyzer scores
+            avg_analyzer_scores = {
+                analyzer: sum(scores) / len(scores) if scores else 0
+                for analyzer, scores in analyzer_scores.items()
+            }
+
             # Classify website based on rating
             website_class = self._classify_website(website_rating)
-            
+
             # Add performance metrics
             evaluation_metrics = self.performance_monitor.get_metrics("website_evaluation")
-            
+
             return json.dumps({
                 "website_url": self.base_url,
                 "website_rating": website_rating,
@@ -197,127 +252,29 @@ class WebsiteEvaluator(BaseEvaluator):
                 "page_evaluations": page_evaluations,
                 "performance_metrics": {
                     "evaluation": evaluation_metrics
-                }
+                },
+                "detailed_report": {
+                    "url": self.base_url,
+                    "pages_evaluated": len(self.urls),
+                    "analyzer_scores": avg_analyzer_scores,
+                    "page_details": page_evaluations
+                },
+                "overall_score": website_rating,
+                "analyzer_scores": avg_analyzer_scores
             }, ensure_ascii=False, indent=2)
     
     def _classify_website(self, rating: float) -> str:
-        """Classify website based on its overall rating."""
+        """Classify website based on rating."""
         if rating >= 90:
             return "Excellent"
         elif rating >= 75:
             return "Good"
         elif rating >= 60:
-            return "Fair"
-        elif rating >= 40:
-            return "Poor"
+            return "Average"
         else:
-            return "Critical"
-    
-    def aggregate_report(self, page_results: List[Dict]) -> Dict:
-        """Aggregate results from all pages into a comprehensive report."""
-        aggregated = {
-            "overall_score": 0.0,
-            "page_count": len(page_results),
-            "analyzer_scores": {},
-            "issues": [],
-            "recommendations": []
-        }
-        
-        # Initialize score counters
-        score_weights = {
-            "accessibility": 0.2,
-            "performance": 0.2,
-            "seo": 0.2,
-            "security": 0.2,
-            "usability": 0.1,
-            "code_quality": 0.1
-        }
-        
-        # Aggregate scores and collect issues
-        for page in page_results:
-            for analyzer_name, analyzer_result in page.get("results", {}).items():
-                if analyzer_name not in aggregated["analyzer_scores"]:
-                    aggregated["analyzer_scores"][analyzer_name] = {
-                        "total_score": 0.0,
-                        "count": 0,
-                        "issues": []
-                    }
-                
-                # Handle different analyzer result formats
-                if isinstance(analyzer_result, dict):
-                    score = analyzer_result.get("score", 0.0)
-                    issues = analyzer_result.get("issues", [])
-                    recommendations = analyzer_result.get("recommendations", [])
-                else:
-                    score = analyzer_result
-                    issues = []
-                    recommendations = []
-                
-                aggregated["analyzer_scores"][analyzer_name]["total_score"] += score
-                aggregated["analyzer_scores"][analyzer_name]["count"] += 1
-                aggregated["analyzer_scores"][analyzer_name]["issues"].extend(issues)
-                aggregated["issues"].extend(issues)
-                aggregated["recommendations"].extend(recommendations)
-        
-        # Calculate weighted average scores
-        for analyzer_name, data in aggregated["analyzer_scores"].items():
-            if data["count"] > 0:
-                avg_score = data["total_score"] / data["count"]
-                weight = score_weights.get(analyzer_name, 0.1)
-                aggregated["overall_score"] += avg_score * weight
-        
-        # Remove duplicate issues and recommendations
-        aggregated["issues"] = list(set(aggregated["issues"]))
-        aggregated["recommendations"] = list(set(aggregated["recommendations"]))
-        
-        return aggregated
-    
-    def generate_detailed_report(self, evaluations: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Generate a detailed report with specific metrics."""
-        return {
-            "aesthetic": [e["results"].get("aesthetic_metrics", {}) for e in evaluations],
-            "wcag": [e["results"].get("wcag_details", {}) for e in evaluations],
-            "cross_device": [e["results"].get("cross_device_simulation", {}) for e in evaluations],
-            "performance_metrics": self.performance_monitor.get_metrics("website_evaluation")
-        }
-    
-    def generate_recommendations(self, evaluations: List[Dict[str, Any]]) -> List[str]:
-        """Generate recommendations based on evaluation results."""
-        recs = []
-        
-        # Language issues
-        lang_issues = sum(len(p["results"].get("language_quality", {}).get("grammar_errors", [])) for p in evaluations)
-        if lang_issues > 0:
-            recs.append(f"Address {lang_issues} language/grammar issues found in content")
-        
-        # Code issues
-        code_issues = sum(len(p["results"].get("code_quality", {}).get("html", {}).get("html_issues", [])) for p in evaluations)
-        if code_issues > 0:
-            recs.append(f"Fix {code_issues} HTML/CSS code quality issues")
-        
-        # Cognitive load
-        try:
-            avg_cog_load = sum(p["results"].get("ux_enhanced", {}).get("cognitive_load", {}).get("complexity_score", 0) for p in evaluations)/len(evaluations)
-            if avg_cog_load > 50:
-                recs.append("Simplify page layouts to reduce cognitive load")
-        except (ZeroDivisionError, KeyError):
-            pass
-        
-        # First page specific checks
-        if evaluations and "results" in evaluations[0]:
-            first = evaluations[0]["results"]
-            if first.get("alt_text", {}).get("missing", 0) > 0:
-                recs.append("Add alt text to images")
-        
-        return recs
+            return "Needs Improvement"
     
     async def cleanup(self) -> None:
         """Clean up resources."""
-        try:
-            if self._browser_manager:
-                browser_manager = await self.get_browser_manager()
-                await browser_manager.close_all()
-        except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
-        finally:
-            self._browser_manager = None
+        if self._browser_manager:
+            await self._browser_manager.cleanup()

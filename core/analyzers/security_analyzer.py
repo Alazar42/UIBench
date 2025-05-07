@@ -1,24 +1,65 @@
+"""
+Security analyzer for evaluating page security.
+"""
+import json
+import os
+from datetime import datetime
 from typing import Dict, Any
 from playwright.async_api import Page
-import asyncio
-from ..utils.error_handler import AnalysisError
+from bs4 import BeautifulSoup
+from core.utils.error_handler import AnalysisError
 import logging
 from .security_checks import SecurityChecks
 from .base_analyzer import BaseAnalyzer
-import json
 
 logger = logging.getLogger(__name__)
 
-class SecurityAnalyzer(BaseAnalyzer):
-    """Analyzes web pages for security vulnerabilities and best practices."""
+class SecurityAnalyzer:
+    """Analyzer for security evaluation."""
     
-    async def analyze(self, url: str, page: Page) -> str:
+    def _save_results(self, url: str, results: Dict[str, Any]) -> str:
+        """Save analysis results to a JSON file."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"security_{url.replace('://', '_').replace('/', '_')}_{timestamp}.json"
+        output_dir = "analysis_results"
+        os.makedirs(output_dir, exist_ok=True)
+        filepath = os.path.join(output_dir, filename)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=2)
+        
+        return filepath
+    
+    async def analyze(self, url: str, page: Page, soup: BeautifulSoup) -> str:
         """
-        Perform comprehensive security analysis.
+        Analyze the page for security issues.
+        
+        Args:
+            url: The URL of the page to analyze
+            page: Playwright page object
+            soup: BeautifulSoup object of the page
+            
         Returns:
-            JSON string containing security analysis results and JSON file path
+            JSON string containing analysis results
         """
         try:
+            # Initialize results structure
+            results = {
+                "results": {
+                    "overall_score": 0,
+                    "security_headers": 0,
+                    "content_security": 0,
+                    "issues": [],
+                    "recommendations": [],
+                    "metrics": {
+                        "security_score": 0,
+                        "total_checks": 0,
+                        "execution_time": 0
+                    }
+                },
+                "json_path": None
+            }
+            
             # Run all security checks
             security_checks = {
                 "headers": await self._check_security_headers(page),
@@ -34,44 +75,34 @@ class SecurityAnalyzer(BaseAnalyzer):
                 "csrf_tokens": await SecurityChecks.check_csrf_tokens(page),
                 "mixed_content": await SecurityChecks.check_mixed_content(page)
             }
-
+            
+            # Process check results
+            total_score = 0
+            total_checks = len(security_checks)
+            
+            for check_name, check_result in security_checks.items():
+                if isinstance(check_result, dict):
+                    score = check_result.get("score", 0)
+                    issues = check_result.get("issues", [])
+                    recommendations = check_result.get("recommendations", [])
+                    
+                    total_score += score
+                    results["results"]["issues"].extend(issues)
+                    results["results"]["recommendations"].extend(recommendations)
+            
             # Calculate overall score
-            scores = [result.get("score", 0) for result in security_checks.values() if isinstance(result, dict)]
-            overall_score = sum(scores) / len(scores) if scores else 0
-
-            # Collect all issues and recommendations
-            all_issues = []
-            all_recommendations = []
-            metrics = {}
-
-            for check_name, result in security_checks.items():
-                if isinstance(result, dict):
-                    all_issues.extend(result.get("issues", []))
-                    all_recommendations.extend(result.get("recommendations", []))
-                    metrics[check_name] = {
-                        "score": result.get("score", 0),
-                        "details": result.get("details", {})
-                    }
-
-            # Standardize results
-            standardized_results = {
-                "overall_score": overall_score,
-                "issues": all_issues,
-                "recommendations": all_recommendations,
-                "metrics": metrics,
-                "details": security_checks
-            }
-
-            # Save to JSON
-            json_path = self.save_to_json(standardized_results, url, "security")
-
-            return json.dumps({
-                "results": standardized_results,
-                "json_path": json_path
-            }, ensure_ascii=False, indent=2)
+            results["results"]["overall_score"] = total_score / total_checks if total_checks > 0 else 0
+            results["results"]["metrics"]["security_score"] = results["results"]["overall_score"]
+            results["results"]["metrics"]["total_checks"] = total_checks
+            
+            # Save results to file
+            results["json_path"] = self._save_results(url, results)
+            
+            return json.dumps(results, ensure_ascii=False, indent=2)
+            
         except Exception as e:
             logger.error(f"Security analysis failed: {str(e)}")
-            raise AnalysisError(f"Security analysis failed: {str(e)}")
+            raise
     
     async def _check_security_headers(self, page: Page) -> Dict[str, Any]:
         """Check security-related HTTP headers."""

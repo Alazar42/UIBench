@@ -1,0 +1,23 @@
+{
+  "results": {
+    "overall_score": 85.83333333333333,
+    "security_headers": 0,
+    "content_security": 0,
+    "issues": [
+      "Missing X-Content-Type-Options header",
+      "Missing X-Frame-Options header",
+      "Missing X-XSS-Protection header",
+      "Missing Strict-Transport-Security header",
+      "Missing Content-Security-Policy header",
+      "Missing X-Frame-Options and CSP frame-ancestors headers",
+      "Missing Content-Security-Policy header"
+    ],
+    "recommendations": [],
+    "metrics": {
+      "security_score": 85.83333333333333,
+      "total_checks": 12,
+      "execution_time": 0
+    }
+  },
+  "json_path": null
+}

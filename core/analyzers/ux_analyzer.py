@@ -6,6 +6,8 @@ from .base_analyzer import BaseAnalyzer
 import json
 import logging
 import asyncio
+import os
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +16,19 @@ class UXAnalyzer(BaseAnalyzer):
     
     def __init__(self):
         super().__init__()
+    
+    def _save_results(self, url: str, results: Dict[str, Any]) -> str:
+        """Save analysis results to a JSON file."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"ux_{url.replace('://', '_').replace('/', '_')}_{timestamp}.json"
+        output_dir = "analysis_results"
+        os.makedirs(output_dir, exist_ok=True)
+        filepath = os.path.join(output_dir, filename)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=2)
+        
+        return filepath
     
     async def analyze(self, url: str, page: Page, soup: BeautifulSoup) -> str:
         """
@@ -68,7 +83,7 @@ class UXAnalyzer(BaseAnalyzer):
             standardized_results = self._standardize_results(combined_results)
             
             # Save to JSON
-            json_path = self.save_to_json(standardized_results, url, "ux")
+            json_path = self._save_results(url, standardized_results)
             
             return json.dumps({
                 "results": standardized_results,
@@ -390,18 +405,3 @@ class UXAnalyzer(BaseAnalyzer):
                 standardized["details"][key] = result
         
         return standardized
-    
-    def save_to_json(self, results: Dict[str, Any], url: str, analysis_type: str) -> str:
-        """Save analysis results to a JSON file."""
-        try:
-            # Create filename from URL and analysis type
-            filename = f"{url.replace('https://', '').replace('http://', '').replace('/', '_')}_{analysis_type}.json"
-            
-            # Save to file
-            with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(results, f, ensure_ascii=False, indent=2)
-            
-            return filename
-        except Exception as e:
-            logger.error(f"Error saving results to JSON: {str(e)}")
-            return ""

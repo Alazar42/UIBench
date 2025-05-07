@@ -52,8 +52,8 @@ To use the UIBench core engine locally, follow these steps:
 
 ### Prerequisites
 
-- Python 3.7+
-- Required libraries: `requests`, `BeautifulSoup`
+- Python 3.11+
+- Git
 
 ### Setup
 
@@ -71,11 +71,21 @@ To use the UIBench core engine locally, follow these steps:
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. Install dependencies:
+3. Install the package:
+
+   You have several installation options depending on your needs:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -e .          # Install everything (recommended for most users)
+   pip install -e .[core]    # Install only core analysis functionality
+   pip install -e .[backend] # Install only backend server functionality
+   pip install -e .[dev]     # Install development tools and testing dependencies
    ```
+
+   The different installation options provide:
+   - `core`: Core analysis functionality including web scraping, NLP, and testing
+   - `backend`: Server functionality including FastAPI and database utilities
+   - `dev`: Development tools like black, flake8, mypy, and pytest extensions
 
 ## Contributing
 
