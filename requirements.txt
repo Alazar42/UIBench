@@ -24,8 +24,6 @@ dnspython==2.7.0
 dotenv==0.9.9
 ecdsa==0.19.1
 email_validator==2.2.0
-en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl#sha256=ab70aeb6172cde82508f7739f35ebc9918a3d07debeed637403c8f794ba3d3dc
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl#sha256=86cc141f63942d4b2c5fcee06630fd6f904788d2f0ab005cce45aadb8fb73889
 esprima==4.0.1
 fastapi==0.115.12
 frozenlist==1.6.0
@@ -92,7 +90,6 @@ tqdm==4.67.1
 typer==0.9.4
 typing-inspection==0.4.0
 typing_extensions==4.12.2
--e git+https://github.com/Alazar42/UIBench.git@887856c79aa091b543564595a1a4746addafa77e#egg=UIBench
 urllib3==2.3.0
 uvicorn==0.34.0
 wasabi==1.1.3
