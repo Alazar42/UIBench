@@ -24,7 +24,7 @@ source venv/bin/activate
 # Install dependencies
 echo -e "${YELLOW}Installing dependencies...${NC}"
 pip install --upgrade pip
-pip install -e .
+pip install -r requirements.txt
 
 # Install Playwright browsers
 echo -e "${YELLOW}Installing Playwright browsers...${NC}"
