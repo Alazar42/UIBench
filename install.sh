@@ -50,10 +50,15 @@ if ! pip show uvicorn &> /dev/null; then
     pip install uvicorn
 fi
 
-# Download spaCy model
+# Download spaCy models
 if ! python -m spacy validate | grep -q "en_core_web_lg"; then
-    echo -e "${YELLOW}Downloading spaCy model...${NC}"
+    echo -e "${YELLOW}Downloading spaCy model en_core_web_lg...${NC}"
     python -m spacy download en_core_web_lg
+fi
+
+if ! python -m spacy validate | grep -q "en_core_web_sm"; then
+    echo -e "${YELLOW}Downloading spaCy model en_core_web_sm...${NC}"
+    python -m spacy download en_core_web_sm
 fi
 
 # Create .env file if it doesn't exist
@@ -83,3 +88,5 @@ echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Update the .env file with your configuration"
 echo "2. Activate the virtual environment: source venv/bin/activate"
 echo "3. Start the backend: uvicorn backend.main:app --reload"
+
+source venv/bin/activate
