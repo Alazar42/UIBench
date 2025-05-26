@@ -12,7 +12,12 @@ class SEOAnalyzer(BaseAnalyzer):
     
     def __init__(self):
         super().__init__()
-        self.nlp = spacy.load("en_core_web_sm")
+        try:
+            self.nlp = spacy.load("en_core_web_sm")
+        except OSError:
+            from spacy.cli import download
+            download("en_core_web_sm")
+            self.nlp = spacy.load("en_core_web_sm")
     
     async def analyze(self, url: str, html: Any) -> str:
         """
