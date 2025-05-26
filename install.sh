@@ -16,26 +16,46 @@ if (( $(echo "$python_version < 3.6") )); then
     exit 1
 fi
 
-# Create virtual environment
-echo -e "${YELLOW}Creating virtual environment...${NC}"
-python3 -m venv venv
-source venv/bin/activate
+# Ensure the virtual environment is activated
+if [ -d "venv" ]; then
+    echo -e "${YELLOW}Activating virtual environment...${NC}"
+    source venv/bin/activate
+else
+    echo -e "${YELLOW}Creating virtual environment...${NC}"
+    python3 -m venv venv
+    source venv/bin/activate
+fi
 
 # Install dependencies
-echo -e "${YELLOW}Installing dependencies...${NC}"
-pip install --upgrade pip
-pip install -r requirements.txt
+if [ -f "requirements.txt" ]; then
+    echo -e "${YELLOW}Installing dependencies from requirements.txt...${NC}"
+    pip install --upgrade pip
+    pip install -r requirements.txt
+else
+    echo -e "${RED}Error: requirements.txt not found!${NC}"
+    exit 1
+fi
 
 # Install Playwright browsers
-echo -e "${YELLOW}Installing Playwright browsers...${NC}"
-playwright install
-
-# Download spaCy model
-echo -e "${YELLOW}Downloading spaCy model...${NC}"
-python -m spacy download en_core_web_lg
+if command -v playwright &> /dev/null; then
+    echo -e "${YELLOW}Installing Playwright browsers...${NC}"
+    playwright install
+else
+    echo -e "${RED}Error: Playwright is not installed!${NC}"
+    exit 1
+fi
 
 # Ensure uvicorn is installed
-pip install uvicorn
+if ! pip show uvicorn &> /dev/null; then
+    echo -e "${YELLOW}Installing uvicorn...${NC}"
+    pip install uvicorn
+fi
+
+# Download spaCy model
+if ! python -m spacy validate | grep -q "en_core_web_lg"; then
+    echo -e "${YELLOW}Downloading spaCy model...${NC}"
+    python -m spacy download en_core_web_lg
+fi
 
 # Create .env file if it doesn't exist
 if [ ! -f .env ]; then
@@ -49,6 +69,7 @@ echo -e "${YELLOW}Creating necessary directories...${NC}"
 mkdir -p logs
 mkdir -p cache
 
+# Final message
 echo -e "${GREEN}Installation completed successfully!${NC}"
 echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Update the .env file with your configuration"
