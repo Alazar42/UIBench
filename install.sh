@@ -34,6 +34,9 @@ playwright install
 echo -e "${YELLOW}Downloading spaCy model...${NC}"
 python -m spacy download en_core_web_lg
 
+# Ensure uvicorn is installed
+pip install uvicorn
+
 # Create .env file if it doesn't exist
 if [ ! -f .env ]; then
     echo -e "${YELLOW}Creating .env file...${NC}"
@@ -50,4 +53,4 @@ echo -e "${GREEN}Installation completed successfully!${NC}"
 echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Update the .env file with your configuration"
 echo "2. Activate the virtual environment: source venv/bin/activate"
-echo "3. Start the backend: uvicorn backend.main:app --reload" 
+echo "3. Start the backend: uvicorn backend.main:app --reload"
