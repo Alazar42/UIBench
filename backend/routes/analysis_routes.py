@@ -1,5 +1,6 @@
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Depends, Header
+import asyncio
 
 from backend.services import project_services
 from ..database.connection import db_instance
@@ -20,7 +21,7 @@ def get_current_user(authorization: str = Header(...)):
     return AuthService.get_current_user(token)
 
 @router.post("/")
-def create_analysis_background(
+async def create_analysis_background(
     project_id: str,
     current_user: dict = Depends(get_current_user)
 ):
@@ -32,17 +33,13 @@ def create_analysis_background(
     if not url:
         raise HTTPException(status_code=400, detail="Project does not have a URL to evaluate")
 
-    result_id = analysis_service.evaluate_and_store_async(
+    response = await analysis_service.evaluate_and_store_async(
         url=url,
         project_id=project_id,
         owner_id=current_user["user_id"]
     )
 
-    return {
-        "message": "Evaluation started in background",
-        "result_id": result_id,
-        "queued_at": datetime.utcnow()
-    }
+    return response
 
 
 @router.get("/{result_id}")

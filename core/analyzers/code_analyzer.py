@@ -11,13 +11,16 @@ from .base_analyzer import BaseAnalyzer
 class CodeAnalyzer(BaseAnalyzer):
     """Analyzes web pages for code quality and best practices."""
     
-    async def analyze(self, url: str, html: str, soup: BeautifulSoup) -> str:
+    async def analyze(self, url: str, html: str) -> str:
         """
         Perform comprehensive code analysis.
         Returns:
             JSON string containing code analysis results and JSON file path
         """
         try:
+            # Parse the HTML content with BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+
             # Run all code analysis checks
             code_checks = {
                 "html_quality": self._analyze_html_quality(html, soup),
@@ -61,11 +64,24 @@ class CodeAnalyzer(BaseAnalyzer):
             json_path = self.save_to_json(standardized_results, url, "code")
 
             return json.dumps({
-                "results": standardized_results,
-                "json_path": json_path
-            }, ensure_ascii=False, indent=2)
+                "results": {
+                    "overall_score": overall_score,
+                    "issues": all_issues,
+                    "recommendations": all_recommendations,
+                    "metrics": metrics
+                },
+                "json_path": "analysis_results/codeanalyzer_{}_{}.json".format(urlparse(url).netloc, datetime.now().strftime("%Y%m%d_%H%M%S"))
+            })
         except Exception as e:
-            raise AnalysisError(f"Code analysis failed: {str(e)}")
+            return json.dumps({
+                "error": f"Code analysis failed: {str(e)}",
+                "status": "failed",
+                "overall_score": 0.0,
+                "details": {},
+                "issues": [f"Analysis failed: {str(e)}"],
+                "recommendations": ["Fix analyzer implementation"],
+                "metrics": {}
+            })
     
     def _analyze_html_quality(self, html: str, soup: BeautifulSoup) -> Dict[str, Any]:
         """Analyze HTML code quality."""

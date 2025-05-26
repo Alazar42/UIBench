@@ -9,6 +9,7 @@ import logging
 from datetime import datetime
 import traceback
 import json
+from playwright.async_api import async_playwright
 
 from .base_evaluator import BaseEvaluator
 from .page_evaluator import PageEvaluator
@@ -31,9 +32,11 @@ class WebsiteEvaluator(BaseEvaluator):
         max_subpages: Optional[int] = None,
         max_depth: int = 10,
         concurrency: int = config.performance.max_concurrent,
-        custom_criteria: Dict[str, Any] = None
+        custom_criteria: Dict[str, Any] = None,
+        page: Optional[Any] = None,  # Add page parameter
     ):
         super().__init__(root_url, custom_criteria)
+        self.root_url = root_url  # Ensure root_url is initialized
         self.max_subpages = max_subpages or 5  # Default to 5 pages
         self.max_depth = min(max_depth, 2)  # Cap depth at 2
         self.concurrency = min(concurrency, 3)  # Cap concurrency at 3
@@ -43,6 +46,8 @@ class WebsiteEvaluator(BaseEvaluator):
         self._browser_manager = None
         self.urls: List[str] = []
         self.base_url = root_url  # Add base_url attribute
+        self.page = page  # Store the page object as an instance attribute
+        print(f"DEBUG: Page object in WebsiteEvaluator: {page}")  # Debug statement
     
     async def get_browser_manager(self) -> BrowserManager:
         """Get or create the browser manager instance."""
@@ -140,13 +145,13 @@ class WebsiteEvaluator(BaseEvaluator):
         return list(visited)
     
     @async_timed()
-    async def evaluate(self) -> str:
+    async def evaluate(self, crawl: bool = False) -> str:
         """Perform comprehensive website evaluation and return JSON string."""
         if not await self.validate():
             raise ValueError("Invalid website for evaluation")
 
         # Initialize URL list by crawling subpages
-        self.urls = await self.crawl_all_subpages()
+        self.urls = await self.crawl_all_subpages() if crawl else [self.root_url]
 
         results = {}
         page_ratings = []
@@ -164,104 +169,54 @@ class WebsiteEvaluator(BaseEvaluator):
             "compliance": []
         }
 
-        with self.performance_monitor.monitor("website_evaluation"):
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
             for url in self.urls:
+                page = await browser.new_page()
                 try:
-                    async with asyncio.timeout(10.0):  # 10 second timeout per page evaluation
-                        # Try to get cached result
-                        cached = self.network_cache.get_response(url)
-                        if cached and "page_data" in cached:
-                            page_data = cached["page_data"]
-                        else:
-                            # Get page content
-                            page = await self.browser.new_page()
-                            await page.goto(url, timeout=5000)  # 5 second page load timeout
-                            html = await page.content()
-                            soup = BeautifulSoup(html, "html.parser")
-                            body_text = soup.get_text()
+                    await page.goto(url, timeout=60000)
+                    html = await page.content()
+                    body_text = await page.inner_text("body")
 
-                            # Create and run page evaluator
-                            page_evaluator = PageEvaluator(
-                                url=url,
-                                html=html,
-                                page=page,
-                                body_text=body_text,
-                                custom_criteria=self.custom_criteria
-                            )
+                    # Create and run page evaluator
+                    if not page:
+                        raise ValueError("Page object is missing or invalid.")
 
-                            page_result = await page_evaluator.evaluate()
-                            page_data = json.loads(page_result)
+                    print(f"DEBUG: Page object before PageEvaluator instantiation: {page}")  # Debug statement
+                    page_evaluator = PageEvaluator(
+                        url=url,
+                        html=html,
+                        page=page,
+                        body_text=body_text,
+                        custom_criteria=self.custom_criteria
+                    )
 
-                            # Cache the result
-                            self.network_cache.cache_response(url, html, {"page_data": page_data})
+                    page_result = await page_evaluator.evaluate()
+                    page_data = json.loads(page_result)
 
-                            # Cleanup
-                            await page_evaluator.cleanup()
-                            await page.close()
-
-                        # Store page evaluation
-                        page_name = page_data.get("page_name", "Unknown")
-                        page_ratings.append(page_data.get("page_rating", 0))
-                        page_evaluations[page_name] = {
-                            "url": url,
-                            "rating": page_data.get("page_rating", 0),
-                            "class": page_data.get("page_class", "Unknown"),
-                            "details": page_data.get("results", {})
-                        }
-
-                        # Collect analyzer scores
-                        if "detailed_report" in page_data and "analyzer_scores" in page_data["detailed_report"]:
-                            for analyzer, score in page_data["detailed_report"]["analyzer_scores"].items():
-                                if analyzer in analyzer_scores:
-                                    analyzer_scores[analyzer].append(score)
-
-                except asyncio.TimeoutError:
-                    logger.warning(f"Timeout evaluating {url}")
-                    page_evaluations[url] = {
-                        "error": "Evaluation timeout",
-                        "rating": 0,
-                        "class": "Error"
+                    # Store page evaluation
+                    page_name = page_data.get("page_name", "Unknown")
+                    page_ratings.append(page_data.get("page_rating", 0))
+                    page_evaluations[page_name] = {
+                        "url": url,
+                        "rating": page_data.get("page_rating", 0),
+                        "class": page_data.get("page_class", "Unknown"),
+                        "details": page_data.get("results", {})
                     }
+
                 except Exception as e:
-                    logger.error(f"Error evaluating page {url}: {str(e)}")
-                    page_evaluations[url] = {
-                        "error": str(e),
-                        "rating": 0,
-                        "class": "Error"
-                    }
+                    logger.error(f"Error evaluating {url}: {e}")
+                finally:
+                    await page.close()
+            await browser.close()
 
-            # Calculate overall website rating
-            website_rating = sum(page_ratings) / len(page_ratings) if page_ratings else 0
+        # Calculate overall website rating
+        website_rating = sum(page_ratings) / len(page_ratings) if page_ratings else 0
 
-            # Calculate average analyzer scores
-            avg_analyzer_scores = {
-                analyzer: sum(scores) / len(scores) if scores else 0
-                for analyzer, scores in analyzer_scores.items()
-            }
-
-            # Classify website based on rating
-            website_class = self._classify_website(website_rating)
-
-            # Add performance metrics
-            evaluation_metrics = self.performance_monitor.get_metrics("website_evaluation")
-
-            return json.dumps({
-                "website_url": self.base_url,
-                "website_rating": website_rating,
-                "website_class": website_class,
-                "page_evaluations": page_evaluations,
-                "performance_metrics": {
-                    "evaluation": evaluation_metrics
-                },
-                "detailed_report": {
-                    "url": self.base_url,
-                    "pages_evaluated": len(self.urls),
-                    "analyzer_scores": avg_analyzer_scores,
-                    "page_details": page_evaluations
-                },
-                "overall_score": website_rating,
-                "analyzer_scores": avg_analyzer_scores
-            }, ensure_ascii=False, indent=2)
+        return json.dumps({
+            "website_rating": website_rating,
+            "page_evaluations": page_evaluations
+        }, ensure_ascii=False, indent=2)
     
     def _classify_website(self, rating: float) -> str:
         """Classify website based on rating."""
@@ -278,3 +233,48 @@ class WebsiteEvaluator(BaseEvaluator):
         """Clean up resources."""
         if self._browser_manager:
             await self._browser_manager.cleanup()
+    
+    async def evaluate_page(self, html: str, body_text: str) -> dict:
+        """Evaluate a single page using the provided HTML and body text."""
+        from .page_evaluator import PageEvaluator
+
+        page_evaluator = PageEvaluator(
+            url=self.root_url,
+            html=html,
+            page=self.page,  # Pass the page object
+            body_text=body_text,
+            custom_criteria=self.custom_criteria
+        )
+
+        try:
+            # Ensure the Playwright instance is properly initialized
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                try:
+                    context = await browser.new_context()
+                    try:
+                        page = await context.new_page()
+                        self.page = page  # Assign the page object for evaluation
+
+                        # Perform the evaluation using the PageEvaluator
+                        evaluation_result = await page_evaluator.evaluate()
+
+                        # Log and return the evaluation result
+                        logger.info(f"Page evaluation completed for URL: {self.root_url}")
+                        return {
+                            "status": "success",
+                            "results": evaluation_result
+                        }
+                    finally:
+                        # Ensure the context is closed properly
+                        await context.close()
+                finally:
+                    # Ensure the browser is closed properly
+                    await browser.close()
+        except Exception as e:
+            logger.error(f"Error during page evaluation: {e}")
+            return {
+                "status": "failed",
+                "error": str(e),
+                "results": {}
+            }

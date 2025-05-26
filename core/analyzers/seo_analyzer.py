@@ -13,13 +13,16 @@ class SEOAnalyzer(BaseAnalyzer):
         super().__init__()
         self.nlp = spacy.load("en_core_web_sm")
     
-    async def analyze(self, url: str, soup: BeautifulSoup) -> str:
+    async def analyze(self, url: str, html: str) -> str:
         """
         Perform comprehensive SEO analysis.
         Returns:
             JSON string containing SEO analysis results and JSON file path
         """
         try:
+            # Parse the HTML content with BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+
             # Run all SEO analyses
             results = {
                 "meta_tags": self._analyze_meta_tags(soup),
@@ -61,11 +64,24 @@ class SEOAnalyzer(BaseAnalyzer):
             json_path = self.save_to_json(standardized_results, url, "seo")
             
             return json.dumps({
-                "results": standardized_results,
-                "json_path": json_path
-            }, ensure_ascii=False, indent=2)
+                "results": {
+                    "overall_score": overall_score,
+                    "issues": all_issues,
+                    "recommendations": all_recommendations,
+                    "metrics": metrics
+                },
+                "json_path": "analysis_results/seoanalyzer_{}_{}.json".format(urlparse(url).netloc, datetime.now().strftime("%Y%m%d_%H%M%S"))
+            })
         except Exception as e:
-            raise AnalysisError(f"SEO analysis failed: {str(e)}")
+            return json.dumps({
+                "error": f"SEO analysis failed: {str(e)}",
+                "status": "failed",
+                "overall_score": 0.0,
+                "details": {},
+                "issues": [f"Analysis failed: {str(e)}"],
+                "recommendations": ["Fix analyzer implementation"],
+                "metrics": {}
+            })
     
     def _analyze_meta_tags(self, soup: BeautifulSoup) -> Dict[str, Any]:
         """Analyze meta tags for SEO."""

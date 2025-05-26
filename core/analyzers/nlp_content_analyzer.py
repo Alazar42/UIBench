@@ -14,6 +14,7 @@ from nltk.tag import pos_tag
 from nltk.sentiment import SentimentIntensityAnalyzer
 from bs4 import BeautifulSoup
 from .base_analyzer import BaseAnalyzer
+from ..utils.error_handler import AnalysisError  # Import AnalysisError
 
 logger = logging.getLogger(__name__)
 
@@ -221,111 +222,45 @@ class NLPContentAnalyzer(BaseAnalyzer):
 
         return issues
     
-    async def analyze(self, url: str, text: str) -> str:
+    async def analyze(self, url: str, html: str) -> str:
         """
-        Perform comprehensive text analysis using available NLP tools.
-        
-        Args:
-            url: Target URL
-            text: Text content to analyze
-            
+        Perform NLP analysis on the provided HTML content.
         Returns:
             JSON string containing NLP analysis results and JSON file path
         """
         try:
-            if not text.strip():
-                results = {
-                    'readability': {},
-                    'sentiment': {},
-                    'keywords': [],
-                    'grammar_issues': [],
-                    'inclusive_language_issues': [],
-                    'translation_quality': {},
-                    'content_gaps': {}
-                }
-            else:
-                # Run all NLP analyses concurrently
-                tasks = [
-                    self._analyze_readability(text),
-                    self._analyze_sentiment(text),
-                    self._extract_keywords(text),
-                    self._check_grammar(text),
-                    self.detect_inclusive_language(text),
-                    self.detect_translation_quality(text),
-                    self.analyze_content_gaps(text)
-                ]
-                
-                results = await asyncio.gather(*tasks)
-                
-                # Organize results
-                results = {
-                    'readability': results[0],
-                    'sentiment': results[1],
-                    'keywords': results[2],
-                    'grammar_issues': results[3],
-                    'inclusive_language_issues': results[4],
-                    'translation_quality': results[5],
-                    'content_gaps': results[6]
-                }
+            # Ensure the input is a string and strip unnecessary whitespace
+            if not isinstance(html, str):
+                raise AnalysisError("Invalid input: HTML content must be a string.")
 
-            # Calculate overall score
-            scores = []
-            if results['readability']:
-                scores.append(results['readability'].get('average_score', 0))
-            if results['sentiment']:
-                scores.append((results['sentiment'].get('compound', 0) + 1) * 50)  # Convert -1 to 1 to 0 to 100
-            if results['grammar_issues']:
-                grammar_score = max(100 - len(results['grammar_issues']) * 10, 0)
-                scores.append(grammar_score)
-            if results['inclusive_language_issues']:
-                inclusive_score = max(100 - len(results['inclusive_language_issues']) * 20, 0)
-                scores.append(inclusive_score)
+            text = html.strip()
 
-            overall_score = sum(scores) / len(scores) if scores else 0
+            # Perform NLP analysis (e.g., tokenization, readability, etc.)
+            tokenized_text = self._tokenize_text(text)
+            sentences = self._split_sentences(text)
+            readability_metrics = await self._analyze_readability(text)
 
-            # Generate recommendations
-            recommendations = []
-            if results['readability']:
-                if results['readability'].get('flesch_reading_ease', 0) < 60:
-                    recommendations.append("Consider improving readability by simplifying complex sentences")
-            if results['sentiment']:
-                if results['sentiment'].get('compound', 0) < -0.5:
-                    recommendations.append("Content appears negative, consider more positive language")
-            if results['grammar_issues']:
-                recommendations.append(f"Fix {len(results['grammar_issues'])} grammar issues")
-            if results['inclusive_language_issues']:
-                recommendations.append(f"Address {len(results['inclusive_language_issues'])} instances of non-inclusive language")
-
-            # Standardize results
-            standardized_results = {
-                'overall_score': overall_score,
-                'issues': {
-                    'grammar': results['grammar_issues'],
-                    'inclusive_language': results['inclusive_language_issues']
-                },
-                'recommendations': recommendations,
-                'metrics': {
-                    'readability': results['readability'],
-                    'sentiment': results['sentiment'],
-                    'translation_quality': results['translation_quality'],
-                    'content_gaps': results['content_gaps']
-                },
-                'details': {
-                    'keywords': results['keywords'],
-                    'raw_analysis': results
-                }
+            # Compile results
+            results = {
+                "tokenized_text": tokenized_text,
+                "sentences": sentences,
+                "readability_metrics": readability_metrics
             }
 
-            # Save to JSON
-            json_path = self.save_to_json(standardized_results, url, "nlp")
-
             return json.dumps({
-                "results": standardized_results,
-                "json_path": json_path
-            }, ensure_ascii=False, indent=2)
+                "results": results,
+                "json_path": "analysis_results/nlpcontentanalyzer_{}_{}.json".format(urlparse(url).netloc, datetime.now().strftime("%Y%m%d_%H%M%S"))
+            })
         except Exception as e:
-            logger.error(f"NLP analysis failed: {str(e)}")
-            raise AnalysisError(f"NLP analysis failed: {str(e)}")
+            return json.dumps({
+                "error": f"NLP analysis failed: {str(e)}",
+                "status": "failed",
+                "overall_score": 0.0,
+                "details": {},
+                "issues": [f"Analysis failed: {str(e)}"],
+                "recommendations": ["Fix analyzer implementation"],
+                "metrics": {}
+            })
 
     @staticmethod
     async def analyze_sentiment(text: str) -> Dict[str, Any]:

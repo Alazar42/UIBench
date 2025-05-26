@@ -54,14 +54,16 @@ class PageEvaluator:
         "fuzz": AnalyzerGroup("fuzz", [FuzzAnalyzer()])
     }
     
-    def __init__(self, url: str, html: str, page, body_text: str):
+    def __init__(self, url: str, html: str, page, body_text: str, custom_criteria: Optional[Dict[str, Any]] = None):
         self.url = url
         self._html = html
         self.page = page
         self.body_text = body_text
+        self.custom_criteria = custom_criteria or {}
         self._soup = None
         self.analysis_cache = AnalysisCache()
         self.analyzers = {}
+        print(f"DEBUG: Page object in PageEvaluator: {self.page}")  # Debug statement
     
     @property
     async def html(self) -> str:
@@ -81,17 +83,26 @@ class PageEvaluator:
     async def validate(self) -> bool:
         """Validate the page for analysis."""
         try:
-            if not self.url or not self.page:
+            if not self.url:
+                logger.error("Validation failed: URL is missing.")
                 return False
-            
+
+            if not self.page:
+                logger.error("Validation failed: Page object is missing.")
+                return False
+
             # Check if page is accessible
             try:
+                # Ensure the event loop is active and Playwright is not stopped
+                if self.page.is_closed():
+                    logger.error("Validation failed: Page is already closed.")
+                    return False
+
                 await self.page.wait_for_load_state("networkidle")
                 return True
             except Exception as e:
-                logger.error(f"Page validation failed: {str(e)}")
+                logger.error(f"Page validation failed during load state check: {str(e)}")
                 return False
-                
         except Exception as e:
             logger.error(f"Validation failed: {str(e)}")
             return False
@@ -200,32 +211,34 @@ class PageEvaluator:
         try:
             if not await self.validate():
                 raise ValueError("Page validation failed")
-            
+
             results = {}
             design_data = {}
-            
+
             for group_name, group in self.ANALYZER_GROUPS.items():
                 group_results = await self.run_analyzer_group(group)
                 results[group_name] = group_results
-                
+
                 # Extract design data from design system analyzer results
                 if group_name == "design" and group_results:
                     for analyzer_result in group_results.values():
                         if isinstance(analyzer_result, dict) and "design_data" in analyzer_result:
                             design_data.update(analyzer_result["design_data"])
-            
+
             # Calculate overall score
             scores = []
             for group_results in results.values():
                 for analyzer_result in group_results.values():
                     if isinstance(analyzer_result, dict) and "score" in analyzer_result:
                         scores.append(analyzer_result["score"])
-            
+
             overall_score = sum(scores) / len(scores) if scores else 0
-            
+
             # Classify page
-            page_class = await self._classify_page(results)
-            
+            page_class = "unknown"
+            if self.page:
+                page_class = await self._classify_page(results)
+
             # Prepare final results
             final_results = {
                 "url": self.url,
@@ -233,13 +246,12 @@ class PageEvaluator:
                 "page_class": page_class,
                 "results": results,
                 "design_data": design_data,
-                "performance_metrics": results.get("performance", {})  # <-- Add this line
+                "performance_metrics": results.get("performance", {})
             }
-            
+
             return json.dumps(final_results)
-            
+
         except Exception as e:
-            logger.error(f"Page evaluation failed: {str(e)}")
             return json.dumps({
                 "error": str(e),
                 "status": "failed",
