@@ -9,9 +9,8 @@ NC='\033[0m' # No Color
 echo -e "${YELLOW}Starting UIBench installation...${NC}"
 
 # Check Python version
-python_version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
-echo ${python_version}
-if (( $(echo "$python_version < 3.6") )); then
+python_version=$(python3 -c 'import sys; print("".join(map(str, sys.version_info[:2])))')
+if [ "$python_version" -lt "38" ]; then
     echo -e "${RED}Error: Python 3.8 or higher is required${NC}"
     exit 1
 fi
@@ -68,6 +67,15 @@ fi
 echo -e "${YELLOW}Creating necessary directories...${NC}"
 mkdir -p logs
 mkdir -p cache
+
+# Ensure the virtual environment is activated before running uvicorn
+if [ -d "venv" ]; then
+    echo -e "${YELLOW}Activating virtual environment for running uvicorn...${NC}"
+    source venv/bin/activate
+else
+    echo -e "${RED}Error: Virtual environment not found! Please run the installation script first.${NC}"
+    exit 1
+fi
 
 # Final message
 echo -e "${GREEN}Installation completed successfully!${NC}"
