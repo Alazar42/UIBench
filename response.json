@@ -1,0 +1,2556 @@
+{
+  "result_id": "ff1cdddf-4e46-4206-ab3f-a9ea2a51e251",
+  "project_id": "f537337b-6cf9-44b2-bb6b-f158d6da2943",
+  "user_id": "5cde0616-2394-4d07-88ef-a6271e003b93",
+  "url": "https://github.com/",
+  "status": "completed",
+  "score": null,
+  "details": null,
+  "analysis_date": "2025-05-26T18:26:11.997000",
+  "result": {
+    "status": "success",
+    "results": {
+      "url": "https://github.com/",
+      "page_rating": 75.48783375054562,
+      "page_class": "content",
+      "results": {
+        "accessibility": {
+          "AccessibilityAnalyzer": {
+            "overall_score": 75.48783375054562,
+            "score": 75.48783375054562,
+            "issues": [
+              "Multiple h1 headings found",
+              "Heading level skipped from h1 to h3",
+              "Image missing dimensions: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg",
+              "Image missing dimensions: https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-2-730955545f07.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-2-730955545f07.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/hero-64ecd484397f.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image missing dimensions: https://github.githubassets.com/assets/hero-961322485af6.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-4-7abff9233556.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/accordion-4-7abff9233556.webp",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/figma-62d390a52419.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/figma-62d390a52419.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/figma-9b0c642e96b8.svg",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg",
+              "Decorative image should have role='presentation': https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp",
+              "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg",
+              "Link uses generic text: Learn more",
+              "Link with target='_blank' missing rel='noopener': https://docs.github.com",
+              "Link with target='_blank' missing rel='noopener': https://skills.github.com",
+              "Link with target='_blank' missing rel='noopener': https://github.blog",
+              "Link with target='_blank' missing rel='noopener': https://resources.github.com/learn/pathways",
+              "Link with target='_blank' missing rel='noopener': https://resources.github.com",
+              "Link with target='_blank' missing rel='noopener': https://partner.github.com",
+              "Link with target='_blank' missing rel='noopener': https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax",
+              "Link missing href attribute",
+              "Link missing href attribute",
+              "Link missing href attribute",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Text element missing color contrast specification",
+              "Form missing submit button",
+              "Missing label for textarea",
+              "Form missing submit button",
+              "Form missing submit button",
+              "Elements found with outline: none style",
+              "aria-labelledby references non-existent ID: query-builder-test-clear query-builder-test-label",
+              "aria-describedby references non-existent ID: feedback-dialog-description",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'",
+              "Interactive elements found inside aria-hidden='true'"
+            ],
+            "passes": [
+              "Proper heading level sequence: h0 to h2",
+              "Proper heading level sequence: h2 to h1",
+              "Proper heading level sequence: h3 to h1",
+              "Proper heading level sequence: h1 to h1",
+              "Proper heading level sequence: h1 to h2",
+              "Proper heading level sequence: h2 to h1",
+              "Proper heading level sequence: h1 to h2",
+              "Proper heading level sequence: h2 to h2",
+              "Proper heading level sequence: h2 to h2",
+              "Proper heading level sequence: h2 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h2",
+              "Proper heading level sequence: h2 to h3",
+              "Proper heading level sequence: h3 to h2",
+              "Proper heading level sequence: h2 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h2",
+              "Proper heading level sequence: h2 to h2",
+              "Proper heading level sequence: h2 to h2",
+              "Proper heading level sequence: h2 to h2",
+              "Proper heading level sequence: h2 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Proper heading level sequence: h3 to h3",
+              "Image has alt text: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+              "Image has alt text: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+              "Image has alt text: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+              "Image has alt text: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+              "Image has alt text: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+              "Image has alt text: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+              "Image has alt text: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+              "Image has alt text: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+              "Image has alt text: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+              "Image has alt text: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+              "Image has alt text: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+              "Image has alt text: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+              "Image has alt text: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+              "Image has alt text: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+              "Image has alt text: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+              "Image has alt text: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+              "Image has alt text: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+              "Image has alt text: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+              "Image has alt text: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+              "Image has alt text: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+              "Image has alt text: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+              "Image has alt text: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+              "Image has alt text: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+              "Image has alt text: https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg",
+              "Image has alt text: https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg",
+              "Image has alt text: https://github.githubassets.com/assets/hero-64ecd484397f.webp",
+              "Image has alt text: https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp",
+              "Image has alt text: https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp",
+              "Image has alt text: https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp",
+              "Image has alt text: https://github.githubassets.com/assets/hero-961322485af6.webp",
+              "Image has alt text: https://github.githubassets.com/assets/figma-9b0c642e96b8.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg",
+              "Image has alt text: https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg",
+              "Link has descriptive text: Skip to content",
+              "Link has aria-label or title: /",
+              "Link has descriptive text: Sign in",
+              "Link has descriptive text: GitHub CopilotWrite better code with AI",
+              "Link has descriptive text: GitHub ModelsNewManage and compare prompts",
+              "Link has descriptive text: GitHub Advanced SecurityFind and fix vulnerabilities",
+              "Link has descriptive text: ActionsAutomate any workflow",
+              "Link has descriptive text: CodespacesInstant dev environments",
+              "Link has descriptive text: IssuesPlan and track work",
+              "Link has descriptive text: Code ReviewManage code changes",
+              "Link has descriptive text: DiscussionsCollaborate outside of code",
+              "Link has descriptive text: Code SearchFind more, search less",
+              "Link has descriptive text: Why GitHub",
+              "Link has descriptive text: All features",
+              "Link has descriptive text: Documentation",
+              "Link has descriptive text: GitHub Skills",
+              "Link has descriptive text: Blog",
+              "Link has descriptive text: Enterprises",
+              "Link has descriptive text: Small and medium teams",
+              "Link has descriptive text: Startups",
+              "Link has descriptive text: Nonprofits",
+              "Link has descriptive text: DevSecOps",
+              "Link has descriptive text: DevOps",
+              "Link has descriptive text: CI/CD",
+              "Link has descriptive text: View all use cases",
+              "Link has descriptive text: Healthcare",
+              "Link has descriptive text: Financial services",
+              "Link has descriptive text: Manufacturing",
+              "Link has descriptive text: Government",
+              "Link has descriptive text: View all industries",
+              "Link has descriptive text: View all solutions",
+              "Link has descriptive text: AI",
+              "Link has descriptive text: DevOps",
+              "Link has descriptive text: Security",
+              "Link has descriptive text: Software Development",
+              "Link has descriptive text: View all",
+              "Link has descriptive text: Learning Pathways",
+              "Link has descriptive text: Events & Webinars",
+              "Link has descriptive text: Ebooks & Whitepapers",
+              "Link has descriptive text: Customer Stories",
+              "Link has descriptive text: Partners",
+              "Link has descriptive text: Executive Insights",
+              "Link has descriptive text: GitHub SponsorsFund open source developers",
+              "Link has descriptive text: The ReadME ProjectGitHub community articles",
+              "Link has descriptive text: Topics",
+              "Link has descriptive text: Trending",
+              "Link has descriptive text: Collections",
+              "Link has descriptive text: Enterprise platformAI-powered developer platform",
+              "Link has descriptive text: GitHub Advanced SecurityEnterprise-grade security features",
+              "Link has descriptive text: Copilot for businessEnterprise-grade AI features",
+              "Link has descriptive text: Premium SupportEnterprise-grade 24/7 support",
+              "Link has descriptive text: Pricing",
+              "Link has descriptive text: EnterpriseLearn More",
+              "Link has descriptive text: SecurityLearn More",
+              "Link has descriptive text: CopilotLearn More",
+              "Link has descriptive text: PricingLearn More",
+              "Link has descriptive text: Search syntax tips",
+              "Link has descriptive text: documentation",
+              "Link has descriptive text: Sign in",
+              "Link has descriptive text: Sign up",
+              "Link has descriptive text: Try GitHub Copilot",
+              "Link has descriptive text: Jump to footnote1",
+              "Link has descriptive text: Explore GitHub Copilot",
+              "Link has descriptive text: Read customer story",
+              "Link has descriptive text: Read report",
+              "Link has descriptive text: Discover GitHub Actions",
+              "Link has descriptive text: Check out GitHub Codespaces",
+              "Link has descriptive text: Download GitHub Mobile",
+              "Link has descriptive text: Visit GitHub Marketplace",
+              "Link has descriptive text: Explore GitHub Advanced Security",
+              "Link has descriptive text: Discover security campaigns",
+              "Link has descriptive text: Learn about Dependabot",
+              "Link has descriptive text: Read about secret scanning",
+              "Link has descriptive text: Jump to footnote2",
+              "Link has descriptive text: of alert types in all supported languages with Copilot Autofix",
+              "Link has descriptive text: Jump into GitHub Projects",
+              "Link has descriptive text: Explore GitHub Issues",
+              "Link has descriptive text: Discover GitHub Discussions",
+              "Link has descriptive text: Learn about code review",
+              "Link has descriptive text: Dive into GitHub Sponsors",
+              "Link has descriptive text: TechnologyFigma streamlines development and strengthens securityRead customer story",
+              "Link has descriptive text: AutomotiveMercedes-Benz standardizes source code and automates onboardingRead customer story",
+              "Link has descriptive text: Financial servicesMercado Libre cuts coding time by 50%Read customer story",
+              "Link has descriptive text: Explore customer stories",
+              "Link has descriptive text: View all solutions",
+              "Link has descriptive text: Try GitHub Copilot",
+              "Link has descriptive text: Survey: The AI wave continues to grow on software development teams, 2024.",
+              "Link has aria-label or title: #footnote-ref-1",
+              "Link has aria-label or title: #footnote-ref-2",
+              "Link has aria-label or title: #hero",
+              "Link has aria-label or title: /",
+              "Link has descriptive text: Subscribe",
+              "Link has descriptive text: Features",
+              "Link has descriptive text: Enterprise",
+              "Link has descriptive text: Copilot",
+              "Link has descriptive text: AI",
+              "Link has descriptive text: Security",
+              "Link has descriptive text: Pricing",
+              "Link has descriptive text: Team",
+              "Link has descriptive text: Resources",
+              "Link has descriptive text: Roadmap",
+              "Link has descriptive text: Compare GitHub",
+              "Link has descriptive text: Developer API",
+              "Link has descriptive text: Partners",
+              "Link has descriptive text: Education",
+              "Link has descriptive text: GitHub CLI",
+              "Link has descriptive text: GitHub Desktop",
+              "Link has descriptive text: GitHub Mobile",
+              "Link has descriptive text: Docs",
+              "Link has descriptive text: Community Forum",
+              "Link has descriptive text: Professional Services",
+              "Link has descriptive text: Premium Support",
+              "Link has descriptive text: Skills",
+              "Link has descriptive text: Status",
+              "Link has descriptive text: Contact GitHub",
+              "Link has descriptive text: About",
+              "Link has descriptive text: Why GitHub",
+              "Link has descriptive text: Customer stories",
+              "Link has descriptive text: Blog",
+              "Link has descriptive text: The ReadME Project",
+              "Link has descriptive text: Careers",
+              "Link has descriptive text: Newsroom",
+              "Link has descriptive text: Inclusion",
+              "Link has descriptive text: Social Impact",
+              "Link has descriptive text: Shop",
+              "Link has descriptive text: Terms",
+              "Link has descriptive text: Privacy",
+              "Link has descriptive text: Updated02/2024",
+              "Link has descriptive text: Sitemap",
+              "Link has descriptive text: What is Git?",
+              "Link has descriptive text: GitHub on LinkedIn",
+              "Link has descriptive text: InstagramGitHub on Instagram",
+              "Link has descriptive text: GitHub on YouTube",
+              "Link has descriptive text: GitHub on X",
+              "Link has descriptive text: TikTokGitHub on TikTok",
+              "Link has descriptive text: TwitchGitHub on Twitch",
+              "Link has descriptive text: GitHub’s organization on GitHub",
+              "Found text element with color contrast specification",
+              "Found label for input",
+              "Found label for input",
+              "Found label for input",
+              "Found placeholder for input",
+              "Input validation found for input",
+              "Found label for input",
+              "Found placeholder for input",
+              "Input validation found for input",
+              "Found label for input",
+              "Found placeholder for input",
+              "Error state handling found for input",
+              "Submit button has accessible name",
+              "Form has ARIA label",
+              "Found label for input",
+              "Found placeholder for input",
+              "Error state handling found for input",
+              "Submit button has accessible name",
+              "Form has ARIA label",
+              "Page has main landmark",
+              "Page has navigation landmark",
+              "Page has header landmark",
+              "Page has footer landmark",
+              "Page has skip navigation link",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Element removed from tab order: a",
+              "Valid ARIA role 'alert' found on global-banner",
+              "Valid ARIA role 'banner' found on header",
+              "Valid ARIA role 'dialog' found on modal-dialog",
+              "Valid ARIA role 'combobox' found on input",
+              "Valid ARIA role 'button' found on button",
+              "Valid ARIA role 'listbox' found on ul",
+              "Valid ARIA role 'presentation' found on li",
+              "Valid ARIA role 'presentation' found on h3",
+              "Valid ARIA role 'presentation' found on ul",
+              "Valid ARIA role 'option' found on li",
+              "Valid ARIA role 'option' found on li",
+              "Valid ARIA role 'option' found on li",
+              "Valid ARIA role 'option' found on li",
+              "Valid ARIA role 'tooltip' found on tool-tip",
+              "Valid ARIA role 'alert' found on div",
+              "Valid ARIA role 'presentation' found on svg",
+              "Valid ARIA role 'tablist' found on div",
+              "Valid ARIA role 'presentation' found on svg",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'region' found on p",
+              "Valid ARIA role 'presentation' found on svg",
+              "Valid ARIA role 'presentation' found on svg",
+              "Valid ARIA role 'tablist' found on div",
+              "Valid ARIA role 'presentation' found on svg",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'tab' found on button",
+              "Valid ARIA role 'contentinfo' found on footer",
+              "Valid ARIA role 'img' found on svg",
+              "Valid ARIA role 'img' found on svg",
+              "Valid ARIA role 'img' found on svg",
+              "Valid ARIA role 'button' found on summary",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: product-explore-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: solutions-by-company-size-heading",
+              "aria-labelledby references valid ID: solutions-by-use-case-heading",
+              "aria-labelledby references valid ID: solutions-by-industry-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: resources-topics-heading",
+              "aria-labelledby references valid ID: resources-explore-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: open-source-repositories-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: enterprise-available-add-ons-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: search-suggestions-dialog-header",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-describedby references valid ID: validation-961a78a9-622e-4132-bc52-11f958024445",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: feedback-dialog-title",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: custom-scopes-dialog-title",
+              "aria-describedby references valid ID: custom-scopes-dialog-description",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: tooltip-acfe66a3-6973-495e-9384-a442415a3ca1",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: hero-section-brand-heading",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "aria-labelledby references valid ID: footer-title-product",
+              "aria-labelledby references valid ID: footer-title-platform",
+              "aria-labelledby references valid ID: footer-title-support",
+              "aria-labelledby references valid ID: footer-title-company",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-hidden='true'",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on input",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button",
+              "Proper use of aria-expanded on button"
+            ],
+            "recommendations": [
+              "Maintain proper heading hierarchy",
+              "Add labels to all form controls",
+              "Maintain visible focus indicators",
+              "Ensure no interactive elements inside aria-hidden regions"
+            ],
+            "metrics": {
+              "headings_score": 93.93939393939394,
+              "images_score": 37.03703703703704,
+              "links_score": 92.56756756756756,
+              "color_contrast_score": 11.11111111111111,
+              "forms_score": 81.81818181818183,
+              "landmarks_score": 100.0,
+              "keyboard_nav_score": 91.66666666666666,
+              "aria_score": 95.76271186440678
+            },
+            "details": {
+              "headings": {
+                "score": 93.93939393939394,
+                "issues": [
+                  "Multiple h1 headings found",
+                  "Heading level skipped from h1 to h3"
+                ],
+                "passes": [
+                  "Proper heading level sequence: h0 to h2",
+                  "Proper heading level sequence: h2 to h1",
+                  "Proper heading level sequence: h3 to h1",
+                  "Proper heading level sequence: h1 to h1",
+                  "Proper heading level sequence: h1 to h2",
+                  "Proper heading level sequence: h2 to h1",
+                  "Proper heading level sequence: h1 to h2",
+                  "Proper heading level sequence: h2 to h2",
+                  "Proper heading level sequence: h2 to h2",
+                  "Proper heading level sequence: h2 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h2",
+                  "Proper heading level sequence: h2 to h3",
+                  "Proper heading level sequence: h3 to h2",
+                  "Proper heading level sequence: h2 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h2",
+                  "Proper heading level sequence: h2 to h2",
+                  "Proper heading level sequence: h2 to h2",
+                  "Proper heading level sequence: h2 to h2",
+                  "Proper heading level sequence: h2 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3",
+                  "Proper heading level sequence: h3 to h3"
+                ]
+              },
+              "images": {
+                "score": 37.03703703703704,
+                "issues": [
+                  "Image missing dimensions: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg",
+                  "Image missing dimensions: https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-2-730955545f07.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-2-730955545f07.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/hero-64ecd484397f.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+                  "Image missing dimensions: https://github.githubassets.com/assets/hero-961322485af6.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/accordion-4-7abff9233556.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/accordion-4-7abff9233556.webp",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/figma-62d390a52419.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/figma-62d390a52419.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/figma-9b0c642e96b8.svg",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg",
+                  "Decorative image should have role='presentation': https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp",
+                  "Image missing dimensions: https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg"
+                ],
+                "passes": [
+                  "Image has alt text: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/shopify-3fed3011ac81.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/ey-7434b194d68c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/figma-04e0038c0fef.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercedes-b9190458c80e.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/societe-generale-7a3414490494.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/philips-8087a5f95f5c.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/infosys-7587455de0bd.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/spotify-591ecb426c1e.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/hero-64ecd484397f.webp",
+                  "Image has alt text: https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp",
+                  "Image has alt text: https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp",
+                  "Image has alt text: https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp",
+                  "Image has alt text: https://github.githubassets.com/assets/hero-961322485af6.webp",
+                  "Image has alt text: https://github.githubassets.com/assets/figma-9b0c642e96b8.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg",
+                  "Image has alt text: https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg"
+                ]
+              },
+              "links": {
+                "score": 92.56756756756756,
+                "issues": [
+                  "Link uses generic text: Learn more",
+                  "Link with target='_blank' missing rel='noopener': https://docs.github.com",
+                  "Link with target='_blank' missing rel='noopener': https://skills.github.com",
+                  "Link with target='_blank' missing rel='noopener': https://github.blog",
+                  "Link with target='_blank' missing rel='noopener': https://resources.github.com/learn/pathways",
+                  "Link with target='_blank' missing rel='noopener': https://resources.github.com",
+                  "Link with target='_blank' missing rel='noopener': https://partner.github.com",
+                  "Link with target='_blank' missing rel='noopener': https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax",
+                  "Link missing href attribute",
+                  "Link missing href attribute",
+                  "Link missing href attribute"
+                ],
+                "passes": [
+                  "Link has descriptive text: Skip to content",
+                  "Link has aria-label or title: /",
+                  "Link has descriptive text: Sign in",
+                  "Link has descriptive text: GitHub CopilotWrite better code with AI",
+                  "Link has descriptive text: GitHub ModelsNewManage and compare prompts",
+                  "Link has descriptive text: GitHub Advanced SecurityFind and fix vulnerabilities",
+                  "Link has descriptive text: ActionsAutomate any workflow",
+                  "Link has descriptive text: CodespacesInstant dev environments",
+                  "Link has descriptive text: IssuesPlan and track work",
+                  "Link has descriptive text: Code ReviewManage code changes",
+                  "Link has descriptive text: DiscussionsCollaborate outside of code",
+                  "Link has descriptive text: Code SearchFind more, search less",
+                  "Link has descriptive text: Why GitHub",
+                  "Link has descriptive text: All features",
+                  "Link has descriptive text: Documentation",
+                  "Link has descriptive text: GitHub Skills",
+                  "Link has descriptive text: Blog",
+                  "Link has descriptive text: Enterprises",
+                  "Link has descriptive text: Small and medium teams",
+                  "Link has descriptive text: Startups",
+                  "Link has descriptive text: Nonprofits",
+                  "Link has descriptive text: DevSecOps",
+                  "Link has descriptive text: DevOps",
+                  "Link has descriptive text: CI/CD",
+                  "Link has descriptive text: View all use cases",
+                  "Link has descriptive text: Healthcare",
+                  "Link has descriptive text: Financial services",
+                  "Link has descriptive text: Manufacturing",
+                  "Link has descriptive text: Government",
+                  "Link has descriptive text: View all industries",
+                  "Link has descriptive text: View all solutions",
+                  "Link has descriptive text: AI",
+                  "Link has descriptive text: DevOps",
+                  "Link has descriptive text: Security",
+                  "Link has descriptive text: Software Development",
+                  "Link has descriptive text: View all",
+                  "Link has descriptive text: Learning Pathways",
+                  "Link has descriptive text: Events & Webinars",
+                  "Link has descriptive text: Ebooks & Whitepapers",
+                  "Link has descriptive text: Customer Stories",
+                  "Link has descriptive text: Partners",
+                  "Link has descriptive text: Executive Insights",
+                  "Link has descriptive text: GitHub SponsorsFund open source developers",
+                  "Link has descriptive text: The ReadME ProjectGitHub community articles",
+                  "Link has descriptive text: Topics",
+                  "Link has descriptive text: Trending",
+                  "Link has descriptive text: Collections",
+                  "Link has descriptive text: Enterprise platformAI-powered developer platform",
+                  "Link has descriptive text: GitHub Advanced SecurityEnterprise-grade security features",
+                  "Link has descriptive text: Copilot for businessEnterprise-grade AI features",
+                  "Link has descriptive text: Premium SupportEnterprise-grade 24/7 support",
+                  "Link has descriptive text: Pricing",
+                  "Link has descriptive text: EnterpriseLearn More",
+                  "Link has descriptive text: SecurityLearn More",
+                  "Link has descriptive text: CopilotLearn More",
+                  "Link has descriptive text: PricingLearn More",
+                  "Link has descriptive text: Search syntax tips",
+                  "Link has descriptive text: documentation",
+                  "Link has descriptive text: Sign in",
+                  "Link has descriptive text: Sign up",
+                  "Link has descriptive text: Try GitHub Copilot",
+                  "Link has descriptive text: Jump to footnote1",
+                  "Link has descriptive text: Explore GitHub Copilot",
+                  "Link has descriptive text: Read customer story",
+                  "Link has descriptive text: Read report",
+                  "Link has descriptive text: Discover GitHub Actions",
+                  "Link has descriptive text: Check out GitHub Codespaces",
+                  "Link has descriptive text: Download GitHub Mobile",
+                  "Link has descriptive text: Visit GitHub Marketplace",
+                  "Link has descriptive text: Explore GitHub Advanced Security",
+                  "Link has descriptive text: Discover security campaigns",
+                  "Link has descriptive text: Learn about Dependabot",
+                  "Link has descriptive text: Read about secret scanning",
+                  "Link has descriptive text: Jump to footnote2",
+                  "Link has descriptive text: of alert types in all supported languages with Copilot Autofix",
+                  "Link has descriptive text: Jump into GitHub Projects",
+                  "Link has descriptive text: Explore GitHub Issues",
+                  "Link has descriptive text: Discover GitHub Discussions",
+                  "Link has descriptive text: Learn about code review",
+                  "Link has descriptive text: Dive into GitHub Sponsors",
+                  "Link has descriptive text: TechnologyFigma streamlines development and strengthens securityRead customer story",
+                  "Link has descriptive text: AutomotiveMercedes-Benz standardizes source code and automates onboardingRead customer story",
+                  "Link has descriptive text: Financial servicesMercado Libre cuts coding time by 50%Read customer story",
+                  "Link has descriptive text: Explore customer stories",
+                  "Link has descriptive text: View all solutions",
+                  "Link has descriptive text: Try GitHub Copilot",
+                  "Link has descriptive text: Survey: The AI wave continues to grow on software development teams, 2024.",
+                  "Link has aria-label or title: #footnote-ref-1",
+                  "Link has aria-label or title: #footnote-ref-2",
+                  "Link has aria-label or title: #hero",
+                  "Link has aria-label or title: /",
+                  "Link has descriptive text: Subscribe",
+                  "Link has descriptive text: Features",
+                  "Link has descriptive text: Enterprise",
+                  "Link has descriptive text: Copilot",
+                  "Link has descriptive text: AI",
+                  "Link has descriptive text: Security",
+                  "Link has descriptive text: Pricing",
+                  "Link has descriptive text: Team",
+                  "Link has descriptive text: Resources",
+                  "Link has descriptive text: Roadmap",
+                  "Link has descriptive text: Compare GitHub",
+                  "Link has descriptive text: Developer API",
+                  "Link has descriptive text: Partners",
+                  "Link has descriptive text: Education",
+                  "Link has descriptive text: GitHub CLI",
+                  "Link has descriptive text: GitHub Desktop",
+                  "Link has descriptive text: GitHub Mobile",
+                  "Link has descriptive text: Docs",
+                  "Link has descriptive text: Community Forum",
+                  "Link has descriptive text: Professional Services",
+                  "Link has descriptive text: Premium Support",
+                  "Link has descriptive text: Skills",
+                  "Link has descriptive text: Status",
+                  "Link has descriptive text: Contact GitHub",
+                  "Link has descriptive text: About",
+                  "Link has descriptive text: Why GitHub",
+                  "Link has descriptive text: Customer stories",
+                  "Link has descriptive text: Blog",
+                  "Link has descriptive text: The ReadME Project",
+                  "Link has descriptive text: Careers",
+                  "Link has descriptive text: Newsroom",
+                  "Link has descriptive text: Inclusion",
+                  "Link has descriptive text: Social Impact",
+                  "Link has descriptive text: Shop",
+                  "Link has descriptive text: Terms",
+                  "Link has descriptive text: Privacy",
+                  "Link has descriptive text: Updated02/2024",
+                  "Link has descriptive text: Sitemap",
+                  "Link has descriptive text: What is Git?",
+                  "Link has descriptive text: GitHub on LinkedIn",
+                  "Link has descriptive text: InstagramGitHub on Instagram",
+                  "Link has descriptive text: GitHub on YouTube",
+                  "Link has descriptive text: GitHub on X",
+                  "Link has descriptive text: TikTokGitHub on TikTok",
+                  "Link has descriptive text: TwitchGitHub on Twitch",
+                  "Link has descriptive text: GitHub’s organization on GitHub"
+                ]
+              },
+              "color_contrast": {
+                "score": 11.11111111111111,
+                "issues": [
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification",
+                  "Text element missing color contrast specification"
+                ],
+                "passes": [
+                  "Found text element with color contrast specification"
+                ]
+              },
+              "forms": {
+                "score": 81.81818181818183,
+                "issues": [
+                  "Form missing submit button",
+                  "Missing label for textarea",
+                  "Form missing submit button",
+                  "Form missing submit button"
+                ],
+                "passes": [
+                  "Found label for input",
+                  "Found label for input",
+                  "Found label for input",
+                  "Found placeholder for input",
+                  "Input validation found for input",
+                  "Found label for input",
+                  "Found placeholder for input",
+                  "Input validation found for input",
+                  "Found label for input",
+                  "Found placeholder for input",
+                  "Error state handling found for input",
+                  "Submit button has accessible name",
+                  "Form has ARIA label",
+                  "Found label for input",
+                  "Found placeholder for input",
+                  "Error state handling found for input",
+                  "Submit button has accessible name",
+                  "Form has ARIA label"
+                ]
+              },
+              "landmarks": {
+                "score": 100.0,
+                "issues": [],
+                "passes": [
+                  "Page has main landmark",
+                  "Page has navigation landmark",
+                  "Page has header landmark",
+                  "Page has footer landmark"
+                ]
+              },
+              "keyboard_navigation": {
+                "score": 91.66666666666666,
+                "issues": [
+                  "Elements found with outline: none style"
+                ],
+                "passes": [
+                  "Page has skip navigation link",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a",
+                  "Element removed from tab order: a"
+                ]
+              },
+              "aria": {
+                "score": 95.76271186440678,
+                "issues": [
+                  "aria-labelledby references non-existent ID: query-builder-test-clear query-builder-test-label",
+                  "aria-describedby references non-existent ID: feedback-dialog-description",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'",
+                  "Interactive elements found inside aria-hidden='true'"
+                ],
+                "passes": [
+                  "Valid ARIA role 'alert' found on global-banner",
+                  "Valid ARIA role 'banner' found on header",
+                  "Valid ARIA role 'dialog' found on modal-dialog",
+                  "Valid ARIA role 'combobox' found on input",
+                  "Valid ARIA role 'button' found on button",
+                  "Valid ARIA role 'listbox' found on ul",
+                  "Valid ARIA role 'presentation' found on li",
+                  "Valid ARIA role 'presentation' found on h3",
+                  "Valid ARIA role 'presentation' found on ul",
+                  "Valid ARIA role 'option' found on li",
+                  "Valid ARIA role 'option' found on li",
+                  "Valid ARIA role 'option' found on li",
+                  "Valid ARIA role 'option' found on li",
+                  "Valid ARIA role 'tooltip' found on tool-tip",
+                  "Valid ARIA role 'alert' found on div",
+                  "Valid ARIA role 'presentation' found on svg",
+                  "Valid ARIA role 'tablist' found on div",
+                  "Valid ARIA role 'presentation' found on svg",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'region' found on p",
+                  "Valid ARIA role 'presentation' found on svg",
+                  "Valid ARIA role 'presentation' found on svg",
+                  "Valid ARIA role 'tablist' found on div",
+                  "Valid ARIA role 'presentation' found on svg",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'tab' found on button",
+                  "Valid ARIA role 'contentinfo' found on footer",
+                  "Valid ARIA role 'img' found on svg",
+                  "Valid ARIA role 'img' found on svg",
+                  "Valid ARIA role 'img' found on svg",
+                  "Valid ARIA role 'button' found on summary",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: product-explore-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: solutions-by-company-size-heading",
+                  "aria-labelledby references valid ID: solutions-by-use-case-heading",
+                  "aria-labelledby references valid ID: solutions-by-industry-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: resources-topics-heading",
+                  "aria-labelledby references valid ID: resources-explore-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: open-source-repositories-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: enterprise-available-add-ons-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: search-suggestions-dialog-header",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-describedby references valid ID: validation-961a78a9-622e-4132-bc52-11f958024445",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: feedback-dialog-title",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: custom-scopes-dialog-title",
+                  "aria-describedby references valid ID: custom-scopes-dialog-description",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: tooltip-acfe66a3-6973-495e-9384-a442415a3ca1",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: hero-section-brand-heading",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "aria-labelledby references valid ID: footer-title-product",
+                  "aria-labelledby references valid ID: footer-title-platform",
+                  "aria-labelledby references valid ID: footer-title-support",
+                  "aria-labelledby references valid ID: footer-title-company",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-hidden='true'",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on input",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button",
+                  "Proper use of aria-expanded on button"
+                ]
+              }
+            }
+          }
+        },
+        "performance": {
+          "PerformanceAnalyzer": {
+            "overall_score": 0.375,
+            "issues": [
+              "Large page size: 289.83 KB",
+              "Slow page load time: 47602ms",
+              "Slow first contentful paint: 6448.5ms"
+            ],
+            "recommendations": [
+              "Optimize page size",
+              "Optimize page load time",
+              "Optimize rendering performance"
+            ],
+            "metrics": {
+              "execution_time": 0,
+              "performance_score": 0.375,
+              "total_checks": 4
+            },
+            "details": {
+              "page_size": {
+                "score": 0.5,
+                "issues": [
+                  "Large page size: 289.83 KB"
+                ],
+                "recommendations": [
+                  "Optimize page size"
+                ],
+                "details": {
+                  "size_bytes": 296790,
+                  "size_kb": 289.833984375
+                }
+              },
+              "load_time": {
+                "score": 0.0,
+                "issues": [
+                  "Slow page load time: 47602ms"
+                ],
+                "recommendations": [
+                  "Optimize page load time"
+                ],
+                "details": {
+                  "loadTime": 47602,
+                  "domContentLoaded": 18975,
+                  "firstPaint": 6364.29999999702
+                }
+              },
+              "resource_usage": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "totalResources": 143,
+                  "totalSize": 0,
+                  "resourceTypes": {
+                    "link": 16,
+                    "script": 80,
+                    "img": 33,
+                    "beacon": 6,
+                    "fetch": 4,
+                    "video": 4
+                  }
+                }
+              },
+              "rendering_performance": {
+                "score": 0.0,
+                "issues": [
+                  "Slow first contentful paint: 6448.5ms"
+                ],
+                "recommendations": [
+                  "Optimize rendering performance"
+                ],
+                "details": {
+                  "firstPaint": 6364.29999999702,
+                  "firstContentfulPaint": 6448.5,
+                  "timeToInteractive": 7350
+                }
+              }
+            }
+          }
+        },
+        "security": {
+          "SecurityAnalyzer": {
+            "overall_score": 60.0,
+            "security_headers": 0,
+            "content_security": 0,
+            "issues": [
+              "Missing X-Content-Type-Options header",
+              "Missing X-Frame-Options header",
+              "Missing X-XSS-Protection header",
+              "Missing Strict-Transport-Security header",
+              "Missing Content-Security-Policy header",
+              "Found 5 inline scripts",
+              "Cookie _octo missing httpOnly flag",
+              "Cookie cpu_bucket missing httpOnly flag",
+              "Cookie preferred_color_mode missing httpOnly flag",
+              "Cookie tz missing httpOnly flag",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              "Input missing pattern validation",
+              "Input missing sanitization",
+              {
+                "name": "_octo",
+                "domain": ".github.com",
+                "missing_flags": [
+                  "HttpOnly"
+                ]
+              },
+              {
+                "name": "cpu_bucket",
+                "domain": ".github.com",
+                "missing_flags": [
+                  "HttpOnly"
+                ]
+              },
+              {
+                "name": "preferred_color_mode",
+                "domain": ".github.com",
+                "missing_flags": [
+                  "HttpOnly"
+                ]
+              },
+              {
+                "name": "tz",
+                "domain": ".github.com",
+                "missing_flags": [
+                  "HttpOnly"
+                ]
+              },
+              {
+                "type": "text",
+                "missing_validation": true,
+                "details": {
+                  "pattern": null,
+                  "maxlength": null,
+                  "minlength": null,
+                  "required": false,
+                  "type": "text"
+                }
+              },
+              {
+                "type": null,
+                "missing_validation": true,
+                "details": {
+                  "pattern": null,
+                  "maxlength": null,
+                  "minlength": null,
+                  "required": false,
+                  "type": null
+                }
+              },
+              {
+                "type": "email",
+                "missing_validation": true,
+                "details": {
+                  "pattern": null,
+                  "maxlength": null,
+                  "minlength": null,
+                  "required": false,
+                  "type": "email"
+                }
+              },
+              {
+                "type": "email",
+                "missing_validation": true,
+                "details": {
+                  "pattern": null,
+                  "maxlength": null,
+                  "minlength": null,
+                  "required": false,
+                  "type": "email"
+                }
+              },
+              "CSP allows unsafe-inline or unsafe-eval",
+              "Found 5 inline scripts (potential XSS risk)",
+              "Form missing CSRF token",
+              "Form missing CSRF token",
+              "Form missing CSRF token"
+            ],
+            "recommendations": [],
+            "metrics": {
+              "security_score": 60.0,
+              "total_checks": 12,
+              "execution_time": 0
+            },
+            "details": {}
+          }
+        },
+        "seo": {
+          "SEOAnalyzer": {
+            "overall_score": 51.11111111111111,
+            "issues": [
+              "Title tag is too long (more than 60 characters)",
+              "Missing robots meta tag",
+              "Top keywords: github (56), code (20), copilot (17), security (11), issues (9)",
+              "URL contains underscores or spaces: /enterprise?ref_loc=search",
+              "URL contains underscores or spaces: /security?ref_loc=search",
+              "URL contains underscores or spaces: /features/copilot?ref_loc=search",
+              "URL contains underscores or spaces: /pricing?ref_loc=search",
+              "URL contains underscores or spaces: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home",
+              "URL contains underscores or spaces: /github-copilot/pro?cft=copilot_lo.copilot_plans.cfi",
+              "URL contains underscores or spaces: /github-copilot/pro?cft=copilot_lo.copilot_plans.cfi",
+              "Image https://github.githubassets.com/assets/shopify-3fed3011ac81.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/shopify-3fed3011ac81.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Alt text is too short",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/figma-04e0038c0fef.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/figma-04e0038c0fef.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercedes-b9190458c80e.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercedes-b9190458c80e.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/societe-generale-7a3414490494.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/societe-generale-7a3414490494.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/philips-8087a5f95f5c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/philips-8087a5f95f5c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/infosys-7587455de0bd.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/infosys-7587455de0bd.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/spotify-591ecb426c1e.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/spotify-591ecb426c1e.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/shopify-3fed3011ac81.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/shopify-3fed3011ac81.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Alt text is too short",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/ey-7434b194d68c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/figma-04e0038c0fef.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/figma-04e0038c0fef.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/duolingo-ea3a0aa56fa5.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/newyorktimes-9d76d7f338f5.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercado-libre-762f679589f2.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/american-airlines-a2b13c8fbe08.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/ford-2fb5195a4c7c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercedes-b9190458c80e.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercedes-b9190458c80e.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/societe-generale-7a3414490494.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/societe-generale-7a3414490494.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/vodafone-6e0f322de6cd.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/philips-8087a5f95f5c.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/philips-8087a5f95f5c.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/sap-ea7dcd02e37d.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/infosys-7587455de0bd.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/infosys-7587455de0bd.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/spotify-591ecb426c1e.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/spotify-591ecb426c1e.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing alt text",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/logo-duolingo-14477f9e54a6.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/logo-gartner-aa8c2e452b64.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-2-730955545f07.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-2-730955545f07.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing alt text",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/hero-64ecd484397f.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing alt text",
+              "Image https://github.githubassets.com/assets/particles-de1dd20f3008.png: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/hero-961322485af6.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/accordion-4-7abff9233556.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/accordion-4-7abff9233556.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/figma-62d390a52419.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/figma-62d390a52419.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/figma-9b0c642e96b8.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/figma-9b0c642e96b8.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercedes-benz-60ddd54043e7.svg: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp: Missing alt text",
+              "Image https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp: Missing width or height attributes",
+              "Image https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg: Image should use .jpg, .jpeg, .png, or .webp format",
+              "Image https://github.githubassets.com/assets/mercado-libre-2d6d610fa873.svg: Missing width or height attributes",
+              "Only 0.0% of images are optimized",
+              "Missing mobile-specific stylesheet",
+              "Missing robots meta tag",
+              "Missing sitemap reference",
+              "Missing structured data"
+            ],
+            "recommendations": [
+              "Meta description length is optimal: 142 characters",
+              "All required Open Graph tags are present",
+              "All required Twitter Card tags are present",
+              "Canonical URL tag is present",
+              "Image has proper alt text: Shopify",
+              "Image uses lazy loading",
+              "Image uses lazy loading",
+              "Image has proper alt text: Figma",
+              "Image uses lazy loading",
+              "Image has proper alt text: Duolingo",
+              "Image uses lazy loading",
+              "Image has proper alt text: New York Times",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercado Libre",
+              "Image uses lazy loading",
+              "Image has proper alt text: American Airlines",
+              "Image uses lazy loading",
+              "Image has proper alt text: Ford",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercedes Benz",
+              "Image uses lazy loading",
+              "Image has proper alt text: Société Générale",
+              "Image uses lazy loading",
+              "Image has proper alt text: Vodafone",
+              "Image uses lazy loading",
+              "Image has proper alt text: Philips",
+              "Image uses lazy loading",
+              "Image has proper alt text: SAP",
+              "Image uses lazy loading",
+              "Image has proper alt text: Infosys",
+              "Image uses lazy loading",
+              "Image has proper alt text: Spotify",
+              "Image uses lazy loading",
+              "Image has proper alt text: Shopify",
+              "Image uses lazy loading",
+              "Image uses lazy loading",
+              "Image has proper alt text: Figma",
+              "Image uses lazy loading",
+              "Image has proper alt text: Duolingo",
+              "Image uses lazy loading",
+              "Image has proper alt text: New York Times",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercado Libre",
+              "Image uses lazy loading",
+              "Image has proper alt text: American Airlines",
+              "Image uses lazy loading",
+              "Image has proper alt text: Ford",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercedes Benz",
+              "Image uses lazy loading",
+              "Image has proper alt text: Société Générale",
+              "Image uses lazy loading",
+              "Image has proper alt text: Vodafone",
+              "Image uses lazy loading",
+              "Image has proper alt text: Philips",
+              "Image uses lazy loading",
+              "Image has proper alt text: SAP",
+              "Image uses lazy loading",
+              "Image has proper alt text: Infosys",
+              "Image uses lazy loading",
+              "Image has proper alt text: Spotify",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image uses lazy loading",
+              "Image has proper alt text: Duolingo",
+              "Image uses lazy loading",
+              "Image has proper alt text: Gartner",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-1-ce487d44c0bf.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-2-730955545f07.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-3-52ca331d22ea.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-4-a26744b70ff7.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image uses lazy loading",
+              "Image has proper alt text: Copilot Autofix identifies vulnerable code and provides an explanation, together with a secure code suggestion to remediate the vulnerability.",
+              "Image has proper format: https://github.githubassets.com/assets/hero-64ecd484397f.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: A security campaign screen displays the campaign’s progress bar with 97% completed of 701 alerts. A total of 23 alerts are left with 13 in progress, and the campaign started 20 days ago. The status below shows that there are 7 days left in the campaign with a due date of November 15, 2024.",
+              "Image has proper format: https://github.githubassets.com/assets/pillar-1-dd667a921f55.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: List of dependencies defined in a requirements .txt file.",
+              "Image has proper format: https://github.githubassets.com/assets/pillar-2-ff69e872920a.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: GitHub push protection confirms and displays an active secret, and blocks the push.",
+              "Image has proper format: https://github.githubassets.com/assets/pillar-3-0a063e2daae2.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/particles-de1dd20f3008.png",
+              "Image uses lazy loading",
+              "Image has proper alt text: A project management dashboard showing tasks for the ‘OctoArcade Invaders’ project, with tasks grouped under project phase categories like ‘Prototype,’ ‘Beta,’ and ‘Launch’ in a table layout. One of the columns displays sub-issue progress bars with percentages for each issue.",
+              "Image has proper format: https://github.githubassets.com/assets/hero-961322485af6.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-1-38ad6b6d1b20.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-2-c0a62cfc31a1.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-3-5d5d222f1830.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/accordion-4-7abff9233556.webp",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/figma-62d390a52419.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: Figma",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/mercedes-benz-d8f89b041561.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercedes-Benz",
+              "Image uses lazy loading",
+              "Image has proper format: https://github.githubassets.com/assets/mercado-libre-579cb5447302.webp",
+              "Image uses lazy loading",
+              "Image has proper alt text: Mercado Libre",
+              "Image uses lazy loading"
+            ],
+            "metrics": {
+              "meta_tags": {
+                "score": 66.66666666666666,
+                "details": {}
+              },
+              "content_structure": {
+                "score": 90,
+                "details": {}
+              },
+              "url_structure": {
+                "score": 30,
+                "details": {}
+              },
+              "image_optimization": {
+                "score": 0.0,
+                "details": {}
+              },
+              "mobile_friendliness": {
+                "score": 80,
+                "details": {}
+              },
+              "technical_seo": {
+                "score": 40,
+                "details": {}
+              }
+            },
+            "details": {}
+          }
+        },
+        "ux": {
+          "UXAnalyzer": {
+            "overall_score": 0.6,
+            "issues": [
+              "Error checking interaction elements: 'async_generator' object is not iterable",
+              "Feedback mechanisms need improvement",
+              "Error checking error handling: 'async_generator' object is not iterable",
+              "Loading states need improvement",
+              "Visual hierarchy needs improvement",
+              "Design consistency needs improvement"
+            ],
+            "recommendations": [
+              "Fix interaction elements analysis",
+              "Improve feedback mechanisms",
+              "Fix error handling analysis",
+              "Improve loading states",
+              "Improve visual hierarchy",
+              "Improve design consistency"
+            ],
+            "metrics": {
+              "navigation": {
+                "score": 1.0,
+                "details": {
+                  "has_main_nav": true,
+                  "has_breadcrumbs": true,
+                  "has_search": false
+                }
+              },
+              "interaction_elements": {
+                "score": 0,
+                "details": {
+                  "error": "'async_generator' object is not iterable"
+                }
+              },
+              "feedback_mechanisms": {
+                "score": 0.5,
+                "details": {
+                  "loading_indicators": 0,
+                  "feedback_messages": 6
+                }
+              },
+              "error_handling": {
+                "score": 0,
+                "details": {
+                  "error": "'async_generator' object is not iterable"
+                }
+              },
+              "mobile_responsiveness": {
+                "score": 1.0,
+                "details": {
+                  "responsive_elements": 7,
+                  "has_viewport_meta": true
+                }
+              },
+              "loading_states": {
+                "score": 0.5,
+                "details": {
+                  "loading_indicators": 0,
+                  "skeleton_loaders": 0
+                }
+              },
+              "visual_hierarchy": {
+                "score": 0.5,
+                "details": {
+                  "has_proper_hierarchy": false,
+                  "sections_count": 13
+                }
+              },
+              "consistency": {
+                "score": 0.5,
+                "details": {
+                  "button_variations": 23,
+                  "input_variations": 4
+                }
+              },
+              "typography": {
+                "score": 1.0,
+                "details": {
+                  "font_size_variations": 0,
+                  "line_height_variations": 0
+                }
+              },
+              "color_contrast": {
+                "score": 1.0,
+                "details": {
+                  "has_contrast_issues": false
+                }
+              }
+            },
+            "details": {
+              "navigation": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "has_main_nav": true,
+                  "has_breadcrumbs": true,
+                  "has_search": false
+                }
+              },
+              "interaction_elements": {
+                "score": 0,
+                "issues": [
+                  "Error checking interaction elements: 'async_generator' object is not iterable"
+                ],
+                "recommendations": [
+                  "Fix interaction elements analysis"
+                ],
+                "details": {
+                  "error": "'async_generator' object is not iterable"
+                }
+              },
+              "feedback_mechanisms": {
+                "score": 0.5,
+                "issues": [
+                  "Feedback mechanisms need improvement"
+                ],
+                "recommendations": [
+                  "Improve feedback mechanisms"
+                ],
+                "details": {
+                  "loading_indicators": 0,
+                  "feedback_messages": 6
+                }
+              },
+              "error_handling": {
+                "score": 0,
+                "issues": [
+                  "Error checking error handling: 'async_generator' object is not iterable"
+                ],
+                "recommendations": [
+                  "Fix error handling analysis"
+                ],
+                "details": {
+                  "error": "'async_generator' object is not iterable"
+                }
+              },
+              "mobile_responsiveness": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "responsive_elements": 7,
+                  "has_viewport_meta": true
+                }
+              },
+              "loading_states": {
+                "score": 0.5,
+                "issues": [
+                  "Loading states need improvement"
+                ],
+                "recommendations": [
+                  "Improve loading states"
+                ],
+                "details": {
+                  "loading_indicators": 0,
+                  "skeleton_loaders": 0
+                }
+              },
+              "visual_hierarchy": {
+                "score": 0.5,
+                "issues": [
+                  "Visual hierarchy needs improvement"
+                ],
+                "recommendations": [
+                  "Improve visual hierarchy"
+                ],
+                "details": {
+                  "has_proper_hierarchy": false,
+                  "sections_count": 13
+                }
+              },
+              "consistency": {
+                "score": 0.5,
+                "issues": [
+                  "Design consistency needs improvement"
+                ],
+                "recommendations": [
+                  "Improve design consistency"
+                ],
+                "details": {
+                  "button_variations": 23,
+                  "input_variations": 4
+                }
+              },
+              "typography": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "font_size_variations": 0,
+                  "line_height_variations": 0
+                }
+              },
+              "color_contrast": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "has_contrast_issues": false
+                }
+              }
+            }
+          }
+        },
+        "code": {
+          "CodeAnalyzer": {
+            "error": "Code analysis failed: Incoming markup is of an invalid type: <Page url='https://github.com/'>. Markup must be a string, a bytestring, or an open filehandle.",
+            "status": "failed",
+            "overall_score": 0.0,
+            "details": {},
+            "issues": [
+              "Analysis failed: Incoming markup is of an invalid type: <Page url='https://github.com/'>. Markup must be a string, a bytestring, or an open filehandle."
+            ],
+            "recommendations": [
+              "Fix analyzer implementation"
+            ],
+            "metrics": {}
+          }
+        },
+        "compliance": {
+          "ComplianceAnalyzer": {
+            "overall_score": 0.21428571428571427,
+            "issues": [
+              "Cookie consent banner missing accept/reject buttons",
+              "No accessibility statement found",
+              "No data access controls found",
+              "No GDPR compliance elements found",
+              "No CCPA compliance elements found",
+              "No data retention policy found"
+            ],
+            "recommendations": [
+              "Add accept and reject buttons to cookie consent banner",
+              "Add an accessibility statement",
+              "Implement data access controls",
+              "Implement GDPR compliance elements",
+              "Implement CCPA compliance elements",
+              "Add a data retention policy"
+            ],
+            "metrics": {
+              "cookie_consent": {
+                "score": 0.5,
+                "details": {
+                  "banner_found": true,
+                  "has_accept_button": false,
+                  "has_reject_button": false
+                }
+              },
+              "privacy_policy": {
+                "score": 1.0,
+                "details": {
+                  "link_found": true
+                }
+              },
+              "accessibility_statement": {
+                "score": 0,
+                "details": {
+                  "statement_found": false
+                }
+              },
+              "data_access_controls": {
+                "score": 0,
+                "details": {
+                  "controls_found": false
+                }
+              },
+              "gdpr_compliance": {
+                "score": 0,
+                "details": {
+                  "gdpr_elements_found": false
+                }
+              },
+              "ccpa_compliance": {
+                "score": 0,
+                "details": {
+                  "ccpa_elements_found": false
+                }
+              },
+              "data_retention": {
+                "score": 0,
+                "details": {
+                  "policy_found": false
+                }
+              }
+            },
+            "details": {
+              "cookie_consent": {
+                "score": 0.5,
+                "issues": [
+                  "Cookie consent banner missing accept/reject buttons"
+                ],
+                "recommendations": [
+                  "Add accept and reject buttons to cookie consent banner"
+                ],
+                "details": {
+                  "banner_found": true,
+                  "has_accept_button": false,
+                  "has_reject_button": false
+                }
+              },
+              "privacy_policy": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "link_found": true
+                }
+              },
+              "accessibility_statement": {
+                "score": 0,
+                "issues": [
+                  "No accessibility statement found"
+                ],
+                "recommendations": [
+                  "Add an accessibility statement"
+                ],
+                "details": {
+                  "statement_found": false
+                }
+              },
+              "data_access_controls": {
+                "score": 0,
+                "issues": [
+                  "No data access controls found"
+                ],
+                "recommendations": [
+                  "Implement data access controls"
+                ],
+                "details": {
+                  "controls_found": false
+                }
+              },
+              "gdpr_compliance": {
+                "score": 0,
+                "issues": [
+                  "No GDPR compliance elements found"
+                ],
+                "recommendations": [
+                  "Implement GDPR compliance elements"
+                ],
+                "details": {
+                  "gdpr_elements_found": false
+                }
+              },
+              "ccpa_compliance": {
+                "score": 0,
+                "issues": [
+                  "No CCPA compliance elements found"
+                ],
+                "recommendations": [
+                  "Implement CCPA compliance elements"
+                ],
+                "details": {
+                  "ccpa_elements_found": false
+                }
+              },
+              "data_retention": {
+                "score": 0,
+                "issues": [
+                  "No data retention policy found"
+                ],
+                "recommendations": [
+                  "Add a data retention policy"
+                ],
+                "details": {
+                  "policy_found": false
+                }
+              }
+            }
+          }
+        },
+        "design": {
+          "DesignSystemAnalyzer": {
+            "overall_score": 50,
+            "issues": [],
+            "recommendations": [],
+            "metrics": {
+              "css_vars_count": 3,
+              "figma_tokens": false,
+              "sketch_data": false
+            },
+            "details": {
+              "figma_tokens": {},
+              "sketch_data": {},
+              "css_vars": []
+            }
+          }
+        },
+        "infrastructure": {
+          "InfrastructureAnalyzer": {
+            "overall_score": 0.6,
+            "issues": [
+              "Low CDN utilization",
+              "High DNS resolution time",
+              "High server response time",
+              "High number of third-party services",
+              "No error monitoring found",
+              "No load balancing detected"
+            ],
+            "recommendations": [
+              "Increase CDN utilization for better performance",
+              "Optimize DNS configuration",
+              "Optimize server response time",
+              "Reduce third-party service usage",
+              "Implement error monitoring",
+              "Implement load balancing"
+            ],
+            "metrics": {
+              "cdn_utilization": {
+                "score": 0.0,
+                "details": {
+                  "cdn_resources": 0,
+                  "total_resources": 145,
+                  "cdn_ratio": 0.0
+                }
+              },
+              "cache_policies": {
+                "score": 1.0,
+                "details": {
+                  "cache_control": "max-age=0, private, must-revalidate",
+                  "has_cache": true
+                }
+              },
+              "dns_configuration": {
+                "score": 0.5,
+                "details": {
+                  "dns_time": 2.375,
+                  "status": 200
+                }
+              },
+              "server_response_times": {
+                "score": 0.5,
+                "details": {
+                  "ttfb": 1.6410000000032596,
+                  "status": 200
+                }
+              },
+              "resource_prioritization": {
+                "score": 1.0,
+                "details": {
+                  "resource_hints": 2
+                }
+              },
+              "third_party_services": {
+                "score": 0.5,
+                "details": {
+                  "third_party_count": 141
+                }
+              },
+              "error_monitoring": {
+                "score": 0,
+                "details": {
+                  "has_error_monitoring": false
+                }
+              },
+              "load_balancing": {
+                "score": 0.5,
+                "details": {
+                  "has_load_balancer": false
+                }
+              },
+              "security_headers": {
+                "score": 1.0,
+                "details": {
+                  "content-security-policy": true,
+                  "x-frame-options": true,
+                  "x-content-type-options": true,
+                  "strict-transport-security": true
+                }
+              },
+              "ssl_tls": {
+                "score": 1.0,
+                "details": {
+                  "is_https": true,
+                  "status": 200
+                }
+              }
+            },
+            "details": {
+              "cdn_utilization": {
+                "score": 0.0,
+                "issues": [
+                  "Low CDN utilization"
+                ],
+                "recommendations": [
+                  "Increase CDN utilization for better performance"
+                ],
+                "details": {
+                  "cdn_resources": 0,
+                  "total_resources": 145,
+                  "cdn_ratio": 0.0
+                }
+              },
+              "cache_policies": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "cache_control": "max-age=0, private, must-revalidate",
+                  "has_cache": true
+                }
+              },
+              "dns_configuration": {
+                "score": 0.5,
+                "issues": [
+                  "High DNS resolution time"
+                ],
+                "recommendations": [
+                  "Optimize DNS configuration"
+                ],
+                "details": {
+                  "dns_time": 2.375,
+                  "status": 200
+                }
+              },
+              "server_response_times": {
+                "score": 0.5,
+                "issues": [
+                  "High server response time"
+                ],
+                "recommendations": [
+                  "Optimize server response time"
+                ],
+                "details": {
+                  "ttfb": 1.6410000000032596,
+                  "status": 200
+                }
+              },
+              "resource_prioritization": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "resource_hints": 2
+                }
+              },
+              "third_party_services": {
+                "score": 0.5,
+                "issues": [
+                  "High number of third-party services"
+                ],
+                "recommendations": [
+                  "Reduce third-party service usage"
+                ],
+                "details": {
+                  "third_party_count": 141
+                }
+              },
+              "error_monitoring": {
+                "score": 0,
+                "issues": [
+                  "No error monitoring found"
+                ],
+                "recommendations": [
+                  "Implement error monitoring"
+                ],
+                "details": {
+                  "has_error_monitoring": false
+                }
+              },
+              "load_balancing": {
+                "score": 0.5,
+                "issues": [
+                  "No load balancing detected"
+                ],
+                "recommendations": [
+                  "Implement load balancing"
+                ],
+                "details": {
+                  "has_load_balancer": false
+                }
+              },
+              "security_headers": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "content-security-policy": true,
+                  "x-frame-options": true,
+                  "x-content-type-options": true,
+                  "strict-transport-security": true
+                }
+              },
+              "ssl_tls": {
+                "score": 1.0,
+                "issues": [],
+                "recommendations": [],
+                "details": {
+                  "is_https": true,
+                  "status": 200
+                }
+              }
+            }
+          }
+        },
+        "nlp": {
+          "NLPContentAnalyzer": {
+            "error": "NLP analysis failed: Invalid input: HTML content must be a string.",
+            "status": "failed",
+            "overall_score": 0.0,
+            "details": {},
+            "issues": [
+              "Analysis failed: Invalid input: HTML content must be a string."
+            ],
+            "recommendations": [
+              "Fix analyzer implementation"
+            ],
+            "metrics": {}
+          }
+        },
+        "operational": {
+          "OperationalMetricsAnalyzer": {
+            "overall_score": 58.333333333333336,
+            "issues": [
+              "No uptime monitoring scripts detected",
+              "No error budget documentation found",
+              "No deployment/version info found",
+              "No performance budget meta tag found",
+              "No audit trail/activity log found"
+            ],
+            "recommendations": [],
+            "metrics": {
+              "execution_time": 0,
+              "operational_score": 58.333333333333336,
+              "total_checks": 6
+            },
+            "details": {
+              "uptime_monitoring": {
+                "score": 50,
+                "issues": [
+                  "No uptime monitoring scripts detected"
+                ],
+                "passes": [],
+                "details": {
+                  "uptime_scripts": []
+                }
+              },
+              "error_budgets": {
+                "score": 50,
+                "issues": [
+                  "No error budget documentation found"
+                ],
+                "passes": []
+              },
+              "deployment_frequency": {
+                "score": 50,
+                "issues": [
+                  "No deployment/version info found"
+                ],
+                "passes": []
+              },
+              "mttr": {
+                "score": 100,
+                "issues": [],
+                "passes": [
+                  "Incident response/status page found"
+                ]
+              },
+              "performance_budgets": {
+                "score": 50,
+                "issues": [
+                  "No performance budget meta tag found"
+                ],
+                "passes": []
+              },
+              "audit_trails": {
+                "score": 50,
+                "issues": [
+                  "No audit trail/activity log found"
+                ],
+                "passes": []
+              }
+            }
+          }
+        },
+        "mutation": {
+          "MutationAnalyzer": {
+            "overall_score": 100.0,
+            "mutations": [
+              {
+                "type": "attribute_change",
+                "element": "button",
+                "attribute": "disabled",
+                "value": true
+              },
+              {
+                "type": "text_change",
+                "element": "h1",
+                "text": "Modified Title"
+              },
+              {
+                "type": "style_change",
+                "element": "div",
+                "property": "display",
+                "value": "none"
+              }
+            ],
+            "killed": 3,
+            "survived": 0,
+            "metrics": {
+              "mutation_score": 100.0,
+              "total_mutations": 3,
+              "execution_time": 0
+            },
+            "details": {},
+            "issues": [],
+            "recommendations": []
+          }
+        },
+        "contract": {
+          "ContractAnalyzer": {
+            "overall_score": 33.33333333333333,
+            "interactions": [
+              {
+                "name": "form_submit",
+                "selector": "form",
+                "action": "submit",
+                "expected": "form_submitted"
+              }
+            ],
+            "passed": 1,
+            "failed": 2,
+            "metrics": {
+              "contract_score": 33.33333333333333,
+              "total_contracts": 3,
+              "execution_time": 0
+            },
+            "details": {},
+            "issues": [],
+            "recommendations": []
+          }
+        },
+        "fuzz": {
+          "FuzzAnalyzer": {
+            "overall_score": -200.0,
+            "executions": 1,
+            "crashes": 3,
+            "coverage": 25.0,
+            "metrics": {
+              "fuzz_score": -200.0,
+              "total_inputs": 4,
+              "execution_time": 0
+            },
+            "details": {},
+            "issues": [],
+            "recommendations": []
+          }
+        }
+      },
+      "design_data": {},
+      "performance_metrics": {
+        "PerformanceAnalyzer": {
+          "overall_score": 0.375,
+          "issues": [
+            "Large page size: 289.83 KB",
+            "Slow page load time: 47602ms",
+            "Slow first contentful paint: 6448.5ms"
+          ],
+          "recommendations": [
+            "Optimize page size",
+            "Optimize page load time",
+            "Optimize rendering performance"
+          ],
+          "metrics": {
+            "execution_time": 0,
+            "performance_score": 0.375,
+            "total_checks": 4
+          },
+          "details": {
+            "page_size": {
+              "score": 0.5,
+              "issues": [
+                "Large page size: 289.83 KB"
+              ],
+              "recommendations": [
+                "Optimize page size"
+              ],
+              "details": {
+                "size_bytes": 296790,
+                "size_kb": 289.833984375
+              }
+            },
+            "load_time": {
+              "score": 0.0,
+              "issues": [
+                "Slow page load time: 47602ms"
+              ],
+              "recommendations": [
+                "Optimize page load time"
+              ],
+              "details": {
+                "loadTime": 47602,
+                "domContentLoaded": 18975,
+                "firstPaint": 6364.29999999702
+              }
+            },
+            "resource_usage": {
+              "score": 1.0,
+              "issues": [],
+              "recommendations": [],
+              "details": {
+                "totalResources": 143,
+                "totalSize": 0,
+                "resourceTypes": {
+                  "link": 16,
+                  "script": 80,
+                  "img": 33,
+                  "beacon": 6,
+                  "fetch": 4,
+                  "video": 4
+                }
+              }
+            },
+            "rendering_performance": {
+              "score": 0.0,
+              "issues": [
+                "Slow first contentful paint: 6448.5ms"
+              ],
+              "recommendations": [
+                "Optimize rendering performance"
+              ],
+              "details": {
+                "firstPaint": 6364.29999999702,
+                "firstContentfulPaint": 6448.5,
+                "timeToInteractive": 7350
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

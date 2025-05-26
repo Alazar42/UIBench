@@ -146,7 +146,7 @@ class AnalysisService:
         result = self.analysis_collection.find_one({"result_id": result_id}, {"_id": 0})
         if result:
             return result
-        return {"error": "Analysis result not found"}
+        return {"error": f"Analysis result with ID {result_id} not found"}
 
     def get_all_analyses_for_project(self, project_id: str):
         results = list(self.analysis_collection.find({"project_id": project_id}, {"_id": 0}))
