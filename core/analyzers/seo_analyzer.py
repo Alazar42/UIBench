@@ -14,7 +14,8 @@ class SEOAnalyzer(BaseAnalyzer):
         super().__init__()
         try:
             self.nlp = spacy.load("en_core_web_sm")
-        except OSError:
+        except OSError as e:
+            print(f"Model not found: {e}. Attempting to download 'en_core_web_sm'.")
             from spacy.cli import download
             download("en_core_web_sm")
             self.nlp = spacy.load("en_core_web_sm")
