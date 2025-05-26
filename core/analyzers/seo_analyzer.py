@@ -14,13 +14,18 @@ class SEOAnalyzer(BaseAnalyzer):
         super().__init__()
         self.nlp = spacy.load("en_core_web_sm")
     
-    async def analyze(self, url: str, html: str) -> str:
+    async def analyze(self, url: str, html: Any) -> str:
         """
         Perform comprehensive SEO analysis.
         Returns:
             JSON string containing SEO analysis results and JSON file path
         """
         try:
+            # Check if html is a Playwright Page object
+            if hasattr(html, 'content') and callable(html.content):
+                # Extract HTML content from the Page object
+                html = await html.content()
+
             # Parse the HTML content with BeautifulSoup
             soup = BeautifulSoup(html, "html.parser")
 
