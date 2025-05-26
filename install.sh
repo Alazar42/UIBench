@@ -61,6 +61,17 @@ if ! python -m spacy validate | grep -q "en_core_web_sm"; then
     python -m spacy download en_core_web_sm
 fi
 
+# Force reinstall spaCy models
+if [ -d "venv" ]; then
+    echo -e "${YELLOW}Activating virtual environment for spaCy model installation...${NC}"
+    source venv/bin/activate
+    echo -e "${YELLOW}Reinstalling spaCy model en_core_web_sm...${NC}"
+    python -m spacy download en_core_web_sm --force
+else
+    echo -e "${RED}Error: Virtual environment not found! Please run the installation script first.${NC}"
+    exit 1
+fi
+
 # Create .env file if it doesn't exist
 if [ ! -f .env ]; then
     echo -e "${YELLOW}Creating .env file...${NC}"
