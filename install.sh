@@ -10,7 +10,7 @@ echo -e "${YELLOW}Starting UIBench installation...${NC}"
 
 # Check Python version
 python_version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
-echo python_version
+echo ${python_version}
 if (( $(echo "$python_version < 3.6" | bc -l) )); then
     echo -e "${RED}Error: Python 3.8 or higher is required${NC}"
     exit 1
