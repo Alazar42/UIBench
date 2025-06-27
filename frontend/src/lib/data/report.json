@@ -1,0 +1,82 @@
+{
+    "project": {
+      "name": "UIBench Project",
+      "evaluation": {
+        "performance": {
+          "score": 78,
+          "issues": [
+            {
+              "id": "P001",
+              "description": "High initial load time due to large image assets.",
+              "impact": "Critical"
+            },
+            {
+              "id": "P002",
+              "description": "Unoptimized JavaScript causing render-blocking.",
+              "impact": "High"
+            }
+          ],
+          "recommendations": [
+            {
+              "id": "R001",
+              "description": "Compress and resize images to reduce load time."
+            },
+            {
+              "id": "R002",
+              "description": "Implement code-splitting and lazy loading for JavaScript."
+            }
+          ]
+        },
+        "aesthetics": {
+          "score": 85,
+          "issues": [
+            {
+              "id": "A001",
+              "description": "Inconsistent font sizes across pages.",
+              "impact": "Medium"
+            },
+            {
+              "id": "A002",
+              "description": "Color contrast is insufficient for some text elements.",
+              "impact": "High"
+            }
+          ],
+          "recommendations": [
+            {
+              "id": "R003",
+              "description": "Use a consistent typography scale for all pages."
+            },
+            {
+              "id": "R004",
+              "description": "Adjust color contrast to meet WCAG AA standards."
+            }
+          ]
+        },
+        "accessibility": {
+          "score": 72,
+          "issues": [
+            {
+              "id": "AC001",
+              "description": "Missing alt attributes for images.",
+              "impact": "High"
+            },
+            {
+              "id": "AC002",
+              "description": "Interactive elements lack focus indicators.",
+              "impact": "Medium"
+            }
+          ],
+          "recommendations": [
+            {
+              "id": "R005",
+              "description": "Add descriptive alt attributes to all images."
+            },
+            {
+              "id": "R006",
+              "description": "Ensure all interactive elements have visible focus styles."
+            }
+          ]
+        }
+      }
+    }
+  }

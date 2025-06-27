@@ -1,11 +1,10 @@
 <script lang="ts">
-	import users from '$lib/data/users.json';
 	import { slide } from 'svelte/transition';
+	import { userContext } from '$lib/context/user';
+	import { getUserDetails, loginUser, registerUser } from '$lib/api/server';
 
 	import { passwordStrength } from 'check-password-strength';
-	import { Sha256 } from '@aws-crypto/sha256-js';
-
-	const hash = new Sha256();
+	import { goto } from '$app/navigation';
 
 	let isLoading = $state(false);
 
@@ -20,61 +19,90 @@
 	let passwordInput = $state('');
 	let confirmPasswordInput = $state('');
 
-	let onSubmit = () => {
+	let onSubmit = async () => {
 		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput) ? (errorInEmail = false) : (errorInEmail = true);
-		if (users.find((user) => user.email === emailInput)) {
-			if (isNewUser) {
-				alert('user already exists, login instead');
-				return;
-			} else onLogin();
-		} else if (isNewUser) {
-			onSignup();
-		} else alert(`user ${emailInput} not found, sign up instead`);
+
+		let userResponse;
+		if (isNewUser) {
+			userResponse = await onSignup();
+		} else userResponse = await onLogin();
+
+		const userDetails = await getUserDetails(userResponse.access_token);
+
+		userContext.set({
+			user_id: userDetails.user_id,
+			name: userDetails.name,
+			email: userDetails.email,
+			bearer: userResponse.access_token,
+			role: userDetails.role,
+			projects: userDetails.projects
+		});
+
+		localStorage.setItem('accessToken', userResponse.access_token);
+
+		if (userDetails.user_id !== '') {
+			goto('/home');
+		}
+
+		isLoading = false;
 	};
 
 	let onLogin = async () => {
 		passwordInput === '' ? (weakPassword = true) : (weakPassword = false);
 		if (!errorInEmail && !weakPassword) {
-			hash.update(passwordInput);
-			const passwordHash = await hash.digest().then((hash) => hash.toString());
-			if (users.find((user) => user.email === emailInput)?.password === passwordHash) {
-				alert('Login successful');
-			} else {
-				alert('Invalid password');
+			// hash.update(passwordInput);
+			try {
+				isLoading = true;
+				return await loginUser({
+					email: emailInput,
+					password: passwordInput
+				});
+
+				// write the updated users to the file
+				// alert('Signup successful');
+			} catch (error: any) {
+				alert(`Error during signup: ${error.message}`);
+				isLoading = false;
+				return;
 			}
 		}
 	};
 
 	let onSignup = async () => {
-		if (!agreedToTerms) alert('You must agree to the terms and conditions');
+		if (!agreedToTerms) {
+			alert('You must agree to the terms and conditions');
+			return;
+		}
 		passwordStrength(passwordInput).value === 'Too weak'
 			? (weakPassword = true)
 			: (weakPassword = false);
 		passwordInput !== confirmPasswordInput ? (mismatchPassword = true) : (mismatchPassword = false);
 
 		if (!errorInEmail && !weakPassword && !mismatchPassword) {
-			hash.update(passwordInput);
-			const passwordHash = await hash.digest().then((hash) => hash.toString());
+			try {
+				isLoading = true;
 
-			users.push({
-				id: users.length + 1,
-				name: '',
-				email: emailInput,
-				age: 0,
-				isActive: true,
-				password: passwordHash
-			});
+				await registerUser({
+					name: '',
+					email: emailInput,
+					password: passwordInput,
+					role: 'user'
+				});
 
-			// write the updated users to the file
-			alert('Signup successful');
+				return await loginUser({
+					email: emailInput,
+					password: passwordInput
+				});
+			} catch (error: any) {
+				alert(`Error during signup: ${error.message}`);
+				isLoading = false;
+				return;
+			}
 		}
 	};
-
-	// $inspect(weakPassword);
-	// $inspect(passwordStrength(passwordInput).value);
 </script>
 
-<div class="flex w-80 flex-col items-center justify-center">
+<div class="flex w-80 flex-col items-center justify-center xl:scale-125 xl:pr-8">
 	<ul id="login or signup tabs" class="mb-6 flex text-center text-sm font-medium text-gray-500">
 		<li class=" me-2">
 			<button

@@ -5,7 +5,8 @@ from typing import List, Optional
 class ProjectModel(BaseModel):
     project_id: Optional[str] = None  # Generated in code
     name: str
-    url: HttpUrl
+    url: Optional[HttpUrl] = None  # URL of the project
+    project_directory: Optional[str] = None  # Path to the project directory on the server
     creation_date: Optional[datetime] = None
     last_updated: Optional[datetime] = None
     owner_id: Optional[str] = None

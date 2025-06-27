@@ -6,5 +6,14 @@ export default defineConfig({
 
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	server: {
+		proxy: {
+			'/api': {
+				target: 'https://uibench.onrender.com',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
+		}
 	}
 });

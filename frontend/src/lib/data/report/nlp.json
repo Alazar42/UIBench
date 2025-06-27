@@ -1,0 +1,303 @@
+{
+  "metadata": {
+    "analyzer": "nlp",
+    "url": "https://www.cursor.com/",
+    "timestamp": "2025-05-04T13:00:34.249563",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 33.32333333333333,
+    "issues": {
+      "grammar": [
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "Ben Bernard Instacart"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "The Cursor tab completion"
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do.\n\n"
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "it's how Copilot should feel."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "i'm completely off VSCode now."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "shadcn Vercel I went from never hearing about Cursor to many IC engineers telling me it\u2019s their new favorite tool."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "oh Kent C. Dodds Internet"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "oh Kent C. Dodds Internet"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "Ben Bernard Instacart"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "The Cursor tab completion"
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do. \n\n"
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "it's how Copilot should feel."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "i'm completely off VSCode now."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "shadcn Vercel I went from never hearing about Cursor to many IC engineers telling me it\u2019s their new favorite tool."
+        },
+        {
+          "type": "capitalization",
+          "message": "Sentence should start with a capital letter",
+          "text": "oh Kent C. Dodds Internet"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "oh Kent C. Dodds Internet"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "\ud83e\udd2f Johannes Schickling Prisma Try Cursor Now Download for free hi@cursor.com"
+        },
+        {
+          "type": "punctuation",
+          "message": "Sentence should end with proper punctuation",
+          "text": "\u00a9 2025 Made by Anysphere English Product Pricing Features Enterprise Downloads Resources Docs Blog Forum Changelog Company Anysphere Careers Community Legal Terms Security Privacy SOC 2 Certified \u00a9 2025 Made by Anysphere English SOC 2 Certified Pricing Features Enterprise Blog Forum Careers Sign in Download"
+        }
+      ],
+      "inclusive_language": []
+    },
+    "recommendations": [
+      "Consider improving readability by simplifying complex sentences",
+      "Fix 18 grammar issues"
+    ],
+    "metrics": {
+      "readability": {
+        "flesch_reading_ease": 56.05,
+        "flesch_kincaid_grade": 9.2,
+        "gunning_fog": 8.11,
+        "smog_index": 11.4,
+        "automated_readability_index": 9.4,
+        "coleman_liau_index": 9.62,
+        "linsear_write_formula": 12.2,
+        "dale_chall_readability_score": 7.19
+      },
+      "sentiment": {
+        "positive": 0.125,
+        "negative": 0.021,
+        "neutral": 0.854,
+        "compound": 0.9994
+      },
+      "translation_quality": {
+        "translation_likelihood": 0.8,
+        "cultural_appropriateness": true
+      },
+      "content_gaps": {
+        "word_frequency": {
+          ".": 76,
+          "cursor": 53,
+          "is": 46,
+          "i": 43,
+          ",": 39,
+          "and": 37,
+          "it": 37,
+          "to": 32,
+          "the": 31,
+          "you": 23
+        },
+        "vocabulary_richness": 0.26990049751243783
+      }
+    },
+    "details": {
+      "keywords": [
+        "necessity",
+        "team",
+        "Etzkorn",
+        "Downloads",
+        "answers",
+        "Sawyer",
+        "Trusted",
+        "Tab",
+        "Zeke",
+        "Internet"
+      ],
+      "raw_analysis": {
+        "readability": {
+          "flesch_reading_ease": 56.05,
+          "flesch_kincaid_grade": 9.2,
+          "gunning_fog": 8.11,
+          "smog_index": 11.4,
+          "automated_readability_index": 9.4,
+          "coleman_liau_index": 9.62,
+          "linsear_write_formula": 12.2,
+          "dale_chall_readability_score": 7.19
+        },
+        "sentiment": {
+          "positive": 0.125,
+          "negative": 0.021,
+          "neutral": 0.854,
+          "compound": 0.9994
+        },
+        "keywords": [
+          "necessity",
+          "team",
+          "Etzkorn",
+          "Downloads",
+          "answers",
+          "Sawyer",
+          "Trusted",
+          "Tab",
+          "Zeke",
+          "Internet"
+        ],
+        "grammar_issues": [
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "Ben Bernard Instacart"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "The Cursor tab completion"
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do.\n\n"
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "it's how Copilot should feel."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "i'm completely off VSCode now."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "shadcn Vercel I went from never hearing about Cursor to many IC engineers telling me it\u2019s their new favorite tool."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "oh Kent C. Dodds Internet"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "oh Kent C. Dodds Internet"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "Ben Bernard Instacart"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "The Cursor tab completion"
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "while coding is occasionally so magic it defies reality - about ~25% of the time it is anticipating exactly what I want to do. \n\n"
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "it's how Copilot should feel."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "i'm completely off VSCode now."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "shadcn Vercel I went from never hearing about Cursor to many IC engineers telling me it\u2019s their new favorite tool."
+          },
+          {
+            "type": "capitalization",
+            "message": "Sentence should start with a capital letter",
+            "text": "oh Kent C. Dodds Internet"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "oh Kent C. Dodds Internet"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "\ud83e\udd2f Johannes Schickling Prisma Try Cursor Now Download for free hi@cursor.com"
+          },
+          {
+            "type": "punctuation",
+            "message": "Sentence should end with proper punctuation",
+            "text": "\u00a9 2025 Made by Anysphere English Product Pricing Features Enterprise Downloads Resources Docs Blog Forum Changelog Company Anysphere Careers Community Legal Terms Security Privacy SOC 2 Certified \u00a9 2025 Made by Anysphere English SOC 2 Certified Pricing Features Enterprise Blog Forum Careers Sign in Download"
+          }
+        ],
+        "inclusive_language_issues": [],
+        "translation_quality": {
+          "translation_likelihood": 0.8,
+          "cultural_appropriateness": true
+        },
+        "content_gaps": {
+          "word_frequency": {
+            ".": 76,
+            "cursor": 53,
+            "is": 46,
+            "i": 43,
+            ",": 39,
+            "and": 37,
+            "it": 37,
+            "to": 32,
+            "the": 31,
+            "you": 23
+          },
+          "vocabulary_richness": 0.26990049751243783
+        }
+      }
+    }
+  }
+}

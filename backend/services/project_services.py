@@ -1,16 +1,16 @@
+import os
 from pymongo.collection import Collection
 from ..models.project import ProjectModel
 from ..database.connection import db_instance
 
 class ProjectService:
-    def __init__(self, collection):
+    def __init__(self, collection: Collection):
         self.collection = collection
 
-    def create_project(self, project):
+    def create_project(self, project: ProjectModel):
         project_data = project.dict()
         self.collection.insert_one(project_data)
 
-        # Add project ID to the user's projects list
         users_collection = db_instance.db["users"]
         users_collection.update_one(
             {"user_id": project.owner_id},
@@ -52,6 +52,7 @@ class ProjectService:
         )
 
         return {"message": "Project deleted"}
+
     def update_project(self, project_id: str, owner_id: str, update_data: dict):
         project = self.collection.find_one({"project_id": project_id})
         if not project:
@@ -60,7 +61,6 @@ class ProjectService:
         if project["owner_id"] != owner_id:
             return {"error": "Not authorized to update this project"}
 
-        # Prevent updating restricted fields
         restricted_fields = {"project_id", "owner_id", "_id", "creation_date"}
         update_data = {k: v for k, v in update_data.items() if k not in restricted_fields}
 

@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "analyzer": "security",
+    "url": "https://www.cursor.com/",
+    "timestamp": "2025-05-04T13:00:50.408737",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 78.33333333333333,
+    "issues": [
+      "Missing X-Content-Type-Options header",
+      "Missing X-Frame-Options header",
+      "Missing X-XSS-Protection header",
+      "Missing Strict-Transport-Security header",
+      "Missing Content-Security-Policy header",
+      "Found 22 inline scripts",
+      "Cookie IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D missing secure flag",
+      "Cookie IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D missing httpOnly flag",
+      "Found potential sensitive data exposure",
+      {
+        "name": "IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D",
+        "domain": ".cursor.com",
+        "missing_flags": [
+          "Secure",
+          "HttpOnly"
+        ]
+      },
+      "CSP allows unsafe-inline or unsafe-eval",
+      "Found 22 inline scripts (potential XSS risk)"
+    ],
+    "recommendations": [],
+    "metrics": {
+      "headers": {
+        "score": 0,
+        "details": {}
+      },
+      "content_security": {
+        "score": 80,
+        "details": {}
+      },
+      "authentication": {
+        "score": 60,
+        "details": {}
+      },
+      "input_validation": {
+        "score": 100,
+        "details": {}
+      },
+      "data_protection": {
+        "score": 50,
+        "details": {}
+      },
+      "api_security": {
+        "score": 100,
+        "details": {}
+      },
+      "cookie_security": {
+        "score": 90,
+        "details": {
+          "total_cookies": 1,
+          "secure_cookies": 0,
+          "insecure_cookies": 1
+        }
+      },
+      "input_sanitization": {
+        "score": 100,
+        "details": {
+          "total_inputs": 0,
+          "validated_inputs": 0,
+          "unvalidated_inputs": 0
+        }
+      },
+      "clickjacking_protection": {
+        "score": 100,
+        "details": {
+          "access-control-allow-origin": "*",
+          "age": "137131",
+          "cache-control": "public, max-age=0, must-revalidate",
+          "content-disposition": "inline",
+          "content-encoding": "br",
+          "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.live https://vercel.live https://*.vercel-scripts.com https://*.posthog.com https://*.unifyintent.com; style-src 'self' 'unsafe-inline' https://vercel.com; img-src 'self' data: https://vercel.com https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; font-src 'self' data: https://vercel.live; connect-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com https://vercel.live https://*.pusher.com wss://*.pusher.com http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.posthog.com https://unifyintent.com; media-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; frame-src https://vercel.live",
+          "content-type": "text/html; charset=utf-8",
+          "date": "Sun, 04 May 2025 10:00:49 GMT",
+          "etag": "W/\"bc6c2b233604c4471fa92461b08c7b2e\"",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "server": "Vercel",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-matched-path": "/en",
+          "x-next-i18n-router-locale": "en",
+          "x-nextjs-prerender": "1",
+          "x-nextjs-stale-time": "4294967294",
+          "x-permitted-cross-domain-policies": "none",
+          "x-vercel-cache": "HIT",
+          "x-vercel-id": "cpt1::fw4kv-1746352849245-15365a38d54a",
+          "x-xss-protection": "1; mode=block"
+        }
+      },
+      "csp_xss": {
+        "score": 60,
+        "details": {
+          "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.live https://vercel.live https://*.vercel-scripts.com https://*.posthog.com https://*.unifyintent.com; style-src 'self' 'unsafe-inline' https://vercel.com; img-src 'self' data: https://vercel.com https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; font-src 'self' data: https://vercel.live; connect-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com https://vercel.live https://*.pusher.com wss://*.pusher.com http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.posthog.com https://unifyintent.com; media-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; frame-src https://vercel.live"
+        }
+      },
+      "csrf_tokens": {
+        "score": 100,
+        "details": {
+          "total_forms": 0,
+          "forms_with_token": 0
+        }
+      },
+      "mixed_content": {
+        "score": 100,
+        "details": {
+          "mixed_content": []
+        }
+      }
+    },
+    "details": {
+      "headers": {
+        "score": 0,
+        "issues": [
+          "Missing X-Content-Type-Options header",
+          "Missing X-Frame-Options header",
+          "Missing X-XSS-Protection header",
+          "Missing Strict-Transport-Security header",
+          "Missing Content-Security-Policy header"
+        ]
+      },
+      "content_security": {
+        "score": 80,
+        "issues": [
+          "Found 22 inline scripts"
+        ]
+      },
+      "authentication": {
+        "score": 60,
+        "issues": [
+          "Cookie IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D missing secure flag",
+          "Cookie IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D missing httpOnly flag"
+        ]
+      },
+      "input_validation": {
+        "score": 100,
+        "issues": []
+      },
+      "data_protection": {
+        "score": 50,
+        "issues": [
+          "Found potential sensitive data exposure"
+        ]
+      },
+      "api_security": {
+        "score": 100,
+        "issues": []
+      },
+      "cookie_security": {
+        "score": 90,
+        "issues": [
+          {
+            "name": "IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D",
+            "domain": ".cursor.com",
+            "missing_flags": [
+              "Secure",
+              "HttpOnly"
+            ]
+          }
+        ],
+        "passes": [],
+        "details": {
+          "total_cookies": 1,
+          "secure_cookies": 0,
+          "insecure_cookies": 1
+        }
+      },
+      "input_sanitization": {
+        "score": 100,
+        "issues": [],
+        "passes": [],
+        "details": {
+          "total_inputs": 0,
+          "validated_inputs": 0,
+          "unvalidated_inputs": 0
+        }
+      },
+      "clickjacking_protection": {
+        "score": 100,
+        "issues": [],
+        "passes": [
+          "X-Frame-Options header present and secure"
+        ],
+        "details": {
+          "access-control-allow-origin": "*",
+          "age": "137131",
+          "cache-control": "public, max-age=0, must-revalidate",
+          "content-disposition": "inline",
+          "content-encoding": "br",
+          "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.live https://vercel.live https://*.vercel-scripts.com https://*.posthog.com https://*.unifyintent.com; style-src 'self' 'unsafe-inline' https://vercel.com; img-src 'self' data: https://vercel.com https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; font-src 'self' data: https://vercel.live; connect-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com https://vercel.live https://*.pusher.com wss://*.pusher.com http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.posthog.com https://unifyintent.com; media-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; frame-src https://vercel.live",
+          "content-type": "text/html; charset=utf-8",
+          "date": "Sun, 04 May 2025 10:00:49 GMT",
+          "etag": "W/\"bc6c2b233604c4471fa92461b08c7b2e\"",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "server": "Vercel",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-matched-path": "/en",
+          "x-next-i18n-router-locale": "en",
+          "x-nextjs-prerender": "1",
+          "x-nextjs-stale-time": "4294967294",
+          "x-permitted-cross-domain-policies": "none",
+          "x-vercel-cache": "HIT",
+          "x-vercel-id": "cpt1::fw4kv-1746352849245-15365a38d54a",
+          "x-xss-protection": "1; mode=block"
+        }
+      },
+      "csp_xss": {
+        "score": 60,
+        "issues": [
+          "CSP allows unsafe-inline or unsafe-eval",
+          "Found 22 inline scripts (potential XSS risk)"
+        ],
+        "passes": [],
+        "details": {
+          "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel.live https://vercel.live https://*.vercel-scripts.com https://*.posthog.com https://*.unifyintent.com; style-src 'self' 'unsafe-inline' https://vercel.com; img-src 'self' data: https://vercel.com https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; font-src 'self' data: https://vercel.live; connect-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com https://vercel.live https://*.pusher.com wss://*.pusher.com http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:* wss://localhost:* wss://127.0.0.1:* https://*.posthog.com https://unifyintent.com; media-src 'self' https://*.basehub.earth https://*.basehub.com https://*.workoscdn.com https://*.vercel.live https://vercel.com https://*.vercel-scripts.com https://*.pusher.com wss://*.pusher.com https://*.posthog.com https://*.cursor.sh https://*.cursor.com https://*.unifyintent.com; frame-src https://vercel.live"
+        }
+      },
+      "csrf_tokens": {
+        "score": 100,
+        "issues": [],
+        "passes": [],
+        "details": {
+          "total_forms": 0,
+          "forms_with_token": 0
+        }
+      },
+      "mixed_content": {
+        "score": 100,
+        "issues": [],
+        "passes": [
+          "No mixed content detected"
+        ],
+        "details": {
+          "mixed_content": []
+        }
+      }
+    }
+  }
+}

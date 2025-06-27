@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "analyzer": "infrastructure",
+    "url": "https://www.cursor.com/",
+    "timestamp": "2025-05-04T13:00:27.934688",
+    "version": "1.0.0"
+  },
+  "results": {
+    "overall_score": 0.575,
+    "issues": [
+      "Low CDN utilization",
+      "High DNS resolution time",
+      "No resource prioritization found",
+      "High number of third-party services",
+      "No error monitoring found",
+      "No load balancing detected",
+      "strict-transport-security"
+    ],
+    "recommendations": [
+      "Increase CDN utilization for better performance",
+      "Optimize DNS configuration",
+      "Implement resource prioritization",
+      "Reduce third-party service usage",
+      "Implement error monitoring",
+      "Implement load balancing",
+      "Add strict-transport-security header"
+    ],
+    "metrics": {
+      "cdn_utilization": {
+        "score": 0.0,
+        "details": {
+          "cdn_resources": 0,
+          "total_resources": 81,
+          "cdn_ratio": 0.0
+        }
+      },
+      "cache_policies": {
+        "score": 1.0,
+        "details": {
+          "cache_control": "public, max-age=0, must-revalidate",
+          "has_cache": true
+        }
+      },
+      "dns_configuration": {
+        "score": 0.5,
+        "details": {
+          "dns_time": 0.6137915220000139,
+          "status": 200
+        }
+      },
+      "server_response_times": {
+        "score": 1.0,
+        "details": {
+          "ttfb": 0.2758757330000208,
+          "status": 200
+        }
+      },
+      "resource_prioritization": {
+        "score": 0.5,
+        "details": {
+          "resource_hints": 0
+        }
+      },
+      "third_party_services": {
+        "score": 0.5,
+        "details": {
+          "third_party_count": 10
+        }
+      },
+      "error_monitoring": {
+        "score": 0,
+        "details": {
+          "has_error_monitoring": false
+        }
+      },
+      "load_balancing": {
+        "score": 0.5,
+        "details": {
+          "has_load_balancer": false
+        }
+      },
+      "security_headers": {
+        "score": 0.75,
+        "details": {
+          "content-security-policy": true,
+          "x-frame-options": true,
+          "x-content-type-options": true,
+          "strict-transport-security": false
+        }
+      },
+      "ssl_tls": {
+        "score": 1.0,
+        "details": {
+          "is_https": true,
+          "status": 200
+        }
+      }
+    },
+    "details": {
+      "cdn_utilization": {
+        "score": 0.0,
+        "issues": [
+          "Low CDN utilization"
+        ],
+        "recommendations": [
+          "Increase CDN utilization for better performance"
+        ],
+        "details": {
+          "cdn_resources": 0,
+          "total_resources": 81,
+          "cdn_ratio": 0.0
+        }
+      },
+      "cache_policies": {
+        "score": 1.0,
+        "issues": [],
+        "recommendations": [],
+        "details": {
+          "cache_control": "public, max-age=0, must-revalidate",
+          "has_cache": true
+        }
+      },
+      "dns_configuration": {
+        "score": 0.5,
+        "issues": [
+          "High DNS resolution time"
+        ],
+        "recommendations": [
+          "Optimize DNS configuration"
+        ],
+        "details": {
+          "dns_time": 0.6137915220000139,
+          "status": 200
+        }
+      },
+      "server_response_times": {
+        "score": 1.0,
+        "issues": [],
+        "recommendations": [],
+        "details": {
+          "ttfb": 0.2758757330000208,
+          "status": 200
+        }
+      },
+      "resource_prioritization": {
+        "score": 0.5,
+        "issues": [
+          "No resource prioritization found"
+        ],
+        "recommendations": [
+          "Implement resource prioritization"
+        ],
+        "details": {
+          "resource_hints": 0
+        }
+      },
+      "third_party_services": {
+        "score": 0.5,
+        "issues": [
+          "High number of third-party services"
+        ],
+        "recommendations": [
+          "Reduce third-party service usage"
+        ],
+        "details": {
+          "third_party_count": 10
+        }
+      },
+      "error_monitoring": {
+        "score": 0,
+        "issues": [
+          "No error monitoring found"
+        ],
+        "recommendations": [
+          "Implement error monitoring"
+        ],
+        "details": {
+          "has_error_monitoring": false
+        }
+      },
+      "load_balancing": {
+        "score": 0.5,
+        "issues": [
+          "No load balancing detected"
+        ],
+        "recommendations": [
+          "Implement load balancing"
+        ],
+        "details": {
+          "has_load_balancer": false
+        }
+      },
+      "security_headers": {
+        "score": 0.75,
+        "issues": [
+          "strict-transport-security"
+        ],
+        "recommendations": [
+          "Add strict-transport-security header"
+        ],
+        "details": {
+          "content-security-policy": true,
+          "x-frame-options": true,
+          "x-content-type-options": true,
+          "strict-transport-security": false
+        }
+      },
+      "ssl_tls": {
+        "score": 1.0,
+        "issues": [],
+        "recommendations": [],
+        "details": {
+          "is_https": true,
+          "status": 200
+        }
+      }
+    }
+  }
+}

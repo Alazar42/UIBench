@@ -12,7 +12,7 @@ class Database:
         cluster = os.getenv("DB_CLUSTER")
         db_name = os.getenv("DB_NAME")
 
-        uri = f"mongodb+srv://{username}:{password}@{cluster}/?retryWrites=true&w=majority"
+        uri = f"mongodb://localhost:27017"
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
         print("Connected to MongoDB!")
