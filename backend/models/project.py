@@ -17,7 +17,6 @@ class ProjectModel(BaseModel):
 
     is_public: bool = False
     tags: List[str] = []
-    status: str = "pending"  # e.g., "draft", "submitted", "archived"
 
     def dict(self, *args, **kwargs):
         # Convert HttpUrl to string for MongoDB compatibility
