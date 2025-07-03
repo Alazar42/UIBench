@@ -62,6 +62,8 @@ class Settings(BaseModel):
     
     # Performance settings
     performance: PerformanceSettings = Field(default_factory=PerformanceSettings)
+
+    custom_criteria: Optional[Dict[str, Any]] = Field(default=None, description="Custom evaluation criteria for analysis")
     
     # Analysis settings
     nlp_model: str = Field(default="en_core_web_lg", description="NLP model to use")

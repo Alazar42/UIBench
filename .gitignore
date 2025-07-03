@@ -66,5 +66,5 @@ test-results.xml
 frontend/.svelte-kit/
 frontend/build/
 frontend/dist/
-
+.history/
 analysis_results/

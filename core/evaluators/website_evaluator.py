@@ -47,7 +47,6 @@ class WebsiteEvaluator(BaseEvaluator):
         self.urls: List[str] = []
         self.base_url = root_url  # Add base_url attribute
         self.page = page  # Store the page object as an instance attribute
-        print(f"DEBUG: Page object in WebsiteEvaluator: {page}")  # Debug statement
     
     async def get_browser_manager(self) -> BrowserManager:
         """Get or create the browser manager instance."""
@@ -182,7 +181,6 @@ class WebsiteEvaluator(BaseEvaluator):
                     if not page:
                         raise ValueError("Page object is missing or invalid.")
 
-                    print(f"DEBUG: Page object before PageEvaluator instantiation: {page}")  # Debug statement
                     page_evaluator = PageEvaluator(
                         url=url,
                         html=html,
