@@ -100,3 +100,14 @@ We welcome contributions to the UIBench core engine! To contribute:
 ## Acknowledgments
 
 - BeautifulSoup: For the efficient parsing and navigation of HTML content.
+
+### Getting Help
+
+If you encounter issues not covered here:
+
+1. if you have any questions ([![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Alazar42/UIBench))
+2. Open a new issue with:
+   - Error message and stack trace
+   - Steps to reproduce
+   - System information
+   - UIBench version
