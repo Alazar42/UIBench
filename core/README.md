@@ -578,19 +578,10 @@ settings = Settings(
 
 If you encounter issues not covered here:
 
-1. Check the [GitHub Issues](https://github.com/yourusername/uibench/issues)
-2. Search the [Documentation](https://uibench.readthedocs.io)
-3. Join our [Discord Community](https://discord.gg/uibench)
-4. Open a new issue with:
+1. if you have any questions ([![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Alazar42/UIBench))
+2. Open a new issue with:
    - Error message and stack trace
    - Steps to reproduce
    - System information
    - UIBench version
 
-## Contributing
-
-We welcome contributions to the core engine! Please see the main README for contribution guidelines.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
