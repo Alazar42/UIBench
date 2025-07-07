@@ -26,31 +26,32 @@ interface Project {
 	is_public: boolean;
 }
 
-interface AnalysisResult {
+export interface AnalysisResult {
+	name: string;
 	status: string;
+	url: string;
 	results: {
-		url: string;
-		page_rating: number;
-		page_class: string;
-		results: {
-			accessibility?: any; // Simplified for brevity, can be detailed if needed
-			performance?: any;
-			security?: any;
-			seo?: any;
-			ux?: any;
-			code?: any;
-			compliance?: any;
-			design?: any;
-			infrastructure?: any;
-			nlp?: any;
-			operational?: any;
-			mutation?: any;
-			contract?: any;
-			fuzz?: any;
-		};
-		design_data?: any;
-		performance_metrics?: any;
+		accessibility?: AResult;
+		code?: AResult;
+		compliance?: AResult;
+		design?: AResult;
+		infrastructure?: AResult;
+		performance?: AResult;
+		seo?: AResult;
+		ux?: AResult;
 	};
+}
+
+export interface AResult {
+	issues: string[];
+	recommendations: string[];
+	metrics?: {
+		names: string[];
+		scores: number[];
+	};
+	overall_score: number;
+	showMoreIssues: boolean;
+	showMoreRecommendations: boolean;
 }
 
 interface ProjectResult {

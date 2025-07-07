@@ -9,10 +9,10 @@ from pymongo.collection import Collection
 import asyncio
 from asyncio import Semaphore
 
-executor = ThreadPoolExecutor()
+executor = ThreadPoolExecutor()  # Use ThreadPoolExecutor to avoid pickling issues
 executor_lock = Lock()
 
-# Limit the number of concurrent processes
+# Limit the number of concurrent processes to 2
 process_semaphore = Semaphore(2)
 
 class AnalysisService:
@@ -20,26 +20,16 @@ class AnalysisService:
         self.analysis_collection = analysis_collection
         self.project_collection = project_collection
 
-    async def evaluate_and_store_async(self, url: str, project_dir: str, project_id: str, owner_id: str):
-        source = None
-
-        # Determine source based on input priority
-        if url and url.strip() != "":
-            source = url.strip()
-        elif project_dir and project_dir.strip() != "":
-            source = project_dir.strip()
-        else:
-            raise ValueError("Either 'url' or 'project_dir' must be provided")
-
+    async def evaluate_and_store_async(self, url: str, project_id: str, owner_id: str):
         result_id = str(uuid.uuid4())
         now = datetime.utcnow()
 
+        # Insert initial "in progress" doc
         self.analysis_collection.insert_one({
             "result_id": result_id,
             "project_id": project_id,
             "user_id": owner_id,
-            "url": url if url else None,
-            "project_dir": project_dir if project_dir else None,
+            "url": url,
             "status": "in progress",
             "score": None,
             "details": None,
@@ -54,8 +44,9 @@ class AnalysisService:
             }
         )
 
+        # Check if a process can start immediately or needs to wait
         if process_semaphore._value > 0:
-            asyncio.create_task(self._run_evaluation_with_semaphore(result_id, source, project_id, owner_id))
+            asyncio.create_task(self._run_evaluation_with_semaphore(result_id, url, project_id, owner_id))
             return {
                 "message": "Evaluation started in background",
                 "result_id": result_id,
@@ -68,22 +59,21 @@ class AnalysisService:
                 "queued_at": now
             }
 
-    async def _run_evaluation_with_semaphore(self, result_id, source, project_id, owner_id):
+    async def _run_evaluation_with_semaphore(self, result_id, url, project_id, owner_id):
         async with process_semaphore:
-            await self._run_evaluation_and_store(result_id, source, project_id, owner_id)
+            await self._run_evaluation_and_store(result_id, url, project_id, owner_id)
 
-    async def _run_evaluation_and_store(self, result_id, source, project_id, owner_id):
+    async def _run_evaluation_and_store(self, result_id, url, project_id, owner_id):
         print("Evaluation started...")
 
         try:
+            # Run the evaluation in an asynchronous context
             from core.evaluators.website_evaluator import WebsiteEvaluator
-            from core.evaluators.project_evaluator import ProjectEvaluator
             from playwright.async_api import async_playwright
             import json
-            import os
-            from pathlib import Path
 
             def recursive_parse(data):
+                """Recursively parse JSON strings into Python dictionaries."""
                 if isinstance(data, str):
                     try:
                         parsed = json.loads(data)
@@ -96,73 +86,76 @@ class AnalysisService:
                     return [recursive_parse(item) for item in data]
                 return data
 
-            if source.startswith("http://") or source.startswith("https://"):
-                # Website evaluation
-                async with async_playwright() as p:
-                    browser = await p.chromium.launch(headless=True)
-                    try:
-                        page = await browser.new_page()
-                        await page.goto(source, timeout=60000)
-                        html = await page.content()
-                        body_text = await page.inner_text("body")
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                try:
+                    page = await browser.new_page()
+                    await page.goto(url, timeout=60000)
+                    html = await page.content()
+                    body_text = await page.inner_text("body")
 
-                        evaluator = WebsiteEvaluator(
-                            root_url=source,
-                            max_subpages=100,
-                            max_depth=3,
-                            concurrency=5,
-                            custom_criteria={},
-                            page=page
-                        )
+                    evaluator = WebsiteEvaluator(
+                        root_url=url,
+                        max_subpages=100,
+                        max_depth=3,
+                        concurrency=5,
+                        custom_criteria={},
+                        page=page  # Pass the page object
+                    )
 
-                        results = await evaluator.evaluate_page(html, body_text)
-                        if asyncio.iscoroutine(results):
-                            results = await results
-                    finally:
-                        await browser.close()
-            else:
-                # Local project folder evaluation
-                if not os.path.isdir(source):
-                    raise Exception(f"Project directory '{source}' does not exist.")
+                    results = await evaluator.evaluate_page(html, body_text)
 
-                evaluator = ProjectEvaluator(Path(source))
-                results = await evaluator.evaluate()
-                if asyncio.iscoroutine(results):
-                    results = await results
+                    # Ensure results are awaited if they are coroutines
+                    if asyncio.iscoroutine(results):
+                        results = await results
 
-            results = recursive_parse(results)
+                    # Recursively parse and reformat the results
+                    results = recursive_parse(results)
 
-            update_data = {
-                "status": "completed",
-                "result": results,
-                "analysis_date": datetime.utcnow()
-            }
+                    update_data = {
+                        "status": "completed",
+                        "result": results,  # Save the entire JSON result
+                        "analysis_date": datetime.utcnow()
+                    }
 
-            self.analysis_collection.update_one(
-                {"result_id": result_id},
-                {"$set": update_data}
-            )
+                    # Update analysis result with the response JSON
+                    self.analysis_collection.update_one(
+                        {"result_id": result_id},
+                        {"$set": update_data}
+                    )
 
-            self.project_collection.update_one(
-                {"project_id": project_id},
-                {
-                    "$push": {"analysis_result_ids": result_id},
-                    "$set": {"last_updated": datetime.utcnow()}
-                }
-            )
-
-            print(f"✅ Evaluation completed and saved for project: {project_id}")
-
+                    # Update project doc
+                    self.project_collection.update_one(
+                        {"project_id": project_id},
+                        {
+                            "$push": {"analysis_result_ids": result_id},
+                            "$set": {"last_updated": datetime.utcnow()}
+                        }
+                    )
+                    print(f"✅ Evaluation completed and saved for project: {project_id}")
+                finally:
+                    await browser.close()
         except Exception as e:
-            print(f"❌ Error during evaluation: {e}")
+            print(f"Error during evaluation: {e}")
             self.analysis_collection.update_one(
                 {"result_id": result_id},
                 {"$set": {"status": "failed", "error": str(e)}}
             )
-            self.project_collection.update_one(
-                {"project_id": project_id},
-                {
-                    "$set": {"last_updated": datetime.utcnow()},
-                    "$pull": {"analysis_result_ids": result_id}
-                }
-            )
+
+    def get_analysis_by_id(self, result_id: str):
+        result = self.analysis_collection.find_one({"result_id": result_id}, {"_id": 0})
+        if result:
+            return result
+        return {"error": f"Analysis result with ID {result_id} not found"}
+
+    def get_all_analyses_for_project(self, project_id: str):
+        results = list(self.analysis_collection.find({"project_id": project_id}, {"_id": 0}))
+        if results:
+            return results
+        return {"error": "No analyses found for this project"}
+
+    def delete_analysis(self, result_id: str):
+        result = self.analysis_collection.delete_one({"result_id": result_id})
+        if result.deleted_count == 1:
+            return {"message": "Analysis result deleted"}
+        return {"error": "Analysis result not found"}

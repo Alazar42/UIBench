@@ -39,7 +39,7 @@
 		});
 
 		localStorage.setItem('accessToken', userResponse.access_token);
-
+		document.cookie = `accessToken=${userResponse.access_token}; path=/; max-age=3600; secure; SameSite=Strict`;
 		if (userDetails.user_id !== '') {
 			goto('/home');
 		}

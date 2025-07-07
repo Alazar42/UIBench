@@ -104,7 +104,6 @@ typer==0.9.4
 typing-inspection==0.4.0
 typing_extensions==4.12.2
 tzdata==2025.2
--e git+https://github.com/Alazar42/UIBench.git@cbea67a992480f75cc18bf73f5362cf8da2974b0#egg=uibench
 urllib3==2.3.0
 uvicorn==0.34.0
 wasabi==1.1.3

@@ -7,10 +7,7 @@ load_dotenv()
 
 class Database:
     def __init__(self):
-        username = quote_plus(os.getenv("MONGODB_USERNAME"))
-        password = quote_plus(os.getenv("MONGODB_PASSWORD"))
-        cluster = os.getenv("DB_CLUSTER")
-        db_name = os.getenv("DB_NAME")
+        db_name = os.getenv("DB_NAME", "UIBenchDB")
 
         uri = f"mongodb://localhost:27017"
         self.client = MongoClient(uri)

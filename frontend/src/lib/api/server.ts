@@ -41,6 +41,37 @@ export async function getUserDetails(token: string) {
 	}
 }
 
+export async function getUserProjectById(token: string, projectId: string) {
+	try {
+		const res = await axios.get(`${API_BASE}/users/me/projects/${projectId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		console.log('Project response:', res.data);
+		return res.data;
+	} catch (error) {
+		console.error('Error fetching project:', error);
+		throw error;
+	}
+}
+
+export async function getUserProjectAnalysisById(token: string, projectId: string) {
+	try {
+		const res = await axios.get(`${API_BASE}/users/me/projects/${projectId}/analysis`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			},
+			method: 'GET'
+		});
+		console.log('Project response:', res.data);
+		return res.data[0]; // Assuming the response is an array and we want the first item
+	} catch (error) {
+		console.error('Error fetching project:', error);
+		throw error;
+	}
+}
+
 export async function getUserProjects(token: string) {
 	try {
 		// Headers.set('Authorization', `Bearer ${token}`);

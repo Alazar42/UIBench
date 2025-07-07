@@ -1,14 +1,23 @@
 import { error } from '@sveltejs/kit';
-import dummyData from '../../../../src/data/dummy.json';
+import { getUserProjectById, getUserProjectAnalysisById } from '$lib/api/server';
 
-export async function load({ params }) {
+export async function load({ params, cookies }) {
 	const { project_id } = params;
 
-	if (dummyData.project_id === project_id) {
-		return {
-			project: dummyData
-		};
+	const token = cookies.get('accessToken'); // ✅ this works server-side
+	if (!token) {
+		throw error(401, 'Unauthorized');
 	}
 
-	throw error(404, 'Project not found');
+	try {
+		const [project, analysis] = await Promise.all([
+			getUserProjectById(token, project_id),
+			getUserProjectAnalysisById(token, project_id)
+		]);
+
+		return { project, analysis };
+	} catch (err) {
+		console.error('Error loading project or analysis:', err);
+		throw error(404, 'Project or analysis not found');
+	}
 }
