@@ -53,8 +53,6 @@ test-results.xml
 *.log
 
 # Ignore files like .cursor and similar
-.cursor
-.cursor/
 .cache
 .cache/
 
