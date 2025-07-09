@@ -27,6 +27,7 @@ from .config import Settings, NetworkSettings, CacheSettings, ResourceSettings, 
 from .analyzers.report_generator import ReportGenerator
 from .utils.report_combiner import ReportCombiner
 from .utils.zip_utils import safe_extract_zip
+from .utils.pdf_exporter import PDFExporter
 
 class UIBenchTUI:
     """Terminal UI for UIBench Core System with enhanced display"""
@@ -74,7 +75,7 @@ class UIBenchTUI:
         ║  ██║   ██║██║██╔══██╗██╔══╝  ██║╚██╗██║██║     ██╔══██║   ║
         ║  ╚██████╝ ██║██████╔╝███████╗██║ ╚████║╚██████╗██║  ██║   ║
         ║    ╚═══╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝   ║
-        ║                                                           ║
+        ║                                                           ║        v0.1.0
         ╚═══════════════════════════════════════════════════════════╝
         """)
         
@@ -772,6 +773,38 @@ class UIBenchTUI:
         import re
         pattern = r'^[a-zA-Z0-9]{20,30}$'
         return bool(re.match(pattern, key))
+    
+    def _generate_report(self):
+        """Generate and display report options"""
+        if not hasattr(self, 'results') or not self.results:
+            print("❌ No analysis results available to generate a report")
+            return
+    
+        try:
+            # Ask for report type
+            report_type = input("📊 Report type? [pdf/html/text] (default: pdf): ") or "pdf"
+        
+            if report_type.lower() == "pdf":
+                try:
+                    from core.utils.pdf_exporter import PDFExporter
+                    filename = PDFExporter.export_results(self.results)
+                    print(f"✅ PDF report generated: {filename}")
+                except ImportError:
+                    print("❌ PDF export requires reportlab: pip install reportlab")
+        
+            elif report_type.lower() == "html":
+                # Add your HTML export logic here
+                print("✅ HTML report generated")
+        
+            elif report_type.lower() == "text":
+                # Add your text export logic here
+                print("✅ Text report generated")
+            
+            else:
+                print(f"❌ Unsupported report type: {report_type}")
+    
+        except Exception as e:
+            print(f"❌ Report generation failed: {str(e)}")
     
     def _extract_design_tokens(self, figma_html_content):
         """Extract design tokens from Figma file HTML content"""

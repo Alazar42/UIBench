@@ -1,11 +1,14 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { userContext } from '$lib/context/user';
+	import { slide } from 'svelte/transition';
 
 	let { isActive = $bindable(), ...props } = $props();
 
+	let logoutCardOpen = $state(false);
+
 	function logout() {
-		localStorage.removeItem("accessToken");
+		localStorage.removeItem('accessToken');
 		goto('/');
 	}
 </script>
@@ -34,36 +37,46 @@
 			+
 		</button>
 
-		
-
 		<!-- User Initial -->
-		<div
+		<button
+			onclick={() => (logoutCardOpen = !logoutCardOpen)}
 			class="flex h-9 w-9 select-none items-center justify-center rounded-full bg-gray-200 text-base font-bold uppercase text-gray-700"
 		>
 			{$userContext.email[0]}
-		</div>
-
-		<!-- Logout Button with SVG Icon -->
-		<button
-			onclick={logout}
-			class="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200"
-			title="Logout"
-			aria-label="Logout"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-				stroke-width="2"
-				class="h-5 w-5"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 002 2h3a2 2 0 002-2V7a2 2 0 00-2-2h-3a2 2 0 00-2 2v1"
-				/>
-			</svg>
 		</button>
+
+		{#if logoutCardOpen}
+			<div
+				onclick={() => (logoutCardOpen = !logoutCardOpen)}
+				onkeydown={(e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						logoutCardOpen = !logoutCardOpen;
+					}
+				}}
+				tabindex="0"
+				role="button"
+				aria-label="Close logout card"
+				class="fixed left-0 top-0 z-40 flex flex h-screen w-screen cursor-default items-start justify-end bg-black/0 pr-6 pt-[4.25rem]"
+			>
+				<button
+					onclick={logout}
+					transition:slide={{ axis: 'y' }}
+					class="z-40 flex items-center justify-center gap-1 rounded-md bg-pink-50 px-5 py-2 text-pink-800 shadow hover:bg-pink-100"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="16px"
+						class="fill-pink-800"
+						viewBox="0 -960 960 960"
+						width="16px"
+						fill="currentColor"
+						><path
+							d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
+						/></svg
+					>
+					Logout
+				</button>
+			</div>
+		{/if}
 	</div>
 </header>
