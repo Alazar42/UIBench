@@ -181,7 +181,6 @@ class UIBenchTUI:
         print(f"\033[1;34m{'─' * 30}\033[0m")
         print(f"\033[94m1.\033[0m 🌐 Website Evaluation (live website analysis)")
         print(f"\033[94m2.\033[0m 📁 Offline Project Evaluation (local files)")
-        print(f"\033[94m3.\033[0m 🎨 Figma Design Evaluation (design system analysis)")
         print(f"\033[1;34m{'─' * 30}\033[0m")
         
         while True:
@@ -193,37 +192,11 @@ class UIBenchTUI:
                 elif choice == 2:
                     self.evaluation_mode = "project"
                     break
-                elif choice == 3:
-                    self.evaluation_mode = "figma"
-                    break
                 else:
                     print(f"\033[91m❌ Invalid choice. Please enter 1-3\033[0m")
             except ValueError:
                 print(f"\033[91m❌ Please enter a valid number\033[0m")
     
-    def _select_analyzers(self):
-        """Select analyzers to run"""
-
-        self.selected_analyzers = []
-
-        analyzer_options = [
-            (name, cls.__name__) for name, cls in self.analyzers.items()
-        ]
-        print(f"\n\033[1;35m🔧 Select analyzers (comma-separated numbers):\033[0m")
-        for idx, (_, label) in enumerate(analyzer_options, 1):
-            print(f"\033[94m{idx}.\033[0m {label}")
-        
-        selections = input(f"\n\033[1;36m🎯 Enter analyzer numbers:\033[0m ").strip()
-        if not selections:
-            return
-        
-        for num in selections.split(","):
-            try:
-                idx = int(num.strip()) - 1
-                if 0 <= idx < len(analyzer_options):
-                    self.selected_analyzers.append(analyzer_options[idx][0])
-            except ValueError:
-                continue
     
     async def _handle_zip_file(self, zip_path: str):
         """Extract and process ZIP file with enhanced UI"""
@@ -332,8 +305,6 @@ class UIBenchTUI:
             elif asyncio.iscoroutine(raw_results):
                 raw_results = await raw_results
 
-            print(f"DEBUG: Raw evaluation result: {raw_results}")
-
             # Parse results
             if isinstance(raw_results, str):
                 try:
@@ -375,14 +346,52 @@ class UIBenchTUI:
                 "status": "good" if overall_score >= 75 else "needs_improvement"
             })
 
+            # Display evaluation results
+            print("\n============================================================\n")
+            print("\033[1;36m📊 EVALUATION RESULTS\033[0m\n")
+            print("============================================================\n")
+
+            if results.get("error"):
+                print(f"\033[1;31m⚠️ Evaluation Error:\033[0m\n   • {results['error']}")
+            else:
+                summary = results.get("summary", {})
+                print(f"\033[1;32m✅ Evaluation Summary:\033[0m")
+                print(f"   • Overall Score: {summary.get('overall_score', 0)}")
+                print(f"   • Total Files: {summary.get('total_files', 0)}")
+                print(f"   • Total Size: {summary.get('total_size', 0)} bytes")
+                print(f"   • File Types: {', '.join([f'{k}: {v}' for k, v in summary.get('file_types', {}).items()])}")
+                print(f"   • Errors: {summary.get('errors', 0)}")
+                if parse_errors:
+                    print(f"\033[1;31m⚠️ Parse Errors:\033[0m")
+                    for error in parse_errors:
+                        print(f"   • {error['path']}: {error['error']}")
+                print(f"   • Status: {summary.get('status', 'unknown').replace('_', ' ').title()}")
+
+            print("\n============================================================\n")
+            print("\033[1;33m📄 Export Options:\033[0m")
+            print("   Would you like to export these results to PDF?")
+            print("   [Y] Yes - Export to PDF")
+            print("   [N] No - Continue")
+
         except Exception as e:
             print(f"\033[1;31mERROR: Failed to evaluate project: {str(e)}\033[0m")
             results = {"error": f"Failed to evaluate project: {str(e)}"}
+            
+            # Display error in evaluation results format
+            print("\n============================================================\n")
+            print("\033[1;36m📊 EVALUATION RESULTS\033[0m\n")
+            print("============================================================\n")
+            print(f"\033[1;31m⚠️ Evaluation Error:\033[0m\n   • {results['error']}")
+            print("\n============================================================\n")
+            print("\033[1;33m📄 Export Options:\033[0m")
+            print("   Would you like to export these results to PDF?")
+            print("   [Y] Yes - Export to PDF")
+            print("   [N] No - Continue")
 
         # Inject TUI metadata with EAT timezone
         results.setdefault("metadata", {})
         results["metadata"].update({
-            "timestamp": "2025-07-03 14:13:00",  # Fixed to match provided time
+            "timestamp": "2025-07-09 04:39:00",  # Updated to current EAT time
             "evaluation_mode": self.evaluation_mode,
             "target": str(self.target),
             "analyzers_used": self.selected_analyzers
@@ -804,7 +813,6 @@ class UIBenchTUI:
         print(f"\033[1;34m{'─' * 40}\033[0m")
         
         self._select_evaluation_mode()
-        self._select_analyzers()
         await self._get_target()
         self._integrate_figma_data()
         
@@ -843,7 +851,7 @@ class UIBenchTUI:
         if self.evaluation_mode == "website":
             self.target = input(f"\n\033[1;36m🌐 Enter website URL:\033[0m ").strip()
         elif self.evaluation_mode == "project":
-            path = input(f"\n\033[1;36m📁 Enter project path or ZIP file:\033[0m ").strip()
+            path = input(f"\n\033[1;36m📁 Enter project path:\033[0m ").strip()
             if path.endswith(".zip"):
                 await self._handle_zip_file(path)
             else:
